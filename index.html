@@ -2495,6 +2495,8 @@
         // Recording details accordion
         function toggleRecordingDetails(toggleElement) {
             const recordingItem = toggleElement.closest('.recording-item');
+            if (!recordingItem) return;
+            
             const isActive = recordingItem.classList.contains('active');
             const toggleIcon = toggleElement.querySelector('.toggle-icon');
             const toggleText = toggleElement.querySelector('.toggle-text');
@@ -2504,22 +2506,24 @@
                 if (item !== recordingItem) {
                     item.classList.remove('active');
                     const otherToggle = item.querySelector('.recording-toggle');
-                    const otherIcon = otherToggle.querySelector('.toggle-icon');
-                    const otherText = otherToggle.querySelector('.toggle-text');
-                    otherIcon.textContent = '🔻';
-                    otherText.textContent = 'Show Recording Details';
+                    if (otherToggle) {
+                        const otherIcon = otherToggle.querySelector('.toggle-icon');
+                        const otherText = otherToggle.querySelector('.toggle-text');
+                        if (otherIcon) otherIcon.textContent = '🔻';
+                        if (otherText) otherText.textContent = 'Show Recording Details';
+                    }
                 }
             });
 
             // Toggle current item
             if (isActive) {
                 recordingItem.classList.remove('active');
-                toggleIcon.textContent = '🔻';
-                toggleText.textContent = 'Show Recording Details';
+                if (toggleIcon) toggleIcon.textContent = '🔻';
+                if (toggleText) toggleText.textContent = 'Show Recording Details';
             } else {
                 recordingItem.classList.add('active');
-                toggleIcon.textContent = '🔺';
-                toggleText.textContent = 'Hide Recording Details';
+                if (toggleIcon) toggleIcon.textContent = '🔺';
+                if (toggleText) toggleText.textContent = 'Hide Recording Details';
             }
         }
 
@@ -2568,8 +2572,16 @@
 
         // View All recordings toggle
         function toggleViewAll() {
+            const recordingsList = document.querySelector('.recordings-list');
+            if (!recordingsList) return;
+            
+            const buttonContainer = recordingsList.nextElementSibling;
+            if (!buttonContainer) return;
+            
+            const button = buttonContainer.querySelector('button');
+            if (!button) return;
+            
             const hiddenItems = document.querySelectorAll('.recording-item.hidden');
-            const button = document.querySelector('.recordings-list').nextElementSibling.querySelector('button');
             
             if (hiddenItems.length > 0) {
                 // Show all hidden items
@@ -2600,8 +2612,16 @@
 
         // View All compositions toggle
         function toggleViewAllCompositions() {
+            const compositionsList = document.querySelector('.compositions-list');
+            if (!compositionsList) return;
+            
+            const buttonContainer = compositionsList.nextElementSibling;
+            if (!buttonContainer) return;
+            
+            const button = buttonContainer.querySelector('button');
+            if (!button) return;
+            
             const hiddenItems = document.querySelectorAll('.composition-item.hidden');
-            const button = document.querySelector('.compositions-list').nextElementSibling.querySelector('button');
             
             if (hiddenItems.length > 0) {
                 // Show all hidden items
@@ -2622,10 +2642,26 @@
         }
 
         function toggleViewAllProjects() {
-            const ongoingTitle = document.querySelector('.project-subsection-title');
+            // Find the Projects section and the first project-subsection-title (Ongoing/Finished)
+            const projectsSection = document.querySelector('.section h2');
+            if (!projectsSection || projectsSection.textContent !== 'Projects') return;
+            
+            const section = projectsSection.closest('.section');
+            if (!section) return;
+            
+            const ongoingTitle = section.querySelector('.project-subsection-title');
+            if (!ongoingTitle) return;
+            
             const ongoingList = ongoingTitle.nextElementSibling;
+            if (!ongoingList || !ongoingList.classList.contains('projects-list')) return;
+            
+            const buttonContainer = ongoingList.nextElementSibling;
+            if (!buttonContainer) return;
+            
+            const button = buttonContainer.querySelector('button');
+            if (!button) return;
+            
             const hiddenItems = ongoingList.querySelectorAll('li.hidden');
-            const button = ongoingList.nextElementSibling.querySelector('button');
             
             if (hiddenItems.length > 0) {
                 // Show all hidden items
