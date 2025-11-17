@@ -75,7 +75,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             z-index: -1;
             background: #000000;
             overflow: hidden;
@@ -83,12 +83,13 @@
 
         /* Floating gradient orbs - Apple Vision Pro style: smaller, brighter spotlights */
         .gradient-orb {
-            position: absolute;
+            position: fixed;
             border-radius: 50%;
             filter: blur(40px);
             opacity: 0.7;
             animation: float 20s ease-in-out infinite;
             pointer-events: none;
+            z-index: -1;
         }
 
         .orb-1 {
@@ -284,6 +285,26 @@
             display: inline-block;
         }
 
+        .section-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 28px;
+            max-width: 800px;
+        }
+
+        .section-description a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.4);
+            transition: color 0.3s ease, text-decoration-color 0.3s ease;
+        }
+
+        .section-description a:hover {
+            color: rgba(255, 255, 255, 1);
+            text-decoration-color: rgba(255, 255, 255, 0.7);
+        }
+
         /* Subtle bottom glow for section titles - Apple Vision Pro style */
         .section h2::after {
             content: '';
@@ -344,11 +365,44 @@
             line-height: 1.6;
         }
 
+        /* Project with image layout: text on left, image on right */
+        .projects-list li:has(.project-image) {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .project-content {
+            flex: 1;
+        }
+
+        .project-subsection-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 32px;
+            margin-bottom: 20px;
+        }
+
+        .project-subsection-title:first-child {
+            margin-top: 0;
+        }
+
         .project-title {
             font-size: 17px;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.95);
             margin-bottom: 12px;
+        }
+
+        .project-image {
+            width: 280px;
+            min-width: 280px;
+            max-width: 280px;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .project-description {
@@ -373,8 +427,27 @@
         .compositions-list {
             list-style: none;
             margin-top: 28px;
+            margin-bottom: 0;
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .composition-item.hidden {
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .projects-list li.hidden {
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         .composition-item {
@@ -389,10 +462,19 @@
                 0 4px 16px rgba(0, 0, 0, 0.3),
                 0 8px 32px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                        max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        margin 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 2000px;
+            opacity: 1;
+            transform: scaleY(1);
+            transform-origin: top;
         }
 
-        .composition-item:hover {
+        .composition-item:not(.hidden):hover {
             transform: translateY(-3px) scale(1.01);
             background: rgba(255, 255, 255, 0.12);
             box-shadow:
@@ -408,6 +490,13 @@
             font-weight: 600;
             color: rgba(255, 255, 255, 0.95);
             margin-bottom: 8px;
+        }
+
+        .composition-date {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
 
         .composition-description {
@@ -444,6 +533,33 @@
             border: none;
         }
 
+        .composition-video-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.95);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .composition-video-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
         .composition-links {
             display: flex;
             flex-wrap: wrap;
@@ -473,16 +589,60 @@
         .recordings-list {
             list-style: none;
             margin-top: 28px;
+            margin-bottom: 0;
             display: grid;
             gap: 20px;
         }
 
-        .recording-item {
-            /* Apple Music style: frosted glass light gray */
+        .recording-item.hidden {
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Ensure recording-details within hidden recording-item are also collapsed */
+        .recording-item.hidden .recording-details {
+            max-height: 0 !important;
+            padding: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .view-all-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .view-all-button button {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(40px) saturate(180%);
-            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .view-all-button button:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .recording-item {
+            /* Apple Music style: frosted glass light gray */
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(180%);
+            padding: 20px;
             border-radius: 16px;
+            overflow: visible;
             box-shadow:
                 inset 0 1px 0 rgba(255, 255, 255, 0.1),
                 inset 0 -1px 0 rgba(0, 0, 0, 0.2),
@@ -490,9 +650,17 @@
                 0 8px 32px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: scaleY(1);
+            transform-origin: top;
         }
 
-        .recording-item:hover {
+        /* Expanded cards need higher z-index to prevent overlap with other cards */
+        .recording-item.active {
+            z-index: 10;
+        }
+
+        .recording-item:not(.hidden):hover {
             transform: translateY(-3px) scale(1.01);
             background: rgba(255, 255, 255, 0.12);
             box-shadow:
@@ -513,8 +681,16 @@
         .recording-date {
             font-size: 15px;
             color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .recording-note {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.55);
             margin-bottom: 16px;
             line-height: 1.5;
+            font-style: italic;
         }
 
         .recording-audio {
@@ -585,6 +761,8 @@
             padding: 4px 0;
             padding-left: 20px;
             position: relative;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .recording-details-content li:before {
@@ -598,7 +776,8 @@
             width: 100%;
             max-width: 600px;
             border-radius: 8px;
-            margin-top: 12px;
+            margin: 12px auto;
+            display: block;
         }
 
         .recording-subsection {
@@ -610,6 +789,14 @@
             font-weight: 600;
             color: rgba(255, 255, 255, 0.85);
             margin-bottom: 8px;
+        }
+
+        .recording-note {
+            font-size: 13px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 12px;
+            line-height: 1.5;
         }
 
         .composition-link::after {
@@ -875,7 +1062,7 @@
             position: relative;
         }
 
-        /* Email - 圆角卡片，蓝色边框，左上角装饰 */
+        /* Email - Rounded card with blue border, top-left decoration */
         .contact-link:nth-child(1) {
             border-radius: 20px;
             border: 3px solid #4A90E2;
@@ -896,7 +1083,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* GitHub - 尖角卡片，灰色边框，右上角装饰 */
+        /* GitHub - Sharp corner card with gray border, top-right decoration */
         .contact-link:nth-child(2) {
             border-radius: 12px 12px 12px 0;
             border: 3px dashed #6E6E6E;
@@ -917,7 +1104,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* LinkedIn - 圆角矩形，橙色边框，左下角装饰 */
+        /* LinkedIn - Rounded rectangle with orange border, bottom-left decoration */
         .contact-link:nth-child(3) {
             border-radius: 0 20px 20px 20px;
             border: 3px solid #FF6B6B;
@@ -938,7 +1125,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* Instagram - 圆角卡片，紫色边框，右下角装饰 */
+        /* Instagram - Rounded card with purple border, bottom-right decoration */
         .contact-link:nth-child(4) {
             border-radius: 20px 0 20px 20px;
             border: 3px double #C77DFF;
@@ -983,7 +1170,7 @@
                 bottom: auto !important;
                 transform: rotate(0deg) !important;
                 margin: 10px auto;
-                display: block;
+            display: block;
                 width: fit-content;
             }
         }
@@ -1030,7 +1217,7 @@
             transform: translateY(-1px);
         }
 
-        /* 滚动时的透明样式 */
+        /* Transparent style when scrolled */
         .cv-download.scrolled {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -1053,7 +1240,7 @@
                 margin-bottom: 20px;
             }
             .avatar { 
-                width: 150px; 
+            width: 150px;
                 height: 150px; 
                 margin-bottom: 20px;
             }
@@ -1135,18 +1322,68 @@
         <!-- Projects -->
     <div class="section">
         <h2>Projects</h2>
+        <p class="section-description">These projects represent my ongoing and completed work across AI music systems, music technology research, and audio engineering. They reflect my focus on building intelligent, interactive tools that bridge musicianship and computational creativity.</p>
+            <div class="project-subsection-title">Ongoing/Finished</div>
             <ul class="projects-list">
             <li>
-                <div class="project-title">🎼 Controllable Symbolic Music Generator</div>
-                <div class="project-description">A controllable symbolic music generation system designed for DAW-integrated workflows, supporting segment-by-segment interaction and structure-first composition. It features a hybrid architecture that combines Transformer and Diffusion models to give musicians fine-grained creative control over the generation process, and supports prompt-based generation of multi-track musical ideas conditioned on user-specified musical attributes.</div>
+                <div class="project-content">
+                    <div class="project-title">🎼 Controllable Symbolic Music Generator</div>
+                    <div class="project-description">A controllable symbolic music generation system designed for DAW-integrated workflows, supporting segment-by-segment interaction and structure-first composition. It features a hybrid architecture that combines Transformer and Diffusion models to give musicians fine-grained creative control over the generation process, and supports prompt-based generation of multi-track musical ideas conditioned on user-specified musical attributes.</div>
+                    <audio controls class="recording-audio" style="margin-top: 16px;">
+                        <source src="audio/SymbolicGeneration.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
+                </div>
+                <img src="images/MusicGeneration.png" alt="Controllable Symbolic Music Generator" class="project-image" loading="lazy" />
             </li>
             <li>
-                <div class="project-title">🥁 Noise-Robust Musical Instrument Classification</div>
-                <div class="project-description">A noise-robust musical instrument classification system designed for real-world acoustic conditions. The project integrates curriculum learning, SNR-aware ensemble modeling, and a harmonic-enhanced fallback mechanism to ensure stable performance under heavy noise, achieving significantly improved reliability in practical audio environments.</div>
+                <div class="project-content">
+                    <div class="project-title">🥁 Noise-Robust Musical Instrument Classification</div>
+                    <div class="project-description">A noise-robust musical instrument classification system designed for real-world acoustic conditions. The project integrates curriculum learning, SNR-aware ensemble modeling, and a harmonic-enhanced fallback mechanism to ensure stable performance under heavy noise, achieving significantly improved reliability in practical audio environments.</div>
+                </div>
+                <img src="images/NoisyInstruments.png" alt="Noise-Robust Musical Instrument Classification" class="project-image" loading="lazy" />
             </li>
             <li>
-                <div class="project-title">🐭 DeepSqueak ML Pipeline Modernization</div>
-                <div class="project-description">A modernization of the DeepSqueak ultrasonic vocalization analysis system, replacing its legacy workflow with a scalable, modular machine learning pipeline. The project strengthens model reliability through noise-augmented training and carefully curated negative samples to improve discrimination in low-SNR environments.</div>
+                <div class="project-content">
+                    <div class="project-title">🐭 DeepSqueak ML Pipeline Modernization</div>
+                    <div class="project-description">A modernization of the DeepSqueak ultrasonic vocalization analysis system, replacing its legacy workflow with a scalable, modular machine learning pipeline. The project strengthens model reliability through noise-augmented training and carefully curated negative samples to improve discrimination in low-SNR environments.</div>
+                </div>
+                <img src="images/deepsqueak.jpeg" alt="DeepSqueak ML Pipeline" class="project-image" loading="lazy" />
+            </li>
+            <li class="hidden">
+                <div class="project-content">
+                    <div class="project-title">🎵 Pitch Tracking in Non-Ideal Conditions</div>
+                    <div class="project-description">A comprehensive benchmark study investigating how state-of-the-art pitch tracking methods perform under non-ideal conditions. The project evaluates models including Crepe and Basic Pitch using MIR datasets, with synthesized perturbations such as tuning variations, vocal distortion, and ambient noise to address data scarcity. Includes optional fine-tuning of Crepe to improve robustness.</div>
+                </div>
+                <img src="images/PitchTracking.png" alt="Pitch Tracking in Non-Ideal Conditions" class="project-image" loading="lazy" />
+            </li>
+            <li class="hidden">
+                <div class="project-content">
+                    <div class="project-title">🎨 Interactive Music Generation via Image-Based Audio Parameter Mapping</div>
+                    <div class="project-description">This project explores real-time music generation driven by image features, using Max/MSP to convert visual information—color, brightness, saturation, and spatial position—into dynamic audio parameters. By continuously analyzing the color block at the user's current mouse position, the system creates an interactive audiovisual environment where "what you see" and where you choose to look directly shapes "what you hear."</div>
+                    <a href="https://drive.google.com/file/d/1TyujxVXRZVkRDKZgBPpPKhxTOhaMo3Mw/view?usp=sharing" target="_blank" class="composition-video-button" style="margin-top: 16px;">
+                        ▶ Watch Video
+                    </a>
+                </div>
+                <img src="images/InteractiveGeneration.png" alt="Interactive Music Generation via Image-Based Audio Parameter Mapping" class="project-image" loading="lazy" />
+            </li>
+            </ul>
+            <div class="view-all-button">
+                <button onclick="toggleViewAllProjects()">View All</button>
+            </div>
+            <div class="project-subsection-title">Upcoming</div>
+            <ul class="projects-list">
+            <li>
+                <div class="project-title">🎨 Audio Visualizer JUCE Plugin</div>
+                <div class="project-description">A music-understanding-based audio visualizer JUCE plugin that uses MIR techniques to enable the plugin to understand musical content and generate visual patterns.</div>
+            </li>
+            <li>
+                <div class="project-title">🎹 Symbolic Music Style Transfer</div>
+                <div class="project-description">A system that allows users to transform existing MIDI melodies and harmonies into different styles based on user input, such as making them jazzy or bluesy.</div>
+            </li>
+            <li>
+                <div class="project-title">⌨️ Keyboard Instrument Design</div>
+                <div class="project-description">A keyboard electronic synthesizer instrument designed using MaxMSP.</div>
             </li>
             </ul>
         </div>
@@ -1154,9 +1391,20 @@
         <!-- Compositions -->
         <div class="section">
             <h2>Compositions</h2>
+            <p class="section-description">My compositions span electronic music, experimental sound design, interactive music systems, piano works, and soundtrack writing. I also create music for the Chinese furry visual novel Chapter of Darkness.<br><br>Outside of production, I'm deeply inspired by Jazz, R&B, and Soul—genres I hope to explore further through future jazz-hip-hop–influenced projects.</p>
             <ul class="compositions-list">
                 <li class="composition-item">
+                    <div class="composition-title">Misty Forest</div>
+                    <div class="composition-date">December 2024</div>
+                    <div class="composition-description">Live sound processing using MaxMSP, featuring clarinet sounds and MIDI keyboard</div>
+                    <a href="https://drive.google.com/file/d/1WbNbeAdn0Ur-jCnHQwMYf94Q1NTPanlA/view?usp=sharing" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
+                </li>
+
+                <li class="composition-item">
                     <div class="composition-title">Lonely Travel</div>
+                    <div class="composition-date">September 2022</div>
                     <div class="composition-description">Original experimental music composition depicting a lonely traveler</div>
                     <div class="composition-links">
                         <a href="https://soundcloud.com/x3kus4lyferg/lonely-travelzixuan-guo/s-p1dvk2QNHXc?si=eb69c73e05524f0981aeb11e728773dd&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" class="composition-link" target="_blank">🔗 SoundCloud</a>
@@ -1165,6 +1413,7 @@
 
                 <li class="composition-item">
                     <div class="composition-title">Dancing in the Rain</div>
+                    <div class="composition-date">April 2023</div>
                     <div class="composition-description">Pure instrumental piano piece depicting a stroll through a square in the rain</div>
                     <div class="composition-links">
                         <a href="https://music.163.com/#/song?id=2037854978" class="composition-link" target="_blank">🔗 NetEase Cloud Music</a>
@@ -1174,49 +1423,60 @@
                 <!-- Audio Composition -->
                 <li class="composition-item">
                     <div class="composition-title">Breaking Free</div>
+                    <div class="composition-date">January 2024</div>
                     <div class="composition-description">My first EDM</div>
                     <audio class="composition-audio" controls>
                         <source src="audio/Breaking Free混音24.1.12.wav" type="audio/wav">
-                        您的浏览器不支持音频播放。
+                        Your browser does not support audio playback.
                     </audio>
                 </li>
 
                 <!-- Video Compositions -->
-                <li class="composition-item">
+                <li class="composition-item hidden">
                     <div class="composition-title">Playing Bass in a Mountain</div>
+                    <div class="composition-date">February 2024</div>
                     <div class="composition-description">Mixed media playing with bass guitar and MIDI keyboard</div>
-                    <iframe class="composition-iframe" src="https://drive.google.com/file/d/1VccAunN-d9St-IpUV4t4oykC-xq7hWeY/preview" allow="autoplay"></iframe>
+                    <a href="https://drive.google.com/file/d/1VccAunN-d9St-IpUV4t4oykC-xq7hWeY/view" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
                 </li>
 
-                <li class="composition-item">
+                <li class="composition-item hidden">
                     <div class="composition-title">The Evil Within 2 Trailer Soundtrack</div>
+                    <div class="composition-date">October 2023</div>
                     <div class="composition-description">Original soundtrack composition</div>
-                    <iframe class="composition-iframe" src="https://drive.google.com/file/d/1vblBLnAz_0w1KRGSQpfg43YEfnx_ey83/preview" allow="autoplay"></iframe>
+                    <a href="https://drive.google.com/file/d/1vblBLnAz_0w1KRGSQpfg43YEfnx_ey83/view" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
                 </li>
 
-                <li class="composition-item">
+                <li class="composition-item hidden">
                     <div class="composition-title">Walking Through the Dark</div>
+                    <div class="composition-date">November 2024</div>
                     <div class="composition-description">Code music composed and played in Supercollider</div>
-                    <iframe class="composition-iframe" src="https://drive.google.com/file/d/1M4xdQEVmX5z_XDGprVyPCwwtLLL8Ll4v/preview" allow="autoplay"></iframe>
+                    <a href="https://drive.google.com/file/d/1M4xdQEVmX5z_XDGprVyPCwwtLLL8Ll4v/view" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
                 </li>
             </ul>
+            <div class="view-all-button">
+                <button onclick="toggleViewAllCompositions()">View All</button>
+            </div>
         </div>
 
         <!-- Recordings -->
         <div class="section">
             <h2>Recordings</h2>
+            <p class="section-description">Multi-microphone ensemble recordings captured at NYU Dolan and Paulson Studios using Tonmeister techniques. Each sample highlights the main array employed in the session. I participated in the recording process for all sessions; full multichannel materials are <a href="#contact">available upon request</a>.</p>
             <ul class="recordings-list">
-                <li class="recording-item">
+                <li class="recording-item hidden">
                     <div class="recording-title">String Trio</div>
                     <div class="recording-date">June 4, 2025<br>(Stereo recording at Dolan recording studio)</div>
+                    <div class="recording-note">This sample uses the M/S M microphone.</div>
                     <audio class="recording-audio" controls>
-                        <source src="" type="audio/mpeg">
-                        您的浏览器不支持音频播放。
+                        <source src="audio/StringTrio.wav" type="audio/wav">
+                        Your browser does not support audio playback.
                     </audio>
-                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
-                        <span class="toggle-icon">🔻</span>
-                        <span class="toggle-text">Show Recording Details</span>
-                    </div>
                     <div class="recording-details">
                         <div class="recording-details-section">
                             <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
@@ -1228,46 +1488,91 @@
                             <div class="recording-details-title">🎚 Microphone List</div>
                             <div class="recording-details-content">
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Main Array</div>
+                                    <div class="recording-subsection-title">Support Mic</div>
                                     <ul>
-                                        <li>Neumann KM130 — L</li>
-                                        <li>Neumann KM130 — R</li>
-                                        <li>Neumann KM130 — C (if any)</li>
-                                        <li>Schoeps MK2H — Decca outriggers</li>
+                                        <li>DPA 4011 — VIOLIN SUPPORT</li>
+                                        <li>DPA 4011 — CELLO SUPPORT</li>
+                                        <li>DPA 4011 — VIOLA SUPPORT</li>
+        </ul>
+    </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Small AB</div>
+                                    <ul>
+                                        <li>Josephson C617 — SMALL AB L</li>
+                                        <li>Josephson C617 — SMALL AB R</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Surround / Ambient</div>
+                                    <div class="recording-subsection-title">OCT</div>
                                     <ul>
-                                        <li>DPA 4011 — LSS</li>
-                                        <li>DPA 4011 — RSS</li>
-                                        <li>DPA 4011 — LRS</li>
-                                        <li>DPA 4011 — RRS</li>
+                                        <li>Sennheiser 8050 — OCT L</li>
+                                        <li>Sennheiser 8050 — OCT R</li>
+                                        <li>Sennheiser 8060 — OCT C</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Room / Height (if any)</div>
+                                    <div class="recording-subsection-title">Large AB</div>
                                     <ul>
-                                        <li>Schoeps MK21 — High L</li>
-                                        <li>Schoeps MK21 — High R</li>
+                                        <li>Josephson C617 — LARGE AB L</li>
+                                        <li>Josephson C617 — LARGE AB R</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">M/S</div>
+                                    <ul>
+                                        <li>Sennheiser MKH800 — M/S M</li>
+                                        <li>Sennheiser MKH800 — M/S S</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">NOS</div>
+                                    <ul>
+                                        <li>Schoeps (multi) — NOS L</li>
+                                        <li>Schoeps (multi) — NOS R</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">ORTF</div>
+                                    <ul>
+                                        <li>Schoeps (multi) — ORTF L</li>
+                                        <li>Schoeps (multi) — ORTF R</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">BLUMLEIN</div>
+                                    <ul>
+                                        <li>Sennheiser MKH800 — BLUMLEIN X Ipsi</li>
+                                        <li>Sennheiser MKH800 — BLUMLEIN X contra</li>
+                                        <li>Sennheiser MKH800 — BLUMLEIN Y Ipsi</li>
+                                        <li>Sennheiser MKH800 — BLUMLEIN Y Contra</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Height</div>
+                                    <ul>
+                                        <li>Neumann KM184 — LH</li>
+                                        <li>Neumann KM184 — LHs</li>
+                                        <li>Neumann KM184 — RH</li>
+                                        <li>Neumann KM184 — RHs</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-
-                <li class="recording-item">
-                    <div class="recording-title">Piano Solo</div>
-                    <div class="recording-date">June 5, 2025<br>(Stereo recording at Paulson Center)</div>
-                    <audio class="recording-audio" controls>
-                        <source src="" type="audio/mpeg">
-                        您的浏览器不支持音频播放。
-                    </audio>
                     <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
                         <span class="toggle-icon">🔻</span>
                         <span class="toggle-text">Show Recording Details</span>
                     </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Piano Solo</div>
+                    <div class="recording-date">June 5, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the Center mic.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/PianoSolo.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
                     <div class="recording-details">
                         <div class="recording-details-section">
                             <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
@@ -1279,46 +1584,69 @@
                             <div class="recording-details-title">🎚 Microphone List</div>
                             <div class="recording-details-content">
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Main Array</div>
+                                    <div class="recording-subsection-title">Main 7.1 Array</div>
                                     <ul>
-                                        <li>Neumann KM130 — L</li>
-                                        <li>Neumann KM130 — R</li>
-                                        <li>Neumann KM130 — C (if any)</li>
-                                        <li>Schoeps MK2H — Decca outriggers</li>
+                                        <li>Neumann KM184 — Left (Cardioid)</li>
+                                        <li>Neumann KM184 — Right (Cardioid)</li>
+                                        <li>Neumann KM184 — Center (Cardioid)</li>
+                                        <li>Neumann KM184 — Ls (Cardioid)</li>
+                                        <li>Neumann KM185 — Rs (Cardioid)</li>
+                                        <li>AKG C414-XLII — Lss (Hypercardioid)</li>
+                                        <li>AKG C414-XLII — Rss (Hypercardioid)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Surround / Ambient</div>
+                                    <div class="recording-subsection-title">Z System</div>
                                     <ul>
-                                        <li>DPA 4011 — LSS</li>
-                                        <li>DPA 4011 — RSS</li>
-                                        <li>DPA 4011 — LRS</li>
-                                        <li>DPA 4011 — RRS</li>
+                                        <li>AKG C414-XLII — ZL (Figure 8)</li>
+                                        <li>AKG C414-XLII — ZR (Figure 8)</li>
+                                        <li>AKG C414-XLII — ZLs (Figure 8)</li>
+                                        <li>AKG C414-XLII — ZRs (Figure 8)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Room / Height (if any)</div>
+                                    <div class="recording-subsection-title">Hamasaki Square</div>
                                     <ul>
-                                        <li>Schoeps MK21 — High L</li>
-                                        <li>Schoeps MK21 — High R</li>
+                                        <li>Neumann U87 — Hamasaki LH (Figure 8)</li>
+                                        <li>Neumann U87 — Hamasaki RH (Figure 8)</li>
+                                        <li>Neumann U87 — Hamasaki LHs (Figure 8)</li>
+                                        <li>Neumann U87 — Hamasaki RHs (Figure 8)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">AB</div>
+                                    <ul>
+                                        <li>Neumann KM183 — A (out) (Omni) — Small AB / Large AB</li>
+                                        <li>Neumann KM183 — B (out) (Omni) — Small AB / Large AB</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Earthworks Pianomic — Hammer L (Omni)</li>
+                                        <li>Earthworks Pianomic — Hammer R (Omni)</li>
+                                        <li>Neumann KM183 — A (in) (Omni)</li>
+                                        <li>Neumann KM183 — B (in) (Omni)</li>
+                                        <li>Neumann KM183 — C (in) (Omni)</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-
-                <li class="recording-item">
-                    <div class="recording-title">Piano Trio</div>
-                    <div class="recording-date">June 6, 2025<br>(Stereo recording at Dolan recording studio)</div>
-                    <audio class="recording-audio" controls>
-                        <source src="" type="audio/mpeg">
-                        您的浏览器不支持音频播放。
-                    </audio>
                     <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
                         <span class="toggle-icon">🔻</span>
                         <span class="toggle-text">Show Recording Details</span>
                     </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Piano Trio</div>
+                    <div class="recording-date">June 6, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the Center mic.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/PianoTrio.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
                     <div class="recording-details">
                         <div class="recording-details-section">
                             <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
@@ -1332,44 +1660,53 @@
                                 <div class="recording-subsection">
                                     <div class="recording-subsection-title">Main Array</div>
                                     <ul>
-                                        <li>Neumann KM130 — L</li>
-                                        <li>Neumann KM130 — R</li>
-                                        <li>Neumann KM130 — C (if any)</li>
-                                        <li>Schoeps MK2H — Decca outriggers</li>
+                                        <li>Schoeps MK4 — L (Cardioid)</li>
+                                        <li>Schoeps MK4 — R (Cardioid)</li>
+                                        <li>Royer R-121 — C (Cardioid)</li>
+                                        <li>Neumann KM183 — LFE (Omni)</li>
+                                        <li>AKG C414-XLII — Lss (Hypercardioid)</li>
+                                        <li>AKG C414-XLII — Rss (Hypercardioid)</li>
+                                        <li>Neumann KM184 — Ls (Cardioid)</li>
+                                        <li>Neumann KM184 — Rs (Cardioid)</li>
+                                        <li>Neumann KM184 — LH (Cardioid)</li>
+                                        <li>Neumann KM184 — RH (Cardioid)</li>
+                                        <li>Neumann KM184 — LHs (Cardioid)</li>
+                                        <li>Neumann KM184 — RHs (Cardioid)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Surround / Ambient</div>
+                                    <div class="recording-subsection-title">Supports</div>
                                     <ul>
-                                        <li>DPA 4011 — LSS</li>
-                                        <li>DPA 4011 — RSS</li>
-                                        <li>DPA 4011 — LRS</li>
-                                        <li>DPA 4011 — RRS</li>
+                                        <li>Royer R-121 — Cello Rib L (Figure 8)</li>
+                                        <li>Royer R-121 — Cello Rib R (Figure 8)</li>
+                                        <li>DPA 4011 — Cello Cond L (Cardioid)</li>
+                                        <li>DPA 4011 — Cello Cond R (Cardioid)</li>
+                                        <li>Earthworks Pianomic — Piano Ham L (Omni)</li>
+                                        <li>Earthworks Pianomic — Piano Ham R (Omni)</li>
+                                        <li>Neumann U87 — Piano NOS L (Cardioid)</li>
+                                        <li>Neumann U87 — Piano NOS R (Cardioid)</li>
+                                        <li>Royer R-121 — Flute Rib (Figure 8)</li>
+                                        <li>DPA 4011 — Flue Cond (Cardioid)</li>
                                     </ul>
-                                </div>
-                                <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Room / Height (if any)</div>
-                                    <ul>
-                                        <li>Schoeps MK21 — High L</li>
-                                        <li>Schoeps MK21 — High R</li>
-                                    </ul>
+                                    <p class="recording-note">Note: Support microphones for flute and cello were deployed in duplicate (ribbon + condenser) purely for instructional comparison during the session. In a real recording setting, only one would typically be used.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-
-                <li class="recording-item">
-                    <div class="recording-title">Guitar Violin Tango</div>
-                    <div class="recording-date">June 10, 2025<br>(Stereo recording at Dolan recording studio)</div>
-                    <audio class="recording-audio" controls>
-                        <source src="" type="audio/mpeg">
-                        您的浏览器不支持音频播放。
-                    </audio>
                     <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
                         <span class="toggle-icon">🔻</span>
                         <span class="toggle-text">Show Recording Details</span>
                     </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Guitar Violin Tango</div>
+                    <div class="recording-date">June 10, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the L and R mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/GuitarViolinTango.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
                     <div class="recording-details">
                         <div class="recording-details-section">
                             <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
@@ -1381,46 +1718,56 @@
                             <div class="recording-details-title">🎚 Microphone List</div>
                             <div class="recording-details-content">
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Main Array</div>
+                                    <div class="recording-subsection-title">Square</div>
                                     <ul>
-                                        <li>Neumann KM130 — L</li>
-                                        <li>Neumann KM130 — R</li>
-                                        <li>Neumann KM130 — C (if any)</li>
-                                        <li>Schoeps MK2H — Decca outriggers</li>
+                                        <li>Sennheiser MKH800 Twin — Left Ipsi (Adjustable)</li>
+                                        <li>Sennheiser MKH800 Twin — Left Contra (Adjustable)</li>
+                                        <li>Sennheiser MKH800 Twin — Right Ipsi (Adjustable)</li>
+                                        <li>Sennheiser MKH800 Twin — Right Contra (Adjustable)</li>
+                                        <li>Sennheiser MKH800 Twin — Left Height Ipsi (Adjustable)</li>
+                                        <li>Sennheiser MKH800 Twin — Left Height Contra (Adjustable)</li>
+                                        <li>Sennheiser MKH800 Twin — Right Height Ipsi (Adjustable)</li>
+                                        <li>Sennheiser MKH800 Twin — Right Height Contra (Adjustable)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Surround / Ambient</div>
+                                    <div class="recording-subsection-title">Surround</div>
                                     <ul>
-                                        <li>DPA 4011 — LSS</li>
-                                        <li>DPA 4011 — RSS</li>
-                                        <li>DPA 4011 — LRS</li>
-                                        <li>DPA 4011 — RRS</li>
+                                        <li>Sennheiser MKH800 — Lss (Bottom) (Wide Cardioid)</li>
+                                        <li>Sennheiser MKH800 — Rss (Bottom) (Wide Cardioid)</li>
+                                        <li>Neumann KM184 — Lss (Top) (Cardioid)</li>
+                                        <li>Neumann KM184 — Rss (Top) (Cardioid)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Room / Height (if any)</div>
+                                    <div class="recording-subsection-title">Supports</div>
                                     <ul>
-                                        <li>Schoeps MK21 — High L</li>
-                                        <li>Schoeps MK21 — High R</li>
+                                        <li>Neumann KM184 — Violin AB Left (Cardioid)</li>
+                                        <li>Neumann KM184 — Violin AB Right (Cardioid)</li>
+                                        <li>Sony C100 — Violin Sony (Cardioid)</li>
+                                        <li>Neumann KM184 — Guitar XY Neumann (X) (Cardioid)</li>
+                                        <li>Neumann KM184 — Guitar XY Neumann (Y) (Cardioid)</li>
+                                        <li>Sony ECM-100U — Guitar XY Sony (X) (Cardioid)</li>
+                                        <li>Sony ECM-100U — Guitar XY Sony (Y) (Cardioid)</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-
-                <li class="recording-item">
-                    <div class="recording-title">Jazz Organ</div>
-                    <div class="recording-date">June 12, 2025<br>(Stereo recording at Dolan recording studio)</div>
-                    <audio class="recording-audio" controls>
-                        <source src="" type="audio/mpeg">
-                        您的浏览器不支持音频播放。
-                    </audio>
                     <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
                         <span class="toggle-icon">🔻</span>
                         <span class="toggle-text">Show Recording Details</span>
                     </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Jazz Organ</div>
+                    <div class="recording-date">June 12, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the Lf Ipsi and Rf Ipsi mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/JazzOrgan.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
                     <div class="recording-details">
                         <div class="recording-details-section">
                             <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
@@ -1432,46 +1779,79 @@
                             <div class="recording-details-title">🎚 Microphone List</div>
                             <div class="recording-details-content">
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Main Array</div>
+                                    <div class="recording-subsection-title">Square</div>
                                     <ul>
-                                        <li>Neumann KM130 — L</li>
-                                        <li>Neumann KM130 — R</li>
-                                        <li>Neumann KM130 — C (if any)</li>
-                                        <li>Schoeps MK2H — Decca outriggers</li>
+                                        <li>Sennheiser MKH800 Twin — Main Lf Ipsi (Cardioid)</li>
+                                        <li>Sennheiser MKH800 Twin — Main Lf Contra (Cardioid)</li>
+                                        <li>Sennheiser MKH800 Twin — Main Rf Ipsi (Cardioid)</li>
+                                        <li>Sennheiser MKH800 Twin — Main Rf Contra (Cardioid)</li>
+                                        <li>Sennheiser MKH800 Twin — Main LHf Ipsi (Cardioid)</li>
+                                        <li>Sennheiser MKH800 Twin — Main LHf Contra (Cardioid)</li>
+                                        <li>Sennheiser MKH800 Twin — Main RHf Ipsi (Cardioid)</li>
+                                        <li>Sennheiser MKH800 Twin — Main RHf Contra (Cardioid)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Surround / Ambient</div>
+                                    <div class="recording-subsection-title">Surround</div>
                                     <ul>
-                                        <li>DPA 4011 — LSS</li>
-                                        <li>DPA 4011 — RSS</li>
-                                        <li>DPA 4011 — LRS</li>
-                                        <li>DPA 4011 — RRS</li>
+                                        <li>Sennheiser MKH800 — Main Surround Lm (Wide Cardioid)</li>
+                                        <li>Sennheiser MKH800 — Main Surround Rm (Wide Cardioid)</li>
+                                        <li>Neumann KM184 — Main Surround LHm (Cardioid)</li>
+                                        <li>Neumann KM184 — Main Surround RHm (Cardioid)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Room / Height (if any)</div>
+                                    <div class="recording-subsection-title">Ambisonics</div>
                                     <ul>
-                                        <li>Schoeps MK21 — High L</li>
-                                        <li>Schoeps MK21 — High R</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Rear (4 channels)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Drum (4 channels)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Vibes (4 channels)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Organ (4 channels)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Boundary</div>
+                                    <ul>
+                                        <li>Sony ECM-100N — Boundary left (Omni)</li>
+                                        <li>Sony ECM-100N — Boundary right (Omni)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Neumann U87 — Drums Overheads 1 (Cardioid)</li>
+                                        <li>Neumann U87 — Drums Overheads 2 (Cardioid)</li>
+                                        <li>Sennheiser MD421 — BDR Spot (Cardioid)</li>
+                                        <li>Sony ECM-100U — Snare Spot (Cardioid)</li>
+                                        <li>Sennheiser MD421 — (Cardioid)</li>
+                                        <li>Direct Input — Organ Bass DI</li>
+                                        <li>Sony C-100 — Vibes Spot 1 (Cardioid)</li>
+                                        <li>Sony C-100 — Vibes Spot 2 (Cardioid)</li>
+                                        <li>Neumann U87 — Organ Spot 1 (Cardioid)</li>
+                                        <li>Sennheiser MD421 — Vocal (Cardioid)</li>
+                                        <li>Direct Input — Organ DI 1</li>
+                                        <li>Direct Input — Organ DI 2</li>
+                                        <li>Neumann U87 — Organ Bass Spot (Cardioid)</li>
+                                        <li>Neumann U87 — Organ Spot 2 (Cardioid)</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </li>
-
-                <li class="recording-item">
-                    <div class="recording-title">Percussion Trio</div>
-                    <div class="recording-date">June 11, 2025<br>(Stereo recording at Dolan recording studio)</div>
-                    <audio class="recording-audio" controls>
-                        <source src="" type="audio/mpeg">
-                        您的浏览器不支持音频播放。
-                    </audio>
                     <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
                         <span class="toggle-icon">🔻</span>
                         <span class="toggle-text">Show Recording Details</span>
                     </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Percussion Trio</div>
+                    <div class="recording-date">June 11, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the L and R mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/PercussionTrio.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
                     <div class="recording-details">
                         <div class="recording-details-section">
                             <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
@@ -1483,39 +1863,533 @@
                             <div class="recording-details-title">🎚 Microphone List</div>
                             <div class="recording-details-content">
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Main Array</div>
+                                    <div class="recording-subsection-title">Square</div>
                                     <ul>
-                                        <li>Neumann KM130 — L</li>
-                                        <li>Neumann KM130 — R</li>
-                                        <li>Neumann KM130 — C (if any)</li>
-                                        <li>Schoeps MK2H — Decca outriggers</li>
+                                        <li>Wall Input 1 — Sennheiser MKH800 Twin — Main L Ipsi (Cardioid)</li>
+                                        <li>Wall Input 2 — Sennheiser MKH800 Twin — Main L Contra (Cardioid)</li>
+                                        <li>Wall Input 3 — Sennheiser MKH800 Twin — Main R Ipsi (Cardioid)</li>
+                                        <li>Wall Input 4 — Sennheiser MKH800 Twin — Main R Contra (Cardioid)</li>
+                                        <li>Wall Input 5 — Sennheiser MKH800 Twin — Main LH Ipsi (Cardioid)</li>
+                                        <li>Wall Input 6 — Sennheiser MKH800 Twin — Main LH Contra (Cardioid)</li>
+                                        <li>Wall Input 7 — Sennheiser MKH800 Twin — Main RH Ipsi (Cardioid)</li>
+                                        <li>Wall Input 8 — Sennheiser MKH800 Twin — Main RH Contra (Cardioid)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Surround / Ambient</div>
+                                    <div class="recording-subsection-title">Surround</div>
                                     <ul>
-                                        <li>DPA 4011 — LSS</li>
-                                        <li>DPA 4011 — RSS</li>
-                                        <li>DPA 4011 — LRS</li>
-                                        <li>DPA 4011 — RRS</li>
+                                        <li>Wall Input 9 — Sennheiser MKH800 — Main Surround L (Wide Cardioid)</li>
+                                        <li>Wall Input 10 — Sennheiser MKH800 — Main Surround R (Wide Cardioid)</li>
+                                        <li>Wall Input 11 — Neumann KM184 — Main Surround LH (Cardioid)</li>
+                                        <li>Wall Input 12 — Neumann KM184 — Main Surround RH (Cardioid)</li>
                                     </ul>
                                 </div>
                                 <div class="recording-subsection">
-                                    <div class="recording-subsection-title">Room / Height (if any)</div>
+                                    <div class="recording-subsection-title">Ambisonics</div>
                                     <ul>
-                                        <li>Schoeps MK21 — High L</li>
-                                        <li>Schoeps MK21 — High R</li>
+                                        <li>Wall Input 33-36 — Sennheiser Ambeo VR — Ambeo L (Omni / First Order)</li>
+                                        <li>Wall Input 37-40 — Sennheiser Ambeo VR — Ambeo R (Omni / First Order)</li>
+                                        <li>Wall Input 41-44 — Sennheiser Ambeo VR — Ambeo C (Omni / First Order)</li>
+                                        <li>Wall Input 45-48 — Sennheiser Ambeo VR — Ambeo Aud (Omni / First Order)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Wall Input 13 — Neumann U87 — Perc 1 Spot 1 (Cardioid)</li>
+                                        <li>Wall Input 14 — Neumann U87 — Perc 1 Spot 2 (Cardioid)</li>
+                                        <li>Wall Input 15 — Sennheiser MD421 — Perc 1 Spot 3 (Cardioid)</li>
+                                        <li>Wall Input 16 — Neumann U87 — Perc 2 Spot 1 (Cardioid)</li>
+                                        <li>Wall Input 17 — Neumann U87 — Perc 2 Spot 2 (Cardioid)</li>
+                                        <li>Wall Input 18 — Sennheiser MD421 — Perc 2 Spot 3 (Cardioid)</li>
+                                        <li>Wall Input 19 — Neumann U87 — Perc 3 Spot 1 (Cardioid)</li>
+                                        <li>Wall Input 20 — Neumann U87 — Perc 3 Spot 2 (Cardioid)</li>
+                                        <li>Wall Input 21 — Sennheiser MD421 — Perc 3 Spot 3 (Cardioid)</li>
+                                        <li>Wall Input 22 — Sony ECM-100U — Hihat Spot (Cardioid)</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
+                        <span class="toggle-icon">🔻</span>
+                        <span class="toggle-text">Show Recording Details</span>
+                    </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Wind Quintet</div>
+                    <div class="recording-date">June 18, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the L and R mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/WindQuentet.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
+                    <div class="recording-details">
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
+                            <div class="recording-details-content">
+                                <img src="images/windquintet.png" alt="Wind Quintet Microphone Layout">
+                            </div>
+                        </div>
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎚 Microphone List</div>
+                            <div class="recording-details-content">
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Main Array</div>
+                                    <ul>
+                                        <li>Josephson C617 — L (Omni)</li>
+                                        <li>Josephson C617 — R (Omni)</li>
+                                        <li>AEA R84 — C (Figure 8)</li>
+                                        <li>Josephson C617 — Lsr (Omni)</li>
+                                        <li>Josephson C617 — Rsr (Omni)</li>
+                                        <li>AKG C414-XLII — Lw (Hyper Cardioid)</li>
+                                        <li>AKG C414-XLII — Rw (Hyper Cardioid)</li>
+                                        <li>AKG C414-XLII — Lhf (Hyper Cardioid)</li>
+                                        <li>AKG C414-XLII — Rhf (Hyper Cardioid)</li>
+                                        <li>AKG C414-XLII — Lhr (Hyper Cardioid)</li>
+                                        <li>AKG C414-XLII — Rhr (Hyper Cardioid)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Boundary</div>
+                                    <ul>
+                                        <li>Sony ECM-100N — Boundary L (Omni)</li>
+                                        <li>Sony ECM-100N — Boundary R (Omni)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Sennheiser MKH800 Twin — Flute Ipsi (Dual Capsule)</li>
+                                        <li>Sennheiser MKH800 Twin — Flute Contra (Dual Capsule)</li>
+                                        <li>Sennheiser MKH800 Twin — Oboe Ipsi (Dual Capsule)</li>
+                                        <li>Sennheiser MKH800 Twin — Oboe Contra (Dual Capsule)</li>
+                                        <li>Sennheiser MKH800 Twin — Clarinet Ipsi (Dual Capsule)</li>
+                                        <li>Sennheiser MKH800 Twin — Clarinet Contra (Dual Capsule)</li>
+                                        <li>Coles 4038 — Bassoon (Figure 8)</li>
+                                        <li>Coles 4038 — French Horn (Figure 8)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Ambisonics</div>
+                                    <ul>
+                                        <li>Sennheiser Ambeo VR — Ambeo A (Flute) (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo B (Oboe) (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo C (Bassoon) (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo D (French Horn) (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo E (Clarinet) (Omni / First Order)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
+                        <span class="toggle-icon">🔻</span>
+                        <span class="toggle-text">Show Recording Details</span>
+                    </div>
+                </li>
+
+                <li class="recording-item">
+                    <div class="recording-title">Quartango</div>
+                    <div class="recording-date">June 25, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the L and R mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/Quartango .wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
+                    <div class="recording-details">
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
+                            <div class="recording-details-content">
+                                <img src="images/Quartango.png" alt="Quartango Microphone Layout">
+                            </div>
+                        </div>
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎚 Microphone List</div>
+                            <div class="recording-details-content">
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Main Array</div>
+                                    <ul>
+                                        <li>Josephson C617 — Main L (Omni)</li>
+                                        <li>Josephson C617 — Main R (Omni)</li>
+                                        <li>Josephson C617 — Main LS (Omni)</li>
+                                        <li>Josephson C617 — Main RS (Omni)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Height</div>
+                                    <ul>
+                                        <li>AKG C414-XLII — Height L (Cardioid)</li>
+                                        <li>AKG C414-XLII — Height R (Cardioid)</li>
+                                        <li>AKG C414-XLII — Height LS (Cardioid)</li>
+                                        <li>AKG C414-XLII — Height RS (Cardioid)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Boundary</div>
+                                    <ul>
+                                        <li>Sony ECM-100N — Boundary L</li>
+                                        <li>Sony ECM-100N — Boundary R</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Royer R-121 — Violin 1 Spot (Figure 8)</li>
+                                        <li>DPA 4011 — Violin 1 Spot (Cardioid)</li>
+                                        <li>Royer R-121 — Violin 2 Spot (Figure 8)</li>
+                                        <li>DPA 4011 — Violin 2 Spot (Cardioid)</li>
+                                        <li>Royer R-121 — Viola Spot (Figure 8)</li>
+                                        <li>DPA 4011 — Viola Spot (Cardioid)</li>
+                                        <li>Royer R-121 — Cello Spot (Figure 8)</li>
+                                        <li>DPA 4011 — Cello Spot (Cardioid)</li>
+                                        <li>Neumann KM184 — Bobby System Violin Side L (Cardioid)</li>
+                                        <li>Neumann KM184 — Bobby System Violin Side R (Cardioid)</li>
+                                        <li>Neumann KM184 — Bobby System Cello Side L (Cardioid)</li>
+                                        <li>Neumann KM184 — Bobby System Cello Side R (Cardioid)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Ambisonics</div>
+                                    <ul>
+                                        <li>Sennheiser Ambeo VR — Violin 1 Spot (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Violin 2 Spot (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Viola Spot (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Cello Spot (Omni / First Order)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
+                        <span class="toggle-icon">🔻</span>
+                        <span class="toggle-text">Show Recording Details</span>
+                    </div>
+                </li>
+
+                <li class="recording-item">
+                    <div class="recording-title">Brass Quartet</div>
+                    <div class="recording-date">June 26, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the L and R mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/BrassQuartet.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
+                    <div class="recording-details">
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
+                            <div class="recording-details-content">
+                                <img src="images/BrassQuartet.png" alt="Brass Quartet Microphone Layout">
+                            </div>
+                        </div>
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎚 Microphone List</div>
+                            <div class="recording-details-content">
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Main Array</div>
+                                    <ul>
+                                        <li>Wall Input 1 — Neumann KM183 — L (Omni)</li>
+                                        <li>Wall Input 2 — Neumann KM183 — R (Omni)</li>
+                                        <li>Wall Input 3 — Neumann KM183 — Ls (Omni)</li>
+                                        <li>Wall Input 4 — Neumann KM183 — Rs (Omni)</li>
+                                        <li>Wall Input 5 — Neumann KM183 — Lsr (Omni)</li>
+                                        <li>Wall Input 6 — Neumann KM183 — Rsr (Omni)</li>
+                                        <li>Wall Input 7 — Neumann KM184 — LH (Cardioid)</li>
+                                        <li>Wall Input 8 — Neumann KM184 — RH (Cardioid)</li>
+                                        <li>Wall Input 9 — Neumann KM184 — LHs (Cardioid)</li>
+                                        <li>Wall Input 10 — Neumann KM184 — RHs (Cardioid)</li>
+                                        <li>Wall Input 11 — Sennheiser MKH800 Twin — Center Ipsi (Hypercardioid)</li>
+                                        <li>Wall Input 12 — Sennheiser MKH800 Twin — Center Contra (Hypercardioid)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Boundary</div>
+                                    <ul>
+                                        <li>Wall Input 13 — Sony ECM-100N — Boundary L (Omni)</li>
+                                        <li>Wall Input 14 — Sony ECM-100N — Boundary R (Omni)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Wall Input 17 — Coles 4038 — A- Trumpet (Figure 8)</li>
+                                        <li>Wall Input 18 — Royer R-121 — B- French Horn (Figure 8)</li>
+                                        <li>Wall Input 19 — Royer R-121 — C- Tuba (Figure 8)</li>
+                                        <li>Wall Input 20 — Royer R-121 — D- Trombone (Figure 8)</li>
+                                        <li>Wall Input 21 — Coles 4038 — E- Trumpet (Figure 8)</li>
+                                        <li>Wall Input 25 — DPA 4011 — Left Room L (Cardioid)</li>
+                                        <li>Wall Input 26 — DPA 4011 — Left Room R (Cardioid)</li>
+                                        <li>Wall Input 27 — DPA 4011 — Right Room L (Cardioid)</li>
+                                        <li>Wall Input 28 — DPA 4011 — Right Room R (Cardioid)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Ambisonics</div>
+                                    <ul>
+                                        <li>Wall Input 33-36 — Sennheiser Ambeo VR — Ambeo L (Cardioid)</li>
+                                        <li>Wall Input 37-40 — Sennheiser Ambeo VR — Ambeo R (Cardioid)</li>
+                                        <li>Wall Input 41-44 — Sennheiser Ambeo VR — Ambeo Center (Cardioid)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
+                        <span class="toggle-icon">🔻</span>
+                        <span class="toggle-text">Show Recording Details</span>
+                    </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Jazz Sextet</div>
+                    <div class="recording-date">June 23, 2025<br>(3D recording at 370 Jay Street)</div>
+                    <div class="recording-note">This sample uses the Hamasaki LH Ipsi and Hamasaki RH Ipsi mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/JazzSextet.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
+                    <div class="recording-details">
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
+                            <div class="recording-details-content">
+                                <img src="images/JazzSextet.png" alt="Jazz Sextet Microphone Layout">
+                            </div>
+                        </div>
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎚 Microphone List</div>
+                            <div class="recording-details-content">
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Percussion</div>
+                                    <ul>
+                                        <li>Order 9 — SM57 — Conga High</li>
+                                        <li>Order 10 — SM57 — Conga Mid</li>
+                                        <li>Order 11 — SM58 — Conga Low</li>
+                                        <li>Order 12 — SM58 — Bongos</li>
+                                        <li>Order 13 — KM184 — Bells</li>
+                                        <li>Order 14 — SM58 — Cowbell</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Hamasaki Square</div>
+                                    <ul>
+                                        <li>Order 15 — MKH 800 Twin — Hamasaki LH Ipsi</li>
+                                        <li>Order 16 — MKH 800 Twin — Hamasaki LH Contra</li>
+                                        <li>Order 17 — MKH 800 Twin — Hamasaki RH Ipsi</li>
+                                        <li>Order 18 — MKH 800 Twin — Hamasaki RH Contra</li>
+                                        <li>Order 19 — MKH 800 Twin — Hamasaki LHR Ipsi</li>
+                                        <li>Order 20 — MKH 800 Twin — Hamasaki LHR Contra</li>
+                                        <li>Order 21 — MKH 800 Twin — Hamasaki RHR Ipsi</li>
+                                        <li>Order 22 — MKH 800 Twin — Hamasaki RHR Contra</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Drums</div>
+                                    <ul>
+                                        <li>Order 41 — M147 — Drum OH</li>
+                                        <li>Order 42 — KM184 — Drum Ride</li>
+                                        <li>Order 43 — KM184 — Drum HiHat</li>
+                                        <li>Order 44 — RE20 — Drum Kick</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Bass & Guitar</div>
+                                    <ul>
+                                        <li>Order 45 — DI — Bass DI</li>
+                                        <li>Order 46 — U87 — Bass Amp</li>
+                                        <li>Order 47 — Coles 4038 — Guitar Amp</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Trombone</div>
+                                    <ul>
+                                        <li>Order 49 — Coles 4038 — Trombone 1</li>
+                                        <li>Order 51 — Coles 4038 — Trombone 2</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Ambisonics</div>
+                                    <ul>
+                                        <li>Order 73-76 — Sennheiser Ambeo VR — Ambeo VR 1</li>
+                                        <li>Order 77-80 — Sennheiser Ambeo VR — Ambeo VR 2</li>
+                                        <li>Order 81-84 — Sennheiser Ambeo VR — Ambeo VR 3</li>
+                                        <li>Order 85-88 — Sennheiser Ambeo VR — Ambeo VR 4</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
+                        <span class="toggle-icon">🔻</span>
+                        <span class="toggle-text">Show Recording Details</span>
+                    </div>
+                </li>
+
+                <li class="recording-item hidden">
+                    <div class="recording-title">Marimba Quintet</div>
+                    <div class="recording-date">June 17, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the L and R mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/MarimbaQuintet.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
+                    <div class="recording-details">
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
+                            <div class="recording-details-content">
+                                <img src="images/MarimbaQuintet.png" alt="Marimba Quintet Microphone Layout">
+                            </div>
+                        </div>
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎚 Microphone List</div>
+                            <div class="recording-details-content">
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Main Array</div>
+                                    <ul>
+                                        <li>Josephson C617 — L (Omni)</li>
+                                        <li>Josephson C617 — R (Omni)</li>
+                                        <li>Josephson C617 — Lsr (Omni)</li>
+                                        <li>Josephson C617 — Rsr (Omni)</li>
+                                        <li>AEA R84 — Center (Figure 8)</li>
+                                        <li>AKG C414-XLII — Lw (Hyper Cardioid)</li>
+                                        <li>AKG C414-XLII — Rw (Hyper Cardioid)</li>
+                                        <li>AKG C414-XLII — Lh (Cardioid)</li>
+                                        <li>AKG C414-XLII — Rh (Cardioid)</li>
+                                        <li>AKG C414-XLII — Lrh (Cardioid)</li>
+                                        <li>AKG C414-XLII — Rrh (Cardioid)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Boundary</div>
+                                    <ul>
+                                        <li>Sony ECM100N — Boundary L (Omni)</li>
+                                        <li>Sony ECM100N — Boundary R (Omni)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Sony C100 — Marimba XY (X) (Cardioid)</li>
+                                        <li>Sony C100 — Marimba XY (Y) (Cardioid)</li>
+                                        <li>Sony ECM100U — Marimba AB (L) (Cardioid)</li>
+                                        <li>Sony ECM100U — Marimba AB (R) (Cardioid)</li>
+                                        <li>Neumann U87 — Snare Overhead (Cardioid)</li>
+                                        <li>Neumann U87 — Ride Overhead (Cardioid)</li>
+                                        <li>Electrovoice RE-20 — Kick (Cardioid)</li>
+                                        <li>DPA 4011 — Flute/Clarinet (Cardioid) — (Mic over the shoulder)</li>
+                                        <li>DPA 4011 — Guitar Top (Cardioid)</li>
+                                        <li>DPA 4011 — Guitar Bottom (Cardioid)</li>
+                                        <li>Neural DSP Direct Out — Guitar DI (L)</li>
+                                        <li>Neural DSP Direct Out — Guitar DI (R)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Ambisonics</div>
+                                    <ul>
+                                        <li>Sennheiser Ambeo VR — Ambeo Drum (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Marimba (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Guitar (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Fl/Cl (Omni / First Order)</li>
+                                        <li>Sennheiser Ambeo VR — Ambeo Oboe (Omni / First Order)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
+                        <span class="toggle-icon">🔻</span>
+                        <span class="toggle-text">Show Recording Details</span>
+                    </div>
+                </li>
+
+                <li class="recording-item">
+                    <div class="recording-title">Eastern Folk</div>
+                    <div class="recording-date">June 24, 2025<br>(3D recording at Paulson Center)</div>
+                    <div class="recording-note">This sample uses the Left Ipsi and Right Ipsi mics.</div>
+                    <audio class="recording-audio" controls>
+                        <source src="audio/EasternFolk.wav" type="audio/wav">
+                        Your browser does not support audio playback.
+                    </audio>
+                    <div class="recording-details">
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎙 Microphone Layout Diagram</div>
+                            <div class="recording-details-content">
+                                <img src="images/EasternFolk.png" alt="Eastern Folk Microphone Layout">
+                            </div>
+                        </div>
+                        <div class="recording-details-section">
+                            <div class="recording-details-title">🎚 Microphone List</div>
+                            <div class="recording-details-content">
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Layer 1 Cross</div>
+                                    <ul>
+                                        <li>Wall Input 1 — Sennheiser MKH800 Twin — Left Ipsi (Dual Capsule)</li>
+                                        <li>Wall Input 2 — Sennheiser MKH800 Twin — Left Contra (Dual Capsule)</li>
+                                        <li>Wall Input 3 — Sennheiser MKH800 Twin — Right Ipsi (Dual Capsule)</li>
+                                        <li>Wall Input 4 — Sennheiser MKH800 Twin — Left Contra (Dual Capsule)</li>
+                                        <li>Wall Input 5 — Sennheiser MKH800 Twin — Left Surround Ipsi (Dual Capsule)</li>
+                                        <li>Wall Input 6 — Sennheiser MKH800 Twin — Left Surround Contra (Dual Capsule)</li>
+                                        <li>Wall Input 7 — Sennheiser MKH800 Twin — Right Surround Ipsi (Dual Capsule)</li>
+                                        <li>Wall Input 8 — Sennheiser MKH800 Twin — Right Surround Contra (Dual Capsule)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Layer 2</div>
+                                    <ul>
+                                        <li>Wall Input 9 — AKG C414-XLII — Hama Left (Figure 8)</li>
+                                        <li>Wall Input 10 — AKG C414-XLII — Hama Right (Figure 8)</li>
+                                        <li>Wall Input 11 — AKG C414-XLII — Hama Left Surround (Figure 8)</li>
+                                        <li>Wall Input 12 — AKG C414-XLII — Hama Right Surround (Figure 8)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Boundary</div>
+                                    <ul>
+                                        <li>Wall Input 13 — Josephson C617 — Boundary Left (Omni)</li>
+                                        <li>Wall Input 14 — Josephson C617 — Boundary Right (Omni)</li>
+                                        <li>Wall Input 15 — Josephson C617 — Boundary Surround Left (Omni)</li>
+                                        <li>Wall Input 16 — Josephson C617 — Boundary Surround Right (Omni)</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Supports</div>
+                                    <ul>
+                                        <li>Wall Input 17 — Neumann KM184 — Frame Drum Left (Cardioid) — Spot A</li>
+                                        <li>Wall Input 18 — Neumann KM184 — Frame Drum Right (Cardioid) — Spot A</li>
+                                        <li>Wall Input 19 — Sony C-100 — Aud Left (Cardioid) — Spot B</li>
+                                        <li>Wall Input 20 — Sony C-100 — Aud Right (Cardioid) — Spot B</li>
+                                        <li>Wall Input 21 — Neumann KM184 — Darbuka Left (Cardioid) — Spot C</li>
+                                        <li>Wall Input 22 — Neumann KM184 — Darbuka Right (Cardioid) — Spot C</li>
+                                        <li>Wall Input 23 — Neumann TLM103 — Rear Amb Left (Cardioid)</li>
+                                        <li>Wall Input 24 — Neumann TLM103 — Rear Amb Right (Cardioid)</li>
+                                        <li>Wall Input 25 — ECM 100U — Room Reverb L</li>
+                                        <li>Wall Input 26 — ECM 100U — Stereo Reverb R</li>
+                                    </ul>
+                                </div>
+                                <div class="recording-subsection">
+                                    <div class="recording-subsection-title">Ambisonics</div>
+                                    <ul>
+                                        <li>Wall Input 33-36 — Sennheiser Ambeo VR — Ambeo A - Frame Drum (Omni / First Order)</li>
+                                        <li>Wall Input 37-40 — Sennheiser Ambeo VR — Ambeo B - Aud (Omni / First Order)</li>
+                                        <li>Wall Input 41-44 — Sennheiser Ambeo VR — Ambeo C - Darbuka (Omni / First Order)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recording-toggle" onclick="toggleRecordingDetails(this)">
+                        <span class="toggle-icon">🔻</span>
+                        <span class="toggle-text">Show Recording Details</span>
+                    </div>
                 </li>
             </ul>
+            <div class="view-all-button">
+                <button onclick="toggleViewAll()">View All</button>
+            </div>
         </div>
 
         <!-- Papers -->
-        <div class="section">
+    <div class="section">
             <h2>Publications</h2>
             <ul class="papers-list">
                 <li class="paper-placeholder">
@@ -1523,7 +2397,7 @@
                     <div class="paper-placeholder-text">The siren husky is composing research papers harmonically...</div>
                     <div class="paper-placeholder-subtext">Our furry research team is on it! 🦊✨</div>
                 </li>
-                <!-- 示例：当你有了论文后，可以这样添加 -->
+                <!-- Example: When you have papers, you can add them like this -->
                 <!-- 
                 <li class="paper-item">
                     <div class="paper-title">Your Paper Title Here</div>
@@ -1543,11 +2417,11 @@
     <div class="section">
             <h2>Gallery</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openGallery('images/gallery/IMG_3906.JPG')" tabindex="0" role="button" aria-label="View Gallery Photo 1" onkeydown="if(event.key==='Enter'||event.key===' '){openGallery('images/gallery/IMG_3906.JPG')}">
-                    <img src="images/gallery/IMG_3906.JPG" alt="Gallery Photo 1" loading="lazy">
+                <div class="gallery-item" onclick="openGallery('images/gallery/IMG_3581.JPG')" tabindex="0" role="button" aria-label="View Gallery Photo 1" onkeydown="if(event.key==='Enter'||event.key===' '){openGallery('images/gallery/IMG_3581.JPG')}">
+                    <img src="images/gallery/IMG_3581.JPG" alt="Gallery Photo 1" loading="lazy">
                 </div>
-                <div class="gallery-item" onclick="openGallery('images/gallery/IMG_4843.JPG')" tabindex="0" role="button" aria-label="View Gallery Photo 2" onkeydown="if(event.key==='Enter'||event.key===' '){openGallery('images/gallery/IMG_4843.JPG')}">
-                    <img src="images/gallery/IMG_4843.JPG" alt="Gallery Photo 2" loading="lazy">
+                <div class="gallery-item" onclick="openGallery('images/gallery/IMG_4887.JPG')" tabindex="0" role="button" aria-label="View Gallery Photo 2" onkeydown="if(event.key==='Enter'||event.key===' '){openGallery('images/gallery/IMG_4887.JPG')}">
+                    <img src="images/gallery/IMG_4887.JPG" alt="Gallery Photo 2" loading="lazy">
                 </div>
                 <div class="gallery-item" onclick="openGallery('images/gallery/IMG_4853.JPG')" tabindex="0" role="button" aria-label="View Gallery Photo 3" onkeydown="if(event.key==='Enter'||event.key===' '){openGallery('images/gallery/IMG_4853.JPG')}">
                     <img src="images/gallery/IMG_4853.JPG" alt="Gallery Photo 3" loading="lazy">
@@ -1560,7 +2434,7 @@
 
         <!-- Contact -->
         <div class="contact-cv-wrapper">
-            <div class="contact-info">
+            <div class="contact-info" id="contact">
                 <div class="contact-title">Let's connect 🐾</div>
                 <div class="contact-links-wrapper">
                     <a class="contact-link" href="mailto:garryorrca@gmail.com" aria-label="Send email to Zixuan Guo">📧 Email</a>
@@ -1646,6 +2520,128 @@
                 recordingItem.classList.add('active');
                 toggleIcon.textContent = '🔺';
                 toggleText.textContent = 'Hide Recording Details';
+            }
+        }
+
+        // Sort recordings by date (newest first)
+        function sortRecordingsByDate() {
+            const recordingsList = document.querySelector('.recordings-list');
+            if (!recordingsList) return;
+
+            const items = Array.from(recordingsList.querySelectorAll('.recording-item'));
+            
+            items.sort((a, b) => {
+                const dateA = a.querySelector('.recording-date')?.textContent || '';
+                const dateB = b.querySelector('.recording-date')?.textContent || '';
+                
+                // Extract date from text (format: "June 26, 2025" or "June 4, 2025")
+                const extractDate = (text) => {
+                    const match = text.match(/(\w+)\s+(\d+),\s+(\d+)/);
+                    if (!match) return new Date(0);
+                    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    const month = monthNames.indexOf(match[1]);
+                    const day = parseInt(match[2]);
+                    const year = parseInt(match[3]);
+                    return new Date(year, month, day);
+                };
+                
+                const dateAObj = extractDate(dateA);
+                const dateBObj = extractDate(dateB);
+                
+                // Sort descending (newest first)
+                return dateBObj - dateAObj;
+            });
+            
+            // Re-append sorted items and ensure only first 3 are visible
+            items.forEach((item, index) => {
+                recordingsList.appendChild(item);
+                if (index >= 3) {
+                    item.classList.add('hidden');
+                } else {
+                    item.classList.remove('hidden');
+                }
+            });
+        }
+
+        // Sort recordings on page load
+        document.addEventListener('DOMContentLoaded', sortRecordingsByDate);
+
+        // View All recordings toggle
+        function toggleViewAll() {
+            const hiddenItems = document.querySelectorAll('.recording-item.hidden');
+            const button = document.querySelector('.recordings-list').nextElementSibling.querySelector('button');
+            
+            if (hiddenItems.length > 0) {
+                // Show all hidden items
+                hiddenItems.forEach(item => {
+                    item.classList.remove('hidden');
+                });
+                button.textContent = 'Show Less';
+            } else {
+                // Hide items after the first 3
+                const allItems = document.querySelectorAll('.recording-item');
+                allItems.forEach((item, index) => {
+                    if (index >= 3) {
+                        item.classList.add('hidden');
+                        // Ensure active class is removed when hiding, collapse recording-details
+                        item.classList.remove('active');
+                        const toggle = item.querySelector('.recording-toggle');
+                        if (toggle) {
+                            const toggleIcon = toggle.querySelector('.toggle-icon');
+                            const toggleText = toggle.querySelector('.toggle-text');
+                            if (toggleIcon) toggleIcon.textContent = '🔻';
+                            if (toggleText) toggleText.textContent = 'Show Recording Details';
+                        }
+                    }
+                });
+                button.textContent = 'View All';
+            }
+        }
+
+        // View All compositions toggle
+        function toggleViewAllCompositions() {
+            const hiddenItems = document.querySelectorAll('.composition-item.hidden');
+            const button = document.querySelector('.compositions-list').nextElementSibling.querySelector('button');
+            
+            if (hiddenItems.length > 0) {
+                // Show all hidden items
+                hiddenItems.forEach(item => {
+                    item.classList.remove('hidden');
+                });
+                button.textContent = 'Show Less';
+            } else {
+                // Hide items after the first 4
+                const allItems = document.querySelectorAll('.composition-item');
+                allItems.forEach((item, index) => {
+                    if (index >= 4) {
+                        item.classList.add('hidden');
+                    }
+                });
+                button.textContent = 'View All';
+            }
+        }
+
+        function toggleViewAllProjects() {
+            const ongoingTitle = document.querySelector('.project-subsection-title');
+            const ongoingList = ongoingTitle.nextElementSibling;
+            const hiddenItems = ongoingList.querySelectorAll('li.hidden');
+            const button = ongoingList.nextElementSibling.querySelector('button');
+            
+            if (hiddenItems.length > 0) {
+                // Show all hidden items
+                hiddenItems.forEach(item => {
+                    item.classList.remove('hidden');
+                });
+                button.textContent = 'Show Less';
+            } else {
+                // Hide items after the first 3
+                const allItems = ongoingList.querySelectorAll('li');
+                allItems.forEach((item, index) => {
+                    if (index >= 3) {
+                        item.classList.add('hidden');
+                    }
+                });
+                button.textContent = 'View All';
             }
         }
     </script>
