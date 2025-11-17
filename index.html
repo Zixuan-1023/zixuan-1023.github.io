@@ -2660,25 +2660,36 @@
         }
 
         function toggleViewAllProjects() {
-            // Find the Projects section and the first project-subsection-title (Ongoing/Finished)
-            const projectsSection = document.querySelector('.section h2');
-            if (!projectsSection || projectsSection.textContent !== 'Projects') return;
+            // Find the Projects section by searching for the h2 with text "Projects"
+            const allSections = document.querySelectorAll('.section');
+            let projectsSection = null;
             
-            const section = projectsSection.closest('.section');
-            if (!section) return;
+            for (const section of allSections) {
+                const h2 = section.querySelector('h2');
+                if (h2 && h2.textContent.trim() === 'Projects') {
+                    projectsSection = section;
+                    break;
+                }
+            }
             
-            const ongoingTitle = section.querySelector('.project-subsection-title');
+            if (!projectsSection) return;
+            
+            // Find the Ongoing/Finished subsection
+            const ongoingTitle = projectsSection.querySelector('.project-subsection-title');
             if (!ongoingTitle) return;
             
+            // Find the projects list after the title
             const ongoingList = ongoingTitle.nextElementSibling;
             if (!ongoingList || !ongoingList.classList.contains('projects-list')) return;
             
+            // Find the button container after the list
             const buttonContainer = ongoingList.nextElementSibling;
-            if (!buttonContainer) return;
+            if (!buttonContainer || !buttonContainer.classList.contains('view-all-button')) return;
             
             const button = buttonContainer.querySelector('button');
             if (!button) return;
             
+            // Check if there are hidden items
             const hiddenItems = ongoingList.querySelectorAll('li.hidden');
             
             if (hiddenItems.length > 0) {
