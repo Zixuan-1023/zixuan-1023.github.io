@@ -412,6 +412,33 @@
             margin-top: 12px;
         }
 
+        /* Project content row layout (for Max/MSP project) */
+        .project-content-row {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .project-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .project-image-right {
+            flex-shrink: 0;
+        }
+
+        .project-image-right img {
+            width: 280px;
+            min-width: 280px;
+            max-width: 280px;
+            height: auto;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
         .projects-list li:hover {
             transform: translateY(-4px) scale(1.02);
             background: rgba(255, 255, 255, 0.12);
@@ -1280,6 +1307,28 @@
             .project-content {
                 order: 1; /* Text appears first */
             }
+
+            /* Mobile: Stack project-content-row layout */
+            .project-content-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .project-image-right {
+                width: 100%;
+                margin-top: 20px;
+                order: 2; /* Image appears after text */
+            }
+
+            .project-image-right img {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+            }
+
+            .project-text {
+                order: 1; /* Text appears first */
+            }
             .contact-links-wrapper {
                 gap: 16px;
             }
@@ -1385,6 +1434,22 @@
                 </div>
                 <img src="images/InteractiveGeneration.png" alt="Interactive Music Generation via Image-Based Audio Parameter Mapping" class="project-image" loading="lazy" />
             </li>
+            <li class="hidden">
+                <div class="project-content-row">
+                    <div class="project-text">
+                        <div class="project-title">🎹 Monophonic MIDI Synthesizer (Max/MSP)</div>
+                        <div class="project-description">An interactive and visualized monophonic MIDI synthesizer built in Max/MSP, designed as a playable instrument that supports real-time performance through both a virtual on-screen keyboard and external MIDI controllers. The synthesizer integrates waveform selection, ADSR envelope shaping, LFO-based modulation (frequency and depth), nonlinear overdrive, filtering, and time-based effects, with each processing module individually controllable and bypassable.</div>
+                    </div>
+            
+                    <div class="project-image-right">
+                        <img
+                            src="images/Max Synth.png"
+                            alt="Monophonic MIDI Synthesizer (Max/MSP)"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </li>
             </ul>
             <div class="view-all-button">
                 <button onclick="toggleViewAllProjects()">View All</button>
@@ -1398,10 +1463,6 @@
             <li>
                 <div class="project-title">🎹 Symbolic Music Style Transfer</div>
                 <div class="project-description">A system that allows users to transform existing MIDI melodies and harmonies into different styles based on user input, such as making them jazzy or bluesy.</div>
-            </li>
-            <li>
-                <div class="project-title">⌨️ Keyboard Instrument Design</div>
-                <div class="project-description">A keyboard electronic synthesizer instrument designed using MaxMSP.</div>
             </li>
             </ul>
         </div>
