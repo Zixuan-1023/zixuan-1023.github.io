@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Zixuan Guo – Portfolio for Georgia Tech Application" />
+    <meta name="author" content="Zixuan Guo" />
+    <meta name="theme-color" content="#667eea" />
+    <title>Zixuan Guo – Portfolio for Georgia Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Global Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- Performance Optimizations --- */
+        .section,
+        .projects-list li,
+        .composition-item,
+        .recording-item,
+        .gallery-item {
+            will-change: transform, opacity;
+        }
+
+        /* --- Fade In Animations --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Font Style --- */
+        body {
+            font-family: "Montserrat", sans-serif;
+            color: #ffffff;
+            line-height: 1.5;
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Animated Background --- */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            background: #000000;
+            overflow: hidden;
+        }
+
+        /* Floating gradient orbs - Apple Vision Pro style: smaller, brighter spotlights */
+        .gradient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.7;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(200, 180, 255, 0.9), rgba(180, 200, 255, 0.3) 25%, transparent 45%);
+            top: 15%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(180, 200, 255, 0.85), rgba(160, 220, 255, 0.25) 25%, transparent 45%);
+            top: 65%;
+            right: 20%;
+            animation-delay: -7s;
+            animation-duration: 25s;
+        }
+
+        .orb-3 {
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(200, 180, 255, 0.8), rgba(180, 200, 255, 0.2) 25%, transparent 45%);
+            bottom: 25%;
+            left: 55%;
+            animation-delay: -14s;
+            animation-duration: 30s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 30px) scale(0.9);
+            }
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 960px;
+            padding: 120px 24px 80px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Hero --- */
+        .hero-glow {
+            position: absolute;
+            top: calc(50% - 90px);
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(
+                circle at center,
+                rgba(255,255,255,0.15) 0%,
+                rgba(255,255,255,0.08) 25%,
+                rgba(255,255,255,0.04) 45%,
+                rgba(255,255,255,0.015) 65%,
+                rgba(255,255,255,0) 100%
+            );
+            filter: blur(60px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.85;
+            mix-blend-mode: soft-light;
+        }
+
+        h1 {
+            font-size: 54px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 28px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar {
+            display: block;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 30px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            transition: 0.35s ease;
+            border: 3px solid rgba(255,255,255,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Avatar halo glow - Apple Vision Pro style with random slow movement */
+        .avatar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 240px;
+            height: 240px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(200, 180, 255, 0.32) 0%,
+                rgba(180, 200, 255, 0.18) 40%,
+                transparent 70%
+            );
+            filter: blur(30px);
+            z-index: -1;
+            pointer-events: none;
+            animation: halo-float 8s ease-in-out infinite;
+        }
+
+        @keyframes halo-float {
+            0% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1) translate(0, 0);
+            }
+            20% {
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1.03) translate(8px, -12px);
+            }
+            40% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.05) translate(-6px, 10px);
+            }
+            60% {
+                opacity: 0.75;
+                transform: translate(-50%, -50%) scale(1.02) translate(12px, 8px);
+            }
+            80% {
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1.04) translate(-10px, -8px);
+            }
+            100% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1) translate(0, 0);
+            }
+        }
+
+        .avatar:hover {
+            transform: scale(1.03);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0;  
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .divider {
+            width: 100%;
+            max-width: 720px;
+            margin: 40px auto 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* --- Section Title --- */
+        .section {
+            max-width: 720px;
+            margin: 35px auto 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .section h2 {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 28px;
+            max-width: 800px;
+        }
+
+        .section-description a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.4);
+            transition: color 0.3s ease, text-decoration-color 0.3s ease;
+        }
+
+        .section-description a:hover {
+            color: rgba(255, 255, 255, 1);
+            text-decoration-color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Subtle bottom glow for section titles - Apple Vision Pro style */
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(200, 180, 255, 0.6) 20%,
+                rgba(180, 200, 255, 0.6) 50%,
+                rgba(200, 180, 255, 0.6) 80%,
+                transparent
+            );
+            filter: blur(8px);
+            opacity: 0.7;
+            transform: scaleX(0.8);
+            transform-origin: center;
+        }
+
+        .section p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.95);
+            line-height: 1.65;
+            margin-bottom: 10px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.15);
+        }
+
+        /* --- Project Cards --- */
+        .projects-list {
+            list-style: none;
+            margin-top: 28px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .projects-list li {
+            /* Apple Music style: frosted glass light gray with inner shadow */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(180%);
+            padding: 24px 32px;
+            border-radius: 20px;
+            /* Inner shadow for depth */
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Project with image layout: text on left, image on right */
+        .projects-list li:has(.project-image) {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .project-content {
+            flex: 1;
+        }
+
+        .project-subsection-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 32px;
+            margin-bottom: 20px;
+        }
+
+        .project-subsection-title:first-child {
+            margin-top: 0;
+        }
+
+        .project-title {
+            font-size: 17px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 12px;
+        }
+
+        .project-image {
+            width: 280px;
+            min-width: 280px;
+            max-width: 280px;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-top: 12px;
+        }
+
+        /* Project content row layout (for Max/MSP project) */
+        .project-content-row {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .project-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .project-image-right {
+            flex-shrink: 0;
+        }
+
+        .project-image-right img {
+            width: 280px;
+            min-width: 280px;
+            max-width: 280px;
+            height: auto;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .projects-list li:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+                0 6px 24px rgba(0, 0, 0, 0.4),
+                0 12px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- Compositions --- */
+        .compositions-list {
+            list-style: none;
+            margin-top: 28px;
+            margin-bottom: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .composition-item.hidden {
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .projects-list li.hidden {
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .composition-item {
+            /* Apple Music style: frosted glass light gray */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(180%);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                        max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        margin 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        padding 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 2000px;
+            opacity: 1;
+            transform: scaleY(1);
+            transform-origin: top;
+        }
+
+        .composition-item:not(.hidden):hover {
+            transform: translateY(-3px) scale(1.01);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+                0 6px 24px rgba(0, 0, 0, 0.4),
+                0 12px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .composition-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 8px;
+        }
+
+        .composition-date {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .composition-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .composition-media {
+            width: 100%;
+            margin-top: 12px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .composition-audio {
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .composition-video {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 12px;
+        }
+
+        .composition-iframe {
+            width: 100%;
+            height: 480px;
+            border-radius: 12px;
+            margin-top: 12px;
+            border: none;
+        }
+
+        .composition-video-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.95);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .composition-video-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Video recordings list: one item per row */
+        .video-recordings-list {
+            grid-template-columns: 1fr !important;
+            max-width: 100% !important;
+        }
+
+        .composition-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 12px;
+            margin-top: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+        }
+
+        .composition-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .composition-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #0071e3;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.25s ease;
+        }
+
+        .composition-link:hover,
+        .composition-link:focus {
+            color: #0077ed;
+            transform: translateX(4px);
+            outline: 2px solid rgba(0,113,227,0.3);
+            outline-offset: 2px;
+        }
+
+        /* --- Recordings --- */
+        .recordings-list {
+            list-style: none;
+            margin-top: 28px;
+            margin-bottom: 0;
+            display: grid;
+            gap: 20px;
+        }
+
+        .recording-item.hidden {
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Ensure recording-details within hidden recording-item are also collapsed */
+        .recording-item.hidden .recording-details {
+            max-height: 0 !important;
+            padding: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .view-all-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .view-all-button button {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            padding: 12px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .view-all-button button:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .recording-item {
+            /* Apple Music style: frosted glass light gray */
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(180%);
+            padding: 20px;
+            border-radius: 16px;
+            overflow: visible;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: scaleY(1);
+            transform-origin: top;
+        }
+
+        /* Expanded cards need higher z-index to prevent overlap with other cards */
+        .recording-item.active {
+            z-index: 10;
+        }
+
+        .recording-item:not(.hidden):hover {
+            transform: translateY(-3px) scale(1.01);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+                0 6px 24px rgba(0, 0, 0, 0.4),
+                0 12px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .recording-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 8px;
+        }
+
+        .recording-date {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .recording-note {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 16px;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .recording-audio {
+            width: 100%;
+            margin-top: 12px;
+            margin-bottom: 16px;
+        }
+
+        .recording-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #0071e3;
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.25s ease;
+            margin-top: 12px;
+            user-select: none;
+        }
+
+        .recording-toggle:hover,
+        .recording-toggle:focus {
+            color: #0077ed;
+            transform: translateX(4px);
+            outline: 2px solid rgba(0,113,227,0.3);
+            outline-offset: 2px;
+        }
+
+        .recording-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0;
+            margin-top: 0;
+        }
+
+        .recording-item.active .recording-details {
+            max-height: 2000px;
+            padding: 20px 0 0 0;
+            margin-top: 16px;
+        }
+
+        .recording-details-section {
+            margin-bottom: 20px;
+        }
+
+        .recording-details-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .recording-details-content {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.6;
+        }
+
+        .recording-details-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 8px 0;
+        }
+
+        .recording-details-content li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .recording-details-content li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .recording-details-content img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            margin: 12px auto;
+            display: block;
+        }
+
+        .recording-subsection {
+            margin-top: 12px;
+        }
+
+        .recording-subsection-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 8px;
+        }
+
+        .recording-note {
+            font-size: 13px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        .composition-link::after {
+            content: '→';
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.25s ease;
+            display: inline-block;
+            margin-left: 4px;
+        }
+
+        .composition-link:hover::after,
+        .composition-link:focus::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Papers --- */
+        .papers-list {
+            list-style: none;
+            margin-top: 28px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .paper-item {
+            /* Apple Music style: frosted glass light gray */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(180%);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .paper-item:hover {
+            transform: translateY(-3px) scale(1.01);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+                0 6px 24px rgba(0, 0, 0, 0.4),
+                0 12px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .paper-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 8px;
+        }
+
+        .paper-authors {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 8px;
+        }
+
+        .paper-venue {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 12px;
+        }
+
+        .paper-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .paper-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #0071e3;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.25s ease;
+        }
+
+        .paper-link:hover,
+        .paper-link:focus {
+            color: #0077ed;
+            transform: translateX(4px);
+            outline: 2px solid rgba(0,113,227,0.3);
+            outline-offset: 2px;
+        }
+
+        .paper-placeholder {
+            /* Apple Music style: frosted glass light gray */
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px) saturate(180%);
+            padding: 60px 24px;
+            border-radius: 16px;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+                0 4px 16px rgba(0, 0, 0, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+
+        .paper-placeholder-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+
+        .paper-placeholder-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .paper-placeholder-subtext {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.65);
+            font-style: italic;
+        }
+
+        /* --- Gallery --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 28px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover,
+        .gallery-item:focus {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            outline: 2px solid rgba(255,255,255,0.5);
+            outline-offset: 4px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(20px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-overlay.active {
+            display: flex;
+            opacity: 1;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .gallery-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(255,255,255,0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-overlay.active img {
+            transform: scale(1);
+        }
+
+        .gallery-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: 0.3s ease;
+        }
+
+        .gallery-close:hover {
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        /* --- Contact --- */
+        .contact-info {
+            margin-top: 0;
+            position: relative;
+            min-height: 280px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .contact-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.95);
+            text-align: center;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .contact-links-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 28px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            color: #1d1d1f;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        /* Email - Rounded card with blue border, top-left decoration */
+        .contact-link:nth-child(1) {
+            border-radius: 20px;
+            border: 3px solid #4A90E2;
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3), inset 0 0 0 1px rgba(255,255,255,0.5);
+            transform: rotate(-1deg);
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(240,248,255,0.95));
+        }
+
+        .contact-link:nth-child(1)::before {
+            content: '✉';
+            position: absolute;
+            top: -8px;
+            left: 12px;
+            font-size: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 4px 8px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* GitHub - Sharp corner card with gray border, top-right decoration */
+        .contact-link:nth-child(2) {
+            border-radius: 12px 12px 12px 0;
+            border: 3px dashed #6E6E6E;
+            box-shadow: 0 6px 20px rgba(110, 110, 110, 0.3);
+            transform: rotate(1deg);
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(245,245,245,0.95));
+        }
+
+        .contact-link:nth-child(2)::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            background: #6E6E6E;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* LinkedIn - Rounded rectangle with orange border, bottom-left decoration */
+        .contact-link:nth-child(3) {
+            border-radius: 0 20px 20px 20px;
+            border: 3px solid #FF6B6B;
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+            transform: rotate(-0.8deg);
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,240,240,0.95));
+        }
+
+        .contact-link:nth-child(3)::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: -8px;
+            width: 24px;
+            height: 24px;
+            background: #FF6B6B;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Instagram - Rounded card with purple border, bottom-right decoration */
+        .contact-link:nth-child(4) {
+            border-radius: 20px 0 20px 20px;
+            border: 3px double #C77DFF;
+            box-shadow: 0 6px 20px rgba(199, 125, 255, 0.3);
+            transform: rotate(1.2deg);
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(250,240,255,0.95));
+        }
+
+        .contact-link:nth-child(4)::after {
+            content: '📷';
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 18px;
+            background: rgba(255,255,255,0.95);
+            padding: 6px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: 2px solid #C77DFF;
+        }
+
+        .contact-link:hover,
+        .contact-link:focus {
+            transform: rotate(0deg) translateY(-8px) scale(1.08);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            background: rgba(255,255,255,1);
+            z-index: 10;
+            outline: 2px solid rgba(255,255,255,0.5);
+            outline-offset: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                min-height: 500px;
+            }
+            
+            .contact-link {
+                position: relative;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                transform: rotate(0deg) !important;
+                margin: 10px auto;
+            display: block;
+                width: fit-content;
+            }
+        }
+
+        .contact-cv-wrapper {
+            margin-top: 0;
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Button container for vertical layout */
+        .button-container {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cv-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            color: #1d1d1f;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: 0.3s ease;
+        }
+
+        .cv-download:hover,
+        .cv-download:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,1);
+            outline: 2px solid rgba(255,255,255,0.5);
+            outline-offset: 4px;
+        }
+
+        .cv-download:active {
+            transform: translateY(-1px);
+        }
+
+        /* Transparent style when scrolled */
+        .cv-download.scrolled {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .cv-download.scrolled:hover,
+        .cv-download.scrolled:focus {
+            background: rgba(255,255,255,0.2);
+            color: #ffffff;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Gatech Portfolio Button */
+        .gatech-portfolio {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            color: #1d1d1f;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: 0.3s ease;
+        }
+
+        .gatech-portfolio:hover,
+        .gatech-portfolio:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            background: rgba(255,255,255,1);
+            outline: 2px solid rgba(255,255,255,0.5);
+            outline-offset: 4px;
+        }
+
+        .gatech-portfolio:active {
+            transform: translateY(-1px);
+        }
+
+        .gatech-portfolio.scrolled {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .gatech-portfolio.scrolled:hover,
+        .gatech-portfolio.scrolled:focus {
+            background: rgba(255,255,255,0.2);
+            color: #ffffff;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            h1 { 
+                font-size: 40px; 
+                margin-bottom: 20px;
+            }
+            .avatar { 
+            width: 150px;
+                height: 150px; 
+                margin-bottom: 20px;
+            }
+            .subtitle {
+                font-size: 16px;
+                padding: 0 16px;
+            }
+            .section { 
+                margin-top: 30px;
+                padding: 0 20px;
+            }
+            .section h2 { 
+                font-size: 30px; 
+                margin-bottom: 16px;
+            }
+            .section p {
+                font-size: 16px;
+            }
+            .projects-list li {
+                padding: 20px 24px;
+            }
+            
+            /* Mobile: Stack project image below text */
+            .projects-list li:has(.project-image) {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .project-image {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+                margin-top: 20px;
+                order: 2; /* Image appears after text */
+            }
+            
+            .project-content {
+                order: 1; /* Text appears first */
+            }
+
+            /* Mobile: Stack project-content-row layout */
+            .project-content-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .project-image-right {
+                width: 100%;
+                margin-top: 20px;
+                order: 2; /* Image appears after text */
+            }
+
+            .project-image-right img {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+            }
+
+            .project-text {
+                order: 1; /* Text appears first */
+            }
+            .contact-links-wrapper {
+                gap: 16px;
+            }
+            .contact-link {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+            .button-container {
+                top: 20px;
+                right: 20px;
+                gap: 10px;
+            }
+            .cv-download {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+            .gatech-portfolio {
+                padding: 12px 20px;
+                font-size: 15px;
+                max-width: calc(100vw - 40px);
+            }
+            .hero-glow {
+                width: 350px;
+                height: 350px;
+                filter: blur(50px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="animated-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="container">
+        <!-- Hero -->
+    <h1>Zixuan Guo</h1>
+        <img class="avatar" src="images/profile.jpg" alt="Zixuan Guo Profile Picture" loading="lazy" />
+        <div class="hero-glow"></div>
+        <p class="subtitle">
+            Music technologist, vocalist, bassist, and AI researcher.<br>
+            Building intelligent tools that extend musicians' creativity.
+        </p>
+        <div class="divider"></div>
+
+        <!-- Writing samples -->
+    <div class="section">
+        <h2>Writing samples</h2>
+        <ul class="projects-list">
+            <li>
+                <div class="project-content">
+                    <div class="project-title">Literature Review</div>
+                    <div class="project-description">This literature review surveys recent work in symbolic and audio-based music generation, with a focus on how different modeling paradigms represent musical structure across time. I analyze limitations of purely symbolic representations in capturing long-range temporal coherence, and discuss emerging approaches that integrate continuous acoustic information into sequence modeling. This work reflects my research interests in statistical modeling of musical structure, hierarchical temporal organization, and human-aligned generative systems.</div>
+                    <div class="composition-links">
+                        <a href="https://drive.google.com/file/d/19wph3bNiqol7cfZ_2XewP2EhR1bcVzMB/view?usp=drive_link" class="composition-link" target="_blank">📄 View PDF</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="project-content">
+                    <div class="project-title">NOISE-ROBUST INSTRUMENT CLASSIFICATION UNDER REAL-WORLD SNR CONDITIONS</div>
+                    <div class="project-description">This project report presents an experimental study on musical instrument classification under extreme noise conditions. Using CLAP-based embeddings, I investigate robustness strategies including curriculum learning across SNR levels and an adaptive ensemble approach. I propose a harmonic-guided fallback mechanism that introduces structural priors when learned embeddings become unreliable. This work demonstrates my experience with experimental design, failure analysis, and representation choices in audio machine learning.</div>
+                    <div class="composition-links">
+                        <a href="https://drive.google.com/file/d/1E_pr3hLkxKhpnAqysShStqhXKzjaCOk3/view?usp=drive_link" class="composition-link" target="_blank">📄 View PDF</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+        <!-- Code -->
+    <div class="section">
+        <h2>Code</h2>
+        <ul class="projects-list">
+            <li>
+                <div class="project-content-row">
+                    <div class="project-text">
+                        <div class="project-title">🎹 Monophonic MIDI Synthesizer (Max/MSP)</div>
+                        <div class="project-description">An interactive and visualized monophonic MIDI synthesizer built in Max/MSP, designed as a playable instrument that supports real-time performance through both a virtual on-screen keyboard and external MIDI controllers. The synthesizer integrates waveform selection, ADSR envelope shaping, LFO-based modulation (frequency and depth), nonlinear overdrive, filtering, and time-based effects, with each processing module individually controllable and bypassable.</div>
+                        <div class="composition-links">
+                            <a href="https://github.com/Zixuan-1023/Monophonic-MIDI-Synthesizer.git" class="composition-link" target="_blank">💻 GitHub</a>
+                        </div>
+                    </div>
+            
+                    <div class="project-image-right">
+                        <img
+                            src="images/Max Synth.png"
+                            alt="Monophonic MIDI Synthesizer (Max/MSP)"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="project-content">
+                    <div class="project-title">🎨 Audio Visualizer JUCE Plugin</div>
+                    <div class="project-description">Audio Visualizer is a real-time audiovisual plugin built with JUCE, translating live audio into an expressive, physically inspired particle system inside a DAW. The plugin runs entirely in real time, analyzing incoming audio on the audio thread and mapping continuous control signals to a custom visual engine that reacts to musical energy and timbral change. Its particle-orbit visual model drives motion, scale, color, and rotation through smoothed audio parameters. An optional Emotion mode uses learned latent controls to shape higher-level visual behaviors, allowing the visualization to feel responsive rather than purely reactive.</div>
+                    <div class="composition-links">
+                        <a href="https://github.com/Zixuan-1023/AudioVisualizer" class="composition-link" target="_blank">💻 GitHub</a>
+                    </div>
+                </div>
+                <img src="images/AudioVisualizer.png" alt="Audio Visualizer JUCE Plugin" class="project-image" loading="lazy" />
+            </li>
+        </ul>
+    </div>
+
+        <!-- Video recordings -->
+    <div class="section">
+        <h2>Video recordings</h2>
+        <ul class="compositions-list video-recordings-list">
+            <li class="composition-item">
+                <div class="composition-title">Misty Forest</div>
+                <div class="composition-date">December 2024</div>
+                <div class="composition-description">Misty Forest explores clarinet timbre through layered recordings and real-time electronic processing. Evolving textures merge notated structure with spontaneous timbral gestures, treating electronics as an extension of the clarinet's physical expressivity. The piece was developed under the artistic guidance of Prof. Dafna Naphtali.</div>
+                <a href="https://drive.google.com/file/d/1WbNbeAdn0Ur-jCnHQwMYf94Q1NTPanlA/view?usp=sharing" target="_blank" class="composition-video-button">
+                    ▶ Watch Video
+                </a>
+                <img src="images/MistyForest.png" alt="Misty Forest" class="composition-image" loading="lazy" />
+            </li>
+
+            <li class="composition-item">
+                <div class="composition-title">Playing Bass in a Mountain</div>
+                <div class="composition-date">February 2024</div>
+                <div class="composition-description">Playing Bass in a Mountain explores an emotional journey through shifting sonic landscapes, where bass textures shift between deep resonance, delicate overtones, and restless kinetic motion. The work treats electronics as narrative space, shaping a trajectory that moves from harmonic instability toward renewed clarity.</div>
+                <a href="https://drive.google.com/file/d/1VccAunN-d9St-IpUV4t4oykC-xq7hWeY/view" target="_blank" class="composition-video-button">
+                    ▶ Watch Video
+                </a>
+                <img src="images/PlayingBass.png" alt="Playing Bass in a Mountain" class="composition-image" loading="lazy" />
+            </li>
+        </ul>
+    </div>
+
+        <!-- Audio recordings -->
+    <div class="section">
+        <h2>Audio recording</h2>
+        <ul class="compositions-list">
+            <li class="composition-item">
+                <div class="composition-title">Lonely Travel</div>
+                <div class="composition-date">September 2022</div>
+                <div class="composition-description">Lonely Travel is an electronic work built from field-recorded rain, passing cars, and ambient textures shaped into five cinematic scenes. Layered textures shape a cinematic arc built from environmental resonance, using electronic scoring as a narrative form.</div>
+                <div class="composition-links">
+                    <a href="https://soundcloud.com/x3kus4lyferg/lonely-travelzixuan-guo/s-p1dvk2QNHXc?si=eb69c73e05524f0981aeb11e728773dd&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" class="composition-link" target="_blank">🔗 SoundCloud</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    </div>
+
+        <!-- Gallery Overlay -->
+        <div class="gallery-overlay" id="galleryOverlay" onclick="closeGallery()">
+            <div class="gallery-close" onclick="closeGallery()">×</div>
+            <img id="galleryImage" src="" alt="Gallery Image" onclick="event.stopPropagation()">
+        </div>
+
+    </div>
+
+    <script>
+        function openGallery(imageSrc) {
+            const overlay = document.getElementById('galleryOverlay');
+            const image = document.getElementById('galleryImage');
+            image.src = imageSrc;
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            const overlay = document.getElementById('galleryOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 按ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeGallery();
+            }
+        });
+
+
+        // Recording details accordion
+        function toggleRecordingDetails(toggleElement) {
+            const recordingItem = toggleElement.closest('.recording-item');
+            if (!recordingItem) return;
+            
+            const isActive = recordingItem.classList.contains('active');
+            const toggleIcon = toggleElement.querySelector('.toggle-icon');
+            const toggleText = toggleElement.querySelector('.toggle-text');
+
+            // Close all other recording items
+            document.querySelectorAll('.recording-item').forEach(item => {
+                if (item !== recordingItem) {
+                    item.classList.remove('active');
+                    const otherToggle = item.querySelector('.recording-toggle');
+                    if (otherToggle) {
+                        const otherIcon = otherToggle.querySelector('.toggle-icon');
+                        const otherText = otherToggle.querySelector('.toggle-text');
+                        if (otherIcon) otherIcon.textContent = '🔻';
+                        if (otherText) otherText.textContent = 'Show Recording Details';
+                    }
+                }
+            });
+
+            // Toggle current item
+            if (isActive) {
+                recordingItem.classList.remove('active');
+                if (toggleIcon) toggleIcon.textContent = '🔻';
+                if (toggleText) toggleText.textContent = 'Show Recording Details';
+            } else {
+                recordingItem.classList.add('active');
+                if (toggleIcon) toggleIcon.textContent = '🔺';
+                if (toggleText) toggleText.textContent = 'Hide Recording Details';
+            }
+        }
+
+        // Sort recordings by date (newest first)
+        function sortRecordingsByDate() {
+            const recordingsList = document.querySelector('.recordings-list');
+            if (!recordingsList) return;
+
+            const items = Array.from(recordingsList.querySelectorAll('.recording-item'));
+            
+            items.sort((a, b) => {
+                const dateA = a.querySelector('.recording-date')?.textContent || '';
+                const dateB = b.querySelector('.recording-date')?.textContent || '';
+                
+                // Extract date from text (format: "June 26, 2025" or "June 4, 2025")
+                const extractDate = (text) => {
+                    const match = text.match(/(\w+)\s+(\d+),\s+(\d+)/);
+                    if (!match) return new Date(0);
+                    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                    const month = monthNames.indexOf(match[1]);
+                    const day = parseInt(match[2]);
+                    const year = parseInt(match[3]);
+                    return new Date(year, month, day);
+                };
+                
+                const dateAObj = extractDate(dateA);
+                const dateBObj = extractDate(dateB);
+                
+                // Sort descending (newest first)
+                return dateBObj - dateAObj;
+            });
+            
+            // Re-append sorted items and ensure only first 3 are visible
+            items.forEach((item, index) => {
+                recordingsList.appendChild(item);
+                if (index >= 3) {
+                    item.classList.add('hidden');
+                } else {
+                    item.classList.remove('hidden');
+                }
+            });
+        }
+
+        // Sort recordings on page load
+        document.addEventListener('DOMContentLoaded', sortRecordingsByDate);
+
+        // View All recordings toggle
+        function toggleViewAll() {
+            const recordingsList = document.querySelector('.recordings-list');
+            if (!recordingsList) return;
+            
+            const buttonContainer = recordingsList.nextElementSibling;
+            if (!buttonContainer) return;
+            
+            const button = buttonContainer.querySelector('button');
+            if (!button) return;
+            
+            const hiddenItems = document.querySelectorAll('.recording-item.hidden');
+            
+            if (hiddenItems.length > 0) {
+                // Show all hidden items
+                hiddenItems.forEach(item => {
+                    item.classList.remove('hidden');
+                });
+                button.textContent = 'Show Less';
+            } else {
+                // Hide items after the first 3
+                const allItems = document.querySelectorAll('.recording-item');
+                allItems.forEach((item, index) => {
+                    if (index >= 3) {
+                        item.classList.add('hidden');
+                        // Ensure active class is removed when hiding, collapse recording-details
+                        item.classList.remove('active');
+                        const toggle = item.querySelector('.recording-toggle');
+                        if (toggle) {
+                            const toggleIcon = toggle.querySelector('.toggle-icon');
+                            const toggleText = toggle.querySelector('.toggle-text');
+                            if (toggleIcon) toggleIcon.textContent = '🔻';
+                            if (toggleText) toggleText.textContent = 'Show Recording Details';
+                        }
+                    }
+                });
+                button.textContent = 'View All';
+            }
+        }
+
+        // View All compositions toggle
+        function toggleViewAllCompositions() {
+            const compositionsList = document.querySelector('.compositions-list');
+            if (!compositionsList) return;
+            
+            const buttonContainer = compositionsList.nextElementSibling;
+            if (!buttonContainer) return;
+            
+            const button = buttonContainer.querySelector('button');
+            if (!button) return;
+            
+            const hiddenItems = document.querySelectorAll('.composition-item.hidden');
+            
+            if (hiddenItems.length > 0) {
+                // Show all hidden items
+                hiddenItems.forEach(item => {
+                    item.classList.remove('hidden');
+                });
+                button.textContent = 'Show Less';
+            } else {
+                // Hide items after the first 4
+                const allItems = document.querySelectorAll('.composition-item');
+                allItems.forEach((item, index) => {
+                    if (index >= 4) {
+                        item.classList.add('hidden');
+                    }
+                });
+                button.textContent = 'View All';
+            }
+        }
+
+        function toggleViewAllProjects() {
+            // Find the Projects section by searching for the h2 with text "Projects"
+            const allSections = document.querySelectorAll('.section');
+            let projectsSection = null;
+            
+            for (const section of allSections) {
+                const h2 = section.querySelector('h2');
+                if (h2 && h2.textContent.trim() === 'Projects') {
+                    projectsSection = section;
+                    break;
+                }
+            }
+            
+            if (!projectsSection) return;
+            
+            // Find the Ongoing/Finished subsection
+            const ongoingTitle = projectsSection.querySelector('.project-subsection-title');
+            if (!ongoingTitle) return;
+            
+            // Find the projects list after the title
+            const ongoingList = ongoingTitle.nextElementSibling;
+            if (!ongoingList || !ongoingList.classList.contains('projects-list')) return;
+            
+            // Find the button container after the list
+            const buttonContainer = ongoingList.nextElementSibling;
+            if (!buttonContainer || !buttonContainer.classList.contains('view-all-button')) return;
+            
+            const button = buttonContainer.querySelector('button');
+            if (!button) return;
+            
+            // Check if there are hidden items
+            const hiddenItems = ongoingList.querySelectorAll('li.hidden');
+            
+            if (hiddenItems.length > 0) {
+                // Show all hidden items
+                hiddenItems.forEach(item => {
+                    item.classList.remove('hidden');
+                });
+                button.textContent = 'Show Less';
+            } else {
+                // Hide items after the first 3
+                const allItems = ongoingList.querySelectorAll('li');
+                allItems.forEach((item, index) => {
+                    if (index >= 3) {
+                        item.classList.add('hidden');
+                    }
+                });
+                button.textContent = 'View All';
+            }
+        }
+    </script>
+</body>
+</html>
