@@ -1079,6 +1079,17 @@
             gap: 24px;
         }
 
+        .site-last-updated {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: rgba(255, 255, 255, 0.42);
+            text-align: center;
+            margin: 0;
+            margin-top: 4px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+        }
+
         .contact-link {
             display: inline-flex;
             align-items: center;
@@ -1392,11 +1403,10 @@
         </p>
     </div>
 
-        <!-- Projects -->
+        <!-- Research -->
     <div class="section">
-        <h2>Projects</h2>
+        <h2>Research</h2>
         <p class="section-description">Research systems and engineering prototypes spanning robust machine listening, controllable symbolic generation, representation learning, and human–AI interaction in music production workflows.</p>
-            <div class="project-subsection-title">Research &amp; systems</div>
             <ul class="projects-list">
             <li>
                 <div class="project-content">
@@ -1452,46 +1462,6 @@
                     </div>
                 </div>
             </li>
-            <li class="hidden">
-                <div class="project-content">
-                    <div class="project-title">🎨 Interactive Music Generation via Image-Based Audio Parameter Mapping</div>
-                    <div class="project-description">Studies cross-modal human–AI interaction: continuous image features (color, brightness, saturation, gaze position) map to synthesis parameters in Max/MSP, framing real-time control as a coupled perception–mapping problem rather than a preset effects chain.</div>
-                    <a href="https://drive.google.com/file/d/1TyujxVXRZVkRDKZgBPpPKhxTOhaMo3Mw/view?usp=sharing" target="_blank" class="composition-video-button" style="margin-top: 16px;">
-                        ▶ Watch Video
-                    </a>
-                </div>
-                <img src="images/InteractiveGeneration.png" alt="Interactive Music Generation via Image-Based Audio Parameter Mapping" class="project-image" loading="lazy" />
-            </li>
-            <li class="hidden">
-                <div class="project-content-row">
-                    <div class="project-text">
-                        <div class="project-title">🎹 Monophonic MIDI Synthesizer (Max/MSP)</div>
-                        <div class="project-description">A DSP-forward performance instrument in Max/MSP: modular subtractive path with ADSR, LFO modulation, nonlinear saturation, and time-based effects, exposed as individually bypassable stages—useful for controlled studies of timbre shaping and interaction latency.</div>
-                        <div class="composition-links">
-                            <a href="https://github.com/Zixuan-1023/Monophonic-MIDI-Synthesizer.git" class="composition-link" target="_blank">💻 GitHub</a>
-                        </div>
-                    </div>
-            
-                    <div class="project-image-right">
-                        <img
-                            src="images/Max Synth.png"
-                            alt="Monophonic MIDI Synthesizer (Max/MSP)"
-                            loading="lazy"
-                        />
-                    </div>
-                </div>
-            </li>
-            <li class="hidden">
-                <div class="project-content">
-                    <div class="project-title">🎨 Audio Visualizer JUCE Plugin</div>
-                    <div class="project-description">Real-time audio analysis in JUCE drives a particle visual engine inside the DAW: band-wise features are smoothed on the audio thread and mapped to motion, scale, and color. An optional latent “Emotion” control explores higher-level conditioning—linking timbral descriptors to macro visual behavior.</div>
-                    <div class="composition-links">
-                        <a href="https://github.com/Zixuan-1023/AudioVisualizer" class="composition-link" target="_blank">💻 GitHub</a>
-                        <a href="https://drive.google.com/file/d/1uPvjq-G3miUayQfFBkSO3RUv_ZLcDmHb/view?usp=drive_link" class="composition-link" target="_blank">▶ Watch Video</a>
-                    </div>
-                </div>
-                <img src="images/AudioVisualizer.png" alt="Audio Visualizer JUCE Plugin" class="project-image" loading="lazy" />
-            </li>
             </ul>
             <div class="view-all-button">
                 <button onclick="toggleViewAllProjects()">View All</button>
@@ -1501,6 +1471,53 @@
             <li>
                 <div class="project-title">🎹 Symbolic Music Style Transfer</div>
                 <div class="project-description">Planned work on controllable symbolic rearrangement: transforming melody/harmony toward target styles while preserving structure—centering editability and user constraints rather than opaque style “magic.”</div>
+            </li>
+            </ul>
+        </div>
+
+        <!-- Music technology systems -->
+        <div class="section">
+            <h2>Music Technology Systems</h2>
+            <ul class="projects-list">
+            <li>
+                <div class="project-content">
+                    <div class="project-title">🎨 Interactive Music Generation via Image-Based Audio Parameter Mapping</div>
+                    <div class="project-description">Studies cross-modal human–AI interaction: continuous image features (color, brightness, saturation, gaze position) map to synthesis parameters in Max/MSP, framing real-time control as a coupled perception–mapping problem rather than a preset effects chain.</div>
+                    <a href="https://drive.google.com/file/d/1TyujxVXRZVkRDKZgBPpPKhxTOhaMo3Mw/view?usp=sharing" target="_blank" class="composition-video-button" style="margin-top: 16px;">
+                        ▶ Watch Video
+                    </a>
+                </div>
+                <img src="images/InteractiveGeneration.png" alt="Interactive Music Generation via Image-Based Audio Parameter Mapping" class="project-image" loading="lazy" />
+            </li>
+            <li>
+                <div class="project-content-row">
+                    <div class="project-text">
+                        <div class="project-title">🎹 Monophonic MIDI Synthesizer (Max/MSP)</div>
+                        <div class="project-description">A DSP-forward performance instrument in Max/MSP: modular subtractive path with ADSR, LFO modulation, nonlinear saturation, and time-based effects, exposed as individually bypassable stages—useful for controlled studies of timbre shaping and interaction latency.</div>
+                        <div class="composition-links">
+                            <a href="https://github.com/Zixuan-1023/Monophonic-MIDI-Synthesizer.git" class="composition-link" target="_blank">💻 GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="project-image-right">
+                        <img
+                            src="images/Max Synth.png"
+                            alt="Monophonic MIDI Synthesizer (Max/MSP)"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="project-content">
+                    <div class="project-title">🎨 Audio Visualizer JUCE Plugin</div>
+                    <div class="project-description">Real-time audio analysis in JUCE drives a particle visual engine inside the DAW: band-wise features are smoothed on the audio thread and mapped to motion, scale, and color. An optional latent “Emotion” control explores higher-level conditioning—linking timbral descriptors to macro visual behavior.</div>
+                    <div class="composition-links">
+                        <a href="https://github.com/Zixuan-1023/AudioVisualizer" class="composition-link" target="_blank">💻 GitHub</a>
+                        <a href="https://drive.google.com/file/d/1uPvjq-G3miUayQfFBkSO3RUv_ZLcDmHb/view?usp=drive_link" class="composition-link" target="_blank">▶ Watch Video</a>
+                    </div>
+                </div>
+                <img src="images/AudioVisualizer.png" alt="Audio Visualizer JUCE Plugin" class="project-image" loading="lazy" />
             </li>
             </ul>
         </div>
@@ -2480,7 +2497,7 @@
                 <li class="composition-item">
                     <div class="composition-title">Breaking Free</div>
                     <div class="composition-date">January 2024</div>
-                    <div class="composition-description">My first EDM</div>
+                    <div class="composition-description">Early EDM production experiment combining live guitar, vocals, and electronic arrangement.</div>
                     <audio class="composition-audio" controls>
                         <source src="audio/Breaking Free混音24.1.12.mp3" type="audio/mpeg">
                         Your browser does not support audio playback.
@@ -2542,13 +2559,14 @@
         <!-- Contact -->
         <div class="contact-cv-wrapper">
             <div class="contact-info" id="contact">
-                <div class="contact-title">Let's connect 🐾</div>
+                <div class="contact-title">Contact</div>
                 <div class="contact-links-wrapper">
                     <a class="contact-link" href="mailto:garryorrca@gmail.com" aria-label="Send email to Zixuan Guo">📧 Email</a>
                     <a class="contact-link" href="https://github.com/Zixuan-1023" target="_blank" rel="noopener noreferrer" aria-label="Visit Zixuan Guo's GitHub profile">💻 GitHub</a>
                     <a class="contact-link" href="https://www.linkedin.com/in/zixuan-guo-a27bb9347/" target="_blank" rel="noopener noreferrer" aria-label="Visit Zixuan Guo's LinkedIn profile">💼 LinkedIn</a>
                     <a class="contact-link" href="https://www.instagram.com/garryorrca/" target="_blank" rel="noopener noreferrer" aria-label="Visit Zixuan Guo's Instagram profile">📷 Instagram</a>
                 </div>
+                <p class="site-last-updated">Last updated: <time datetime="2026-05-10">May 10, 2026</time></p>
             </div>
         </div>
 
@@ -2749,27 +2767,21 @@
         }
 
         function toggleViewAllProjects() {
-            // Find the Projects section by searching for the h2 with text "Projects"
             const allSections = document.querySelectorAll('.section');
-            let projectsSection = null;
-            
+            let researchSection = null;
+
             for (const section of allSections) {
                 const h2 = section.querySelector('h2');
-                if (h2 && h2.textContent.trim() === 'Projects') {
-                    projectsSection = section;
+                if (h2 && h2.textContent.trim() === 'Research') {
+                    researchSection = section;
                     break;
                 }
             }
-            
-            if (!projectsSection) return;
-            
-            // Find the Ongoing/Finished subsection
-            const ongoingTitle = projectsSection.querySelector('.project-subsection-title');
-            if (!ongoingTitle) return;
-            
-            // Find the projects list after the title
-            const ongoingList = ongoingTitle.nextElementSibling;
-            if (!ongoingList || !ongoingList.classList.contains('projects-list')) return;
+
+            if (!researchSection) return;
+
+            const ongoingList = researchSection.querySelector('ul.projects-list');
+            if (!ongoingList) return;
             
             // Find the button container after the list
             const buttonContainer = ongoingList.nextElementSibling;
