@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Zixuan Guo – Music Technology researcher (NYU), AI + Music, MIR, symbolic music generation." />
+    <meta name="description" content="Zixuan Guo — Audio AI / MIR researcher (NYU MM Music Technology). Controllable generation, robust machine listening, human-centered music AI." />
     <meta name="author" content="Zixuan Guo" />
     <meta name="theme-color" content="#667eea" />
-    <title>Zixuan Guo – Music Technology Researcher</title>
+    <title>Zixuan Guo — Audio AI / MIR Research</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -333,6 +333,11 @@
             line-height: 1.65;
             margin-bottom: 10px;
             text-shadow: 0 1px 5px rgba(0,0,0,0.15);
+        }
+
+        /* Hide optional sections without removing markup (e.g. Gallery until curated) */
+        .section.section-hidden {
+            display: none !important;
         }
 
         /* --- Project Cards --- */
@@ -1368,8 +1373,8 @@
         <img class="avatar" src="images/profile.jpg" alt="Zixuan Guo Profile Picture" loading="lazy" />
         <div class="hero-glow"></div>
         <p class="subtitle">
-            Music technologist, vocalist, bassist, and AI researcher.<br>
-            Building intelligent tools that extend musicians' creativity.
+            Audio AI / MIR Researcher and Music Technologist<br>
+            Building interactive and controllable intelligent systems for music and audio.
         </p>
         <div class="divider"></div>
 
@@ -1377,25 +1382,26 @@
     <div class="section">
         <h2>About Me</h2>
         <p>
-                I am a Music Technology researcher, pop vocalist, electric bassist, and music producer. 
-                My research explores Digital Signal Processing (DSP) and machine learning for music and audio, particularly Music Information Retrieval (MIR), symbolic music generation, and music understanding.
+                I am an Audio AI and Music Technology researcher working at the intersection of machine learning, DSP, and interactive music systems. My research focuses on Music Information Retrieval (MIR), controllable symbolic music generation, robust machine listening, and human-centered AI tools for creative workflows.
             </p>
             <p>
-                Currently, I am pursuing an MM in Music Technology at NYU. My goal is to design interactive and controllable AI systems that extend musicians' creativity 
-                and integrate naturally into real-world production workflows.
+                Outside of research, I also work as a vocalist, electric bassist, and music producer—practice that keeps my systems grounded in real composition and studio workflows.
+            </p>
+            <p>
+                I am pursuing an MM in Music Technology at NYU, where I aim to develop interactive, controllable models that integrate naturally into professional production while supporting musician agency.
         </p>
     </div>
 
         <!-- Projects -->
     <div class="section">
         <h2>Projects</h2>
-        <p class="section-description">These projects represent my ongoing and completed work across AI music systems, music technology research, and audio engineering. They reflect my focus on building intelligent, interactive tools that bridge musicianship and computational creativity.</p>
-            <div class="project-subsection-title">Ongoing/Finished</div>
+        <p class="section-description">Research systems and engineering prototypes spanning robust machine listening, controllable symbolic generation, representation learning, and human–AI interaction in music production workflows.</p>
+            <div class="project-subsection-title">Research &amp; systems</div>
             <ul class="projects-list">
             <li>
                 <div class="project-content">
                     <div class="project-title">🎼 Controllable Symbolic Music Generator</div>
-                    <div class="project-description">A controllable symbolic music generation system designed for DAW-integrated workflows, supporting segment-by-segment interaction and structure-first composition. It features a hybrid architecture that combines Transformer and Diffusion models to give musicians fine-grained creative control over the generation process, and supports prompt-based generation of multi-track musical ideas conditioned on user-specified musical attributes.</div>
+                    <div class="project-description">This project investigates controllable symbolic music generation for DAW-integrated workflows using Transformer-based sequence modeling, diffusion-style latent refinement, and segment-level interaction. The emphasis is on fine-grained musician control—structure-first editing and attribute-conditioned generation—rather than one-shot demo generation.</div>
                     <div class="composition-links">
                         <a href="https://github.com/Zixuan-1023/Symbolic_Generation" class="composition-link" target="_blank">💻 GitHub</a>
                     </div>
@@ -1409,7 +1415,7 @@
             <li>
                 <div class="project-content">
                     <div class="project-title">🥁 Noise-Robust Musical Instrument Classification</div>
-                    <div class="project-description">A noise-robust musical instrument classification system designed for real-world acoustic conditions. The project integrates curriculum learning, SNR-aware ensemble modeling, and a harmonic-enhanced fallback mechanism to ensure stable performance under heavy noise, achieving significantly improved reliability in practical audio environments.</div>
+                    <div class="project-description">This work targets robustness of instrument recognition under real-world SNR: curriculum learning, SNR-aware ensembling, and a harmonic-enhanced fallback pathway are combined so predictions remain stable when noise dominates the mixture—stress-testing representation quality beyond clean benchmark conditions.</div>
                     <div class="composition-links">
                         <a href="https://github.com/Zixuan-1023/Noisy_Instruments_Classification" class="composition-link" target="_blank">💻 GitHub</a>
                         <a href="https://drive.google.com/file/d/1E_pr3hLkxKhpnAqysShStqhXKzjaCOk3/view" class="composition-link" target="_blank">📄 View PDF</a>
@@ -1420,7 +1426,7 @@
             <li>
                 <div class="project-content">
                     <div class="project-title">🐭 DeepSqueak ML Pipeline Modernization</div>
-                    <div class="project-description">A modernization of the DeepSqueak ultrasonic vocalization analysis system, replacing its legacy workflow with a scalable, modular machine learning pipeline. The project strengthens model reliability through noise-augmented training and carefully curated negative samples to improve discrimination in low-SNR environments.</div>
+                    <div class="project-description">A reproducible rewrite of the DeepSqueak ultrasonic vocalization stack into a modular ML pipeline, motivated by reliability in low-SNR bioacoustic settings. Noise-augmented training and curated negatives are used to study discrimination under weak signals—adjacent in spirit to robust front-ends in MIR.</div>
                     <div class="composition-links">
                         <a href="https://github.com/Zixuan-1023/DeepSqueak_update" class="composition-link" target="_blank">💻 GitHub</a>
                     </div>
@@ -1430,7 +1436,7 @@
             <li class="hidden">
                 <div class="project-content">
                     <div class="project-title">🎵 Pitch Tracking in Non-Ideal Conditions</div>
-                    <div class="project-description">A comprehensive benchmark study investigating how state-of-the-art pitch tracking methods perform under non-ideal conditions. The project evaluates models including Crepe and Basic Pitch using MIR datasets, with synthesized perturbations such as tuning variations, vocal distortion, and ambient noise to address data scarcity. Includes optional fine-tuning of Crepe to improve robustness.</div>
+                    <div class="project-description">Benchmarking pitch estimation under controlled degradations (detuning, distortion, ambient noise) to quantify robustness gaps on MIR-style material. Crepe, Basic Pitch, and optional fine-tuning are compared as a small robustness study when clean training data are scarce.</div>
                     <div class="composition-links">
                         <a href="https://github.com/HQQHQ/Benchmark-PitchTracking-in-Non-ideal-Conditions.git" class="composition-link" target="_blank">💻 GitHub</a>
                     </div>
@@ -1440,7 +1446,7 @@
             <li class="hidden">
                 <div class="project-content">
                     <div class="project-title">🧠 Domain-Adversarial Transfer Learning</div>
-                    <div class="project-description">A domain-adversarial transfer learning project focused on robust cross-domain classification. The system uses a DANN-based PyTorch pipeline to align feature distributions between source and target domains, introduces intermediate-domain generation with Mixup and CutMixup, and validates performance on Office-31 and OfficeHome benchmarks with improved generalization over conventional baselines.</div>
+                    <div class="project-description">Explores domain-invariant representations via adversarial alignment (DANN) with intermediate-domain synthesis (Mixup / CutMixup) for cross-domain classification—relevant to representation transfer when train and deployment audio conditions diverge.</div>
                     <div class="composition-links">
                         <a href="https://github.com/Zixuan-1023/Domain-Adversarial-Transfer-Learning-" class="composition-link" target="_blank">💻 GitHub</a>
                     </div>
@@ -1449,7 +1455,7 @@
             <li class="hidden">
                 <div class="project-content">
                     <div class="project-title">🎨 Interactive Music Generation via Image-Based Audio Parameter Mapping</div>
-                    <div class="project-description">This project explores real-time music generation driven by image features, using Max/MSP to convert visual information—color, brightness, saturation, and spatial position—into dynamic audio parameters. By continuously analyzing the color block at the user's current mouse position, the system creates an interactive audiovisual environment where "what you see" and where you choose to look directly shapes "what you hear."</div>
+                    <div class="project-description">Studies cross-modal human–AI interaction: continuous image features (color, brightness, saturation, gaze position) map to synthesis parameters in Max/MSP, framing real-time control as a coupled perception–mapping problem rather than a preset effects chain.</div>
                     <a href="https://drive.google.com/file/d/1TyujxVXRZVkRDKZgBPpPKhxTOhaMo3Mw/view?usp=sharing" target="_blank" class="composition-video-button" style="margin-top: 16px;">
                         ▶ Watch Video
                     </a>
@@ -1460,7 +1466,7 @@
                 <div class="project-content-row">
                     <div class="project-text">
                         <div class="project-title">🎹 Monophonic MIDI Synthesizer (Max/MSP)</div>
-                        <div class="project-description">An interactive and visualized monophonic MIDI synthesizer built in Max/MSP, designed as a playable instrument that supports real-time performance through both a virtual on-screen keyboard and external MIDI controllers. The synthesizer integrates waveform selection, ADSR envelope shaping, LFO-based modulation (frequency and depth), nonlinear overdrive, filtering, and time-based effects, with each processing module individually controllable and bypassable.</div>
+                        <div class="project-description">A DSP-forward performance instrument in Max/MSP: modular subtractive path with ADSR, LFO modulation, nonlinear saturation, and time-based effects, exposed as individually bypassable stages—useful for controlled studies of timbre shaping and interaction latency.</div>
                         <div class="composition-links">
                             <a href="https://github.com/Zixuan-1023/Monophonic-MIDI-Synthesizer.git" class="composition-link" target="_blank">💻 GitHub</a>
                         </div>
@@ -1478,7 +1484,7 @@
             <li class="hidden">
                 <div class="project-content">
                     <div class="project-title">🎨 Audio Visualizer JUCE Plugin</div>
-                    <div class="project-description">Audio Visualizer is a real-time audiovisual plugin built with JUCE, translating live audio into an expressive, physically inspired particle system inside a DAW. The plugin runs entirely in real time, analyzing incoming audio on the audio thread and mapping continuous control signals to a custom visual engine that reacts to musical energy and timbral change. Its particle-orbit visual model drives motion, scale, color, and rotation through smoothed audio parameters. An optional Emotion mode uses learned latent controls to shape higher-level visual behaviors, allowing the visualization to feel responsive rather than purely reactive.</div>
+                    <div class="project-description">Real-time audio analysis in JUCE drives a particle visual engine inside the DAW: band-wise features are smoothed on the audio thread and mapped to motion, scale, and color. An optional latent “Emotion” control explores higher-level conditioning—linking timbral descriptors to macro visual behavior.</div>
                     <div class="composition-links">
                         <a href="https://github.com/Zixuan-1023/AudioVisualizer" class="composition-link" target="_blank">💻 GitHub</a>
                         <a href="https://drive.google.com/file/d/1uPvjq-G3miUayQfFBkSO3RUv_ZLcDmHb/view?usp=drive_link" class="composition-link" target="_blank">▶ Watch Video</a>
@@ -1490,90 +1496,29 @@
             <div class="view-all-button">
                 <button onclick="toggleViewAllProjects()">View All</button>
             </div>
-            <div class="project-subsection-title">Upcoming</div>
+            <div class="project-subsection-title">Planned</div>
             <ul class="projects-list">
             <li>
                 <div class="project-title">🎹 Symbolic Music Style Transfer</div>
-                <div class="project-description">A system that allows users to transform existing MIDI melodies and harmonies into different styles based on user input, such as making them jazzy or bluesy.</div>
+                <div class="project-description">Planned work on controllable symbolic rearrangement: transforming melody/harmony toward target styles while preserving structure—centering editability and user constraints rather than opaque style “magic.”</div>
             </li>
             </ul>
         </div>
 
-        <!-- Compositions -->
-        <div class="section">
-            <h2>Compositions</h2>
-            <p class="section-description">My compositions span electronic music, experimental sound design, interactive music systems, piano works, and soundtrack writing. I also create music for the Chinese furry visual novel Chapter of Darkness.<br><br>Outside of production, I'm deeply inspired by Jazz, R&B, and Soul—genres I hope to explore further through future jazz-hip-hop–influenced projects.</p>
-            <ul class="compositions-list">
-                <li class="composition-item">
-                    <div class="composition-title">Misty Forest</div>
-                    <div class="composition-date">December 2024</div>
-                    <div class="composition-description">Live sound processing using MaxMSP, featuring clarinet sounds and MIDI keyboard</div>
-                    <a href="https://drive.google.com/file/d/1WbNbeAdn0Ur-jCnHQwMYf94Q1NTPanlA/view?usp=sharing" target="_blank" class="composition-video-button">
-                        ▶ Watch Video
-                    </a>
-                </li>
-
-                <li class="composition-item">
-                    <div class="composition-title">Lonely Travel</div>
-                    <div class="composition-date">September 2022</div>
-                    <div class="composition-description">Original experimental music composition depicting a lonely traveler</div>
-                    <div class="composition-links">
-                        <a href="https://soundcloud.com/x3kus4lyferg/lonely-travelzixuan-guo/s-p1dvk2QNHXc?si=eb69c73e05524f0981aeb11e728773dd&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" class="composition-link" target="_blank">🔗 SoundCloud</a>
+        <!-- Papers -->
+    <div class="section">
+            <h2>Publications</h2>
+            <ul class="papers-list">
+                <li class="paper-item">
+                    <div class="paper-title">Noise-Robust Instrument Classification under Real-World SNR Conditions</div>
+                    <div class="paper-authors">Guo, Z., Zhong, J., and Chen, S.</div>
+                    <div class="paper-venue">SSRN Electronic Journal</div>
+                    <div class="paper-links">
+                        <a href="https://drive.google.com/file/d/1E_pr3hLkxKhpnAqysShStqhXKzjaCOk3/view" class="paper-link" target="_blank">📄 PDF</a>
                     </div>
                 </li>
-
-                <li class="composition-item">
-                    <div class="composition-title">Dancing in the Rain</div>
-                    <div class="composition-date">April 2023</div>
-                    <div class="composition-description">Pure instrumental piano piece depicting a stroll through a square in the rain</div>
-                    <div class="composition-links">
-                        <a href="https://music.163.com/#/song?id=2037854978" class="composition-link" target="_blank">🔗 NetEase Cloud Music</a>
-                    </div>
-                </li>
-
-                <!-- Audio Composition -->
-                <li class="composition-item">
-                    <div class="composition-title">Breaking Free</div>
-                    <div class="composition-date">January 2024</div>
-                    <div class="composition-description">My first EDM</div>
-                    <audio class="composition-audio" controls>
-                        <source src="audio/Breaking Free混音24.1.12.mp3" type="audio/mpeg">
-                        Your browser does not support audio playback.
-                    </audio>
-                </li>
-
-                <!-- Video Compositions -->
-                <li class="composition-item hidden">
-                    <div class="composition-title">Playing Bass in a Mountain</div>
-                    <div class="composition-date">February 2024</div>
-                    <div class="composition-description">Mixed media playing with bass guitar and MIDI keyboard</div>
-                    <a href="https://drive.google.com/file/d/1VccAunN-d9St-IpUV4t4oykC-xq7hWeY/view" target="_blank" class="composition-video-button">
-                        ▶ Watch Video
-                    </a>
-                </li>
-
-                <li class="composition-item hidden">
-                    <div class="composition-title">The Evil Within 2 Trailer Soundtrack</div>
-                    <div class="composition-date">October 2023</div>
-                    <div class="composition-description">Original soundtrack composition</div>
-                    <a href="https://drive.google.com/file/d/1vblBLnAz_0w1KRGSQpfg43YEfnx_ey83/view" target="_blank" class="composition-video-button">
-                        ▶ Watch Video
-                    </a>
-                </li>
-
-                <li class="composition-item hidden">
-                    <div class="composition-title">Walking Through the Dark</div>
-                    <div class="composition-date">November 2024</div>
-                    <div class="composition-description">Code music composed and played in Supercollider</div>
-                    <a href="https://drive.google.com/file/d/1M4xdQEVmX5z_XDGprVyPCwwtLLL8Ll4v/view" target="_blank" class="composition-video-button">
-                        ▶ Watch Video
-                    </a>
-                </li>
-            </ul>
-            <div class="view-all-button">
-                <button onclick="toggleViewAllCompositions()">View All</button>
-            </div>
-        </div>
+        </ul>
+    </div>
 
         <!-- Recordings -->
         <div class="section">
@@ -2499,23 +2444,84 @@
             </div>
         </div>
 
-        <!-- Papers -->
-    <div class="section">
-            <h2>Publications</h2>
-            <ul class="papers-list">
-                <li class="paper-item">
-                    <div class="paper-title">Noise-Robust Instrument Classification under Real-World SNR Conditions</div>
-                    <div class="paper-authors">Guo, Z., Zhong, J., and Chen, S.</div>
-                    <div class="paper-venue">SSRN Electronic Journal</div>
-                    <div class="paper-links">
-                        <a href="https://drive.google.com/file/d/1E_pr3hLkxKhpnAqysShStqhXKzjaCOk3/view" class="paper-link" target="_blank">📄 PDF</a>
+        <!-- Compositions -->
+        <div class="section">
+            <h2>Compositions</h2>
+            <p class="section-description">Creative practice alongside research: electronic and experimental work, piano pieces, interactive pieces, and soundtrack writing—including music for the Chinese furry visual novel <em>Chapter of Darkness</em>. Jazz, R&amp;B, and Soul remain touchstones for future jazz–hip-hop–influenced projects.</p>
+            <ul class="compositions-list">
+                <li class="composition-item">
+                    <div class="composition-title">Misty Forest</div>
+                    <div class="composition-date">December 2024</div>
+                    <div class="composition-description">Live sound processing using MaxMSP, featuring clarinet sounds and MIDI keyboard</div>
+                    <a href="https://drive.google.com/file/d/1WbNbeAdn0Ur-jCnHQwMYf94Q1NTPanlA/view?usp=sharing" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
+                </li>
+
+                <li class="composition-item">
+                    <div class="composition-title">Lonely Travel</div>
+                    <div class="composition-date">September 2022</div>
+                    <div class="composition-description">Original experimental music composition depicting a lonely traveler</div>
+                    <div class="composition-links">
+                        <a href="https://soundcloud.com/x3kus4lyferg/lonely-travelzixuan-guo/s-p1dvk2QNHXc?si=eb69c73e05524f0981aeb11e728773dd&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing" class="composition-link" target="_blank">🔗 SoundCloud</a>
                     </div>
                 </li>
-        </ul>
-    </div>
 
-        <!-- Gallery -->
-    <div class="section">
+                <li class="composition-item">
+                    <div class="composition-title">Dancing in the Rain</div>
+                    <div class="composition-date">April 2023</div>
+                    <div class="composition-description">Pure instrumental piano piece depicting a stroll through a square in the rain</div>
+                    <div class="composition-links">
+                        <a href="https://music.163.com/#/song?id=2037854978" class="composition-link" target="_blank">🔗 NetEase Cloud Music</a>
+                    </div>
+                </li>
+
+                <!-- Audio Composition -->
+                <li class="composition-item">
+                    <div class="composition-title">Breaking Free</div>
+                    <div class="composition-date">January 2024</div>
+                    <div class="composition-description">My first EDM</div>
+                    <audio class="composition-audio" controls>
+                        <source src="audio/Breaking Free混音24.1.12.mp3" type="audio/mpeg">
+                        Your browser does not support audio playback.
+                    </audio>
+                </li>
+
+                <!-- Video Compositions -->
+                <li class="composition-item hidden">
+                    <div class="composition-title">Playing Bass in a Mountain</div>
+                    <div class="composition-date">February 2024</div>
+                    <div class="composition-description">Mixed media playing with bass guitar and MIDI keyboard</div>
+                    <a href="https://drive.google.com/file/d/1VccAunN-d9St-IpUV4t4oykC-xq7hWeY/view" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
+                </li>
+
+                <li class="composition-item hidden">
+                    <div class="composition-title">The Evil Within 2 Trailer Soundtrack</div>
+                    <div class="composition-date">October 2023</div>
+                    <div class="composition-description">Original soundtrack composition</div>
+                    <a href="https://drive.google.com/file/d/1vblBLnAz_0w1KRGSQpfg43YEfnx_ey83/view" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
+                </li>
+
+                <li class="composition-item hidden">
+                    <div class="composition-title">Walking Through the Dark</div>
+                    <div class="composition-date">November 2024</div>
+                    <div class="composition-description">Code music composed and played in Supercollider</div>
+                    <a href="https://drive.google.com/file/d/1M4xdQEVmX5z_XDGprVyPCwwtLLL8Ll4v/view" target="_blank" class="composition-video-button">
+                        ▶ Watch Video
+                    </a>
+                </li>
+            </ul>
+            <div class="view-all-button">
+                <button onclick="toggleViewAllCompositions()">View All</button>
+            </div>
+        </div>
+
+        <!-- Gallery (remove class section-hidden when you have a fuller curated set) -->
+    <div class="section section-hidden" aria-hidden="true">
             <h2>Gallery</h2>
             <div class="gallery-grid">
                 <div class="gallery-item" onclick="openGallery('images/gallery/IMG_3581.JPG')" tabindex="0" role="button" aria-label="View Gallery Photo 1" onkeydown="if(event.key==='Enter'||event.key===' '){openGallery('images/gallery/IMG_3581.JPG')}">
