@@ -10,14 +10,6 @@ export function Collaborations() {
 
   const collaborations = [
     {
-      organization: 'Noise-Robust Instrument Classification under Real-World SNR Conditions',
-      role: 'SSRN Electronic Journal',
-      period: '2026',
-      description: 'Guo, Z., Zhong, J., and Chen, S. A study on robust MIR classification under challenging real-world noise conditions.',
-      image: '/images/NoisyInstruments.png',
-      highlights: ['SSRN', 'PDF available', 'Robust MIR'],
-    },
-    {
       organization: 'Self-Evolving AI Agents with Dual Memory for Automated Software Testing and Bug Localization',
       role: 'IEEE Access (Early Access)',
       period: '2026',
@@ -25,6 +17,14 @@ export function Collaborations() {
         'Mo, T., Zhang, C., Zou, J., Guo, Z., and Rhee, M. Proposes LS-CM, a dual-memory agent architecture for software testing and bug localization with improved fault localization accuracy and lower editing churn. DOI: 10.1109/ACCESS.2026.3713401.',
       image: '/images/dualmemory.png',
       highlights: ['IEEE', 'Open Access', 'Software Testing', 'Bug Localization'],
+    },
+    {
+      organization: 'Noise-Robust Instrument Classification under Real-World SNR Conditions',
+      role: 'SSRN Electronic Journal',
+      period: '2025',
+      description: 'Guo, Z., Zhong, J., and Chen, S. A study on robust MIR classification under challenging real-world noise conditions.',
+      image: '/images/NoisyInstruments.png',
+      highlights: ['SSRN', 'PDF available', 'Robust MIR'],
     },
   ];
 
