@@ -100,7 +100,7 @@ export function Honors() {
                       <ImageWithFallback
                         src={honor.imagePath}
                         alt={`${honor.title} thumbnail`}
-                        className="w-full h-auto max-h-[420px] object-contain rounded-md"
+                        className="w-[88%] h-auto max-h-[320px] object-contain rounded-md"
                       />
                       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/20 via-background/5 to-transparent" />
                       <div className="absolute top-6 left-4 w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
