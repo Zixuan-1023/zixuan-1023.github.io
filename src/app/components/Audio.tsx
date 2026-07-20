@@ -114,7 +114,7 @@ const compositionItems: CompositionItem[] = [
     title: 'Misty Forest',
     period: 'December 2024',
     description: 'Live sound processing in Max/MSP with clarinet material and MIDI keyboard control.',
-    imagePath: '/images/MistyForest.png',
+    imagePath: '/images/mistyforest.JPG',
     link: 'https://drive.google.com/file/d/1WbNbeAdn0Ur-jCnHQwMYf94Q1NTPanlA/view?usp=sharing',
     linkLabel: 'Watch Video',
   },
