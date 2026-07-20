@@ -28,13 +28,13 @@ export function Footer() {
   const quickLinks = [
     { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
-    { label: 'Education', id: 'education' },
-    { label: 'Honors', id: 'honors' },
-    { label: 'Experience', id: 'experience' },
     { label: 'Projects', id: 'projects' },
     { label: 'Recordings', id: 'audio' },
     { label: 'Publications', id: 'collaborations' },
     { label: 'Service', id: 'service' },
+    { label: 'Honors & Awards', id: 'honors' },
+    { label: 'Education', id: 'education' },
+    { label: 'Experience', id: 'experience' },
     { label: 'Gallery', id: 'gallery' },
     { label: 'Contact', id: 'contact' },
   ];

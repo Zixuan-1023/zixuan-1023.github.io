@@ -26,13 +26,13 @@ export function Header() {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'education', label: 'Education' },
-    { id: 'honors', label: 'Honors' },
-    { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
     { id: 'audio', label: 'Recordings' },
     { id: 'collaborations', label: 'Publications' },
     { id: 'service', label: 'Service' },
+    { id: 'honors', label: 'Honors & Awards' },
+    { id: 'education', label: 'Education' },
+    { id: 'experience', label: 'Experience' },
     { id: 'gallery', label: 'Gallery' },
     { id: 'contact', label: 'Contact' },
   ];
