@@ -42,7 +42,7 @@ export function Honors() {
       description: [
         'Awarded for academic performance and overall achievement during undergraduate studies in Computer Science and Technology at Jilin University.',
       ],
-      imagePath: '/images/scholarship.png',
+      imagePath: '/images/scholarships.jpg',
     },
   ];
 
