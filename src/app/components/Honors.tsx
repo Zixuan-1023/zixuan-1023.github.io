@@ -96,19 +96,19 @@ export function Honors() {
               >
                 {honor.imagePath ? (
                   <div className={`grid md:grid-cols-[0.9fr_1.1fr] ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
-                    <div className={`relative h-56 md:h-64 lg:h-72 ${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
+                    <div className={`relative flex items-center justify-center px-2 md:px-3 py-4 md:py-5 bg-gradient-to-br from-white/[0.05] to-transparent ${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
                       <ImageWithFallback
                         src={honor.imagePath}
                         alt={`${honor.title} thumbnail`}
-                        className="w-full h-full object-contain p-2 bg-muted/40"
+                        className="w-full h-auto max-h-[420px] object-contain rounded-md"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/65 via-background/20 to-transparent" />
-                      <div className="absolute top-4 left-4 w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
+                      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background/20 via-background/5 to-transparent" />
+                      <div className="absolute top-6 left-4 w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
                         <Award size={20} className="text-primary-foreground" />
                       </div>
                     </div>
 
-                    <div className={`p-6 md:p-8 ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
+                    <div className={`p-6 md:p-8 md:flex md:flex-col md:justify-center ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
                       <div className="inline-flex items-center gap-2 mb-4">
                         <span className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-xs text-primary">
                           {honor.year}
