@@ -24,7 +24,7 @@ export function Collaborations() {
       period: '2026',
       description:
         'Zhang, F., Guo, Z., Ding, J., Yang, J., and Liu, W. Proposes a gated multimodal fusion framework for robust perception in dense fog using coordinated vision and LiDAR integration.',
-      image: '/images/adaptive-fusion-placeholder.png',
+      image: '/images/Adaptive_Sensor.png',
       highlights: ['Sensor Fusion', 'LiDAR', 'Computer Vision', 'Robust Perception'],
     },
     {
