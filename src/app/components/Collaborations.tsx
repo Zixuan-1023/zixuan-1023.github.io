@@ -19,6 +19,15 @@ export function Collaborations() {
       highlights: ['IEEE', 'Open Access', 'Software Testing', 'Bug Localization'],
     },
     {
+      organization: 'Adaptive Sensor Fusion for Robust Perception in Dense Fog: A Gated Vision and LiDAR Integration Framework',
+      role: 'Research Publication',
+      period: '2026',
+      description:
+        'Zhang, F., Guo, Z., Ding, J., Yang, J., and Liu, W. Proposes a gated multimodal fusion framework for robust perception in dense fog using coordinated vision and LiDAR integration.',
+      image: '/images/adaptive-fusion-placeholder.png',
+      highlights: ['Sensor Fusion', 'LiDAR', 'Computer Vision', 'Robust Perception'],
+    },
+    {
       organization: 'Noise-Robust Instrument Classification under Real-World SNR Conditions',
       role: 'SSRN Electronic Journal',
       period: '2025',
