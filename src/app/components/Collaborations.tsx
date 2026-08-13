@@ -23,9 +23,9 @@ export function Collaborations() {
       role: 'Sensors (Journal article)',
       period: '2026-06-11',
       description:
-        'DOI: 10.3390/s26123728. Contributors: Fengyuan Zhang; Zixuan Guo; Jianbo Ding; Jingyun Yang; Wenhe Liu.',
+        'Zhang, F., Guo, Z., Ding, J., Yang, J., and Liu, W. Introduces a gated vision-LiDAR integration framework for robust perception under dense fog conditions. DOI: 10.3390/s26123728.',
       image: '/images/Adaptive_Sensor.png',
-      highlights: ['Sensors', 'Journal Article', 'DOI: 10.3390/s26123728', 'Sensor Fusion'],
+      highlights: ['Sensors', 'Journal Article', 'Vision-LiDAR Fusion', 'Robust Perception'],
     },
     {
       organization: 'Noise-Robust Instrument Classification under Real-World SNR Conditions',
