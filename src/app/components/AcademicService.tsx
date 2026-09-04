@@ -27,6 +27,17 @@ export function AcademicService() {
         'Editorial decision informed by review input: Accept.',
       ],
     },
+    {
+      title: 'Invited Reviewer',
+      year: '2026',
+      category: 'Academic Service',
+      issuer: 'Discover Artificial Intelligence (Springer Nature) · Aug 2026',
+      associatedWith: 'Manuscript review service',
+      description: [
+        'Reviewed the manuscript "Modeling Reciprocal Social Interaction for ASD Intervention via Multi-Agent Reinforcement Learning in Grid Systems."',
+        'Received formal acknowledgement of completed peer-review report submission.',
+      ],
+    },
   ];
 
   return (
@@ -72,7 +83,7 @@ export function AcademicService() {
           <div className="space-y-7">
             {items.map((item, index) => (
               <motion.article
-                key={item.title}
+                key={`${item.title}-${item.issuer}`}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                 transition={{ duration: 0.7, delay: 0.3 + index * 0.15 }}
