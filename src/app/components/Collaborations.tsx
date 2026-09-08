@@ -10,6 +10,15 @@ export function Collaborations() {
 
   const collaborations = [
     {
+      organization: 'Closed-Loop Audio Neuroregulation for ADHD: Graph-Based Attention Decoding and Rhythm Entrainment',
+      role: 'IEEE Access (Early Access)',
+      period: '2026',
+      description:
+        'Guo, Z., Fang, Q., Yang, J.-S., and Rhee, M. Presents a closed-loop audio neuroregulation framework for ADHD using graph-based attention decoding and rhythm entrainment. DOI: 10.1109/ACCESS.2026.3731552.',
+      image: '/images/Closed-Loop.png',
+      highlights: ['IEEE', 'Open Access', 'ADHD', 'Rhythm Entrainment'],
+    },
+    {
       organization: 'Self-Evolving AI Agents with Dual Memory for Automated Software Testing and Bug Localization',
       role: 'IEEE Access (Early Access)',
       period: '2026',
@@ -21,7 +30,7 @@ export function Collaborations() {
     {
       organization: 'Adaptive Sensor Fusion for Robust Perception in Dense Fog: A Gated Vision and LiDAR Integration Framework',
       role: 'Sensors (Journal article)',
-      period: '2026-06-11',
+      period: '2026',
       description:
         'Zhang, F., Guo, Z., Ding, J., Yang, J., and Liu, W. Introduces a gated vision-LiDAR integration framework for robust perception under dense fog conditions. DOI: 10.3390/s26123728.',
       image: '/images/Adaptive_Sensor.png',
