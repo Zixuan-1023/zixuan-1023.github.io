@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Button } from './ui/button';
+import { Download } from 'lucide-react';
 
 export function Hero() {
   const scrollToContact = () => {
@@ -68,17 +69,28 @@ export function Hero() {
           initial={{ opacity: 0, y: 30, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: 1.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               onClick={scrollToContact}
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-primary/50 transition-all duration-300"
             >
               Contact
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white/60 text-white hover:bg-white/10 hover:text-white shadow-lg"
+            >
+              <a href="/Zixuan_Guo_CV.pdf" download>
+                <Download size={16} />
+                Download CV
+              </a>
             </Button>
           </motion.div>
         </motion.div>
