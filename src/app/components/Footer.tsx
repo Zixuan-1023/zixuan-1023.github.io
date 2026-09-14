@@ -29,7 +29,7 @@ export function Footer() {
     { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
     { label: 'Projects', id: 'projects' },
-    { label: 'Recordings', id: 'audio' },
+    { label: 'Music', id: 'audio' },
     { label: 'Publications', id: 'collaborations' },
     { label: 'Service', id: 'service' },
     { label: 'Honors & Awards', id: 'honors' },
@@ -106,12 +106,12 @@ export function Footer() {
               </motion.div>
               <div>
                 <h3 className="text-lg">Zixuan Guo</h3>
-                <p className="text-sm text-muted-foreground">Audio AI / MIR Research</p>
+                <p className="text-sm text-muted-foreground">ML Engineer &amp; Audio/Music AI Researcher</p>
               </div>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Audio AI and music technology researcher focused on controllable generation,
-              robust listening, and human-centered creative tools.
+              Machine learning engineer and Audio/Music AI researcher working on representation
+              learning, machine music understanding, and intelligent audio systems.
             </p>
             {/* Decorative line */}
             <motion.div

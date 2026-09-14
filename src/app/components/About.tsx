@@ -127,12 +127,15 @@ export function About() {
                 animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                <h3 className="mb-4 text-primary">Audio AI & Music Technology</h3>
+                <h3 className="mb-2 text-primary">Machine Learning Engineer &amp; Audio/Music AI Researcher</h3>
+                <p className="text-sm uppercase tracking-wide text-primary/80 mb-4">
+                  Audio AI · Machine Learning · Music Technology
+                </p>
                 <p className="text-lg leading-relaxed text-foreground/90">
-                  I am an Applied ML Engineer and Audio AI researcher-developer focused on
-                  intelligent systems for music, audio, and interactive media. My background
-                  combines an M.M. in Music Technology from NYU with a B.S. in Computer Science,
-                  bridging research depth with engineering execution.
+                  I am a machine learning engineer and Audio/Music AI researcher with an M.M. in
+                  Music Technology from NYU and a B.S. in Computer Science. My work combines
+                  machine learning research with end-to-end engineering across music, audio, and
+                  intelligent interactive systems.
                 </p>
               </motion.div>
 
@@ -142,9 +145,12 @@ export function About() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="text-muted-foreground leading-relaxed"
               >
-                Across research and production-oriented engineering, I work on controllable music
-                generation, robust machine listening, audio representation learning, and
-                human-centered AI tools for creative workflows.
+                My research interests center on music and audio representation learning, machine
+                music understanding, and music information retrieval, with particular interests in
+                robust and generalizable representations under real-world conditions. Recent work
+                spans robust musical instrument recognition, low-label acoustic representation
+                learning, pitch analysis, acoustic event detection, and controllable symbolic
+                music generation.
               </motion.p>
 
               <motion.p
@@ -153,10 +159,10 @@ export function About() {
                 transition={{ duration: 0.6, delay: 0.7 }}
                 className="text-muted-foreground leading-relaxed"
               >
-                I currently contribute as a machine learning engineer in applied AI settings and
-                have supported academic research projects in low-SNR audio analysis. Alongside
-                this work, I stay active as a vocalist, electric bassist, and producer, keeping
-                system design grounded in real composition and studio practice.
+                On the engineering side, I build complete ML and audio systems, from data and
+                evaluation pipelines to model training, inference backends, APIs, and real-time
+                C++/JUCE applications. My background as a musician and producer also informs how I
+                think about musical structure and the design of practical audio technologies.
               </motion.p>
 
               {/* Decorative divider */}

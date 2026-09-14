@@ -28,7 +28,6 @@ export function Honors() {
       associatedWith: 'Associated with New York University',
       description: [
         'Recognized for outstanding academic achievement in the NYU Graduate Music Technology program.',
-        'Awarded for excellence in Audio AI, Music Information Retrieval (MIR), machine learning for audio, and interactive music technology research and development.',
       ],
       imagePath: '/images/award.jpeg',
     },

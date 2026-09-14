@@ -60,7 +60,7 @@ export function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.1 }}
           >
-            Applied ML Engineer and MIR Researcher-Developer
+            Machine Learning Engineer &amp; Audio/Music AI Researcher
           </motion.p>
         </motion.div>
 

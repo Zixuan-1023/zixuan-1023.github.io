@@ -24,7 +24,7 @@ export function AcademicService() {
       associatedWith: 'Manuscript review service',
       description: [
         'Reviewed the manuscript "Deep Learning-Based Adaptive Recommendation Algorithm for Personalized Music Teaching."',
-        'Editorial decision informed by review input: Accept.',
+        'Reviewed research on deep learning-based personalized music teaching and provided a formal peer-review report.',
       ],
     },
     {
@@ -35,7 +35,7 @@ export function AcademicService() {
       associatedWith: 'Manuscript review service',
       description: [
         'Reviewed the manuscript "Modeling Reciprocal Social Interaction for ASD Intervention via Multi-Agent Reinforcement Learning in Grid Systems."',
-        'Received formal acknowledgement of completed peer-review report submission.',
+        'Provided a formal peer-review report for reciprocal social interaction modeling in ASD intervention research.',
       ],
     },
   ];

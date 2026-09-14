@@ -27,7 +27,7 @@ export function Header() {
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
-    { id: 'audio', label: 'Recordings' },
+    { id: 'audio', label: 'Music' },
     { id: 'collaborations', label: 'Publications' },
     { id: 'service', label: 'Service' },
     { id: 'honors', label: 'Honors & Awards' },

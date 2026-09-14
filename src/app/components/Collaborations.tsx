@@ -10,6 +10,7 @@ export function Collaborations() {
 
   const collaborations = [
     {
+      section: 'First-Author Research',
       organization: 'Closed-Loop Audio Neuroregulation for ADHD: Graph-Based Attention Decoding and Rhythm Entrainment',
       role: 'IEEE Access (Early Access)',
       period: '2026',
@@ -19,6 +20,16 @@ export function Collaborations() {
       highlights: ['IEEE', 'Open Access', 'ADHD', 'Rhythm Entrainment'],
     },
     {
+      section: 'First-Author Research',
+      organization: 'Noise-Robust Instrument Classification under Real-World SNR Conditions',
+      role: 'SSRN Electronic Journal',
+      period: '2025',
+      description: 'Guo, Z., Zhong, J., and Chen, S. A study on robust MIR classification under challenging real-world noise conditions.',
+      image: '/images/NoisyInstruments.png',
+      highlights: ['SSRN', 'PDF available', 'Robust MIR'],
+    },
+    {
+      section: 'Collaborative Research',
       organization: 'Self-Evolving AI Agents with Dual Memory for Automated Software Testing and Bug Localization',
       role: 'IEEE Access (Early Access)',
       period: '2026',
@@ -28,6 +39,7 @@ export function Collaborations() {
       highlights: ['IEEE', 'Open Access', 'Software Testing', 'Bug Localization'],
     },
     {
+      section: 'Collaborative Research',
       organization: 'Adaptive Sensor Fusion for Robust Perception in Dense Fog: A Gated Vision and LiDAR Integration Framework',
       role: 'Sensors (Journal article)',
       period: '2026',
@@ -35,14 +47,6 @@ export function Collaborations() {
         'Zhang, F., Guo, Z., Ding, J., Yang, J., and Liu, W. Introduces a gated vision-LiDAR integration framework for robust perception under dense fog conditions. DOI: 10.3390/s26123728.',
       image: '/images/Adaptive_Sensor.png',
       highlights: ['Sensors', 'Journal Article', 'Vision-LiDAR Fusion', 'Robust Perception'],
-    },
-    {
-      organization: 'Noise-Robust Instrument Classification under Real-World SNR Conditions',
-      role: 'SSRN Electronic Journal',
-      period: '2025',
-      description: 'Guo, Z., Zhong, J., and Chen, S. A study on robust MIR classification under challenging real-world noise conditions.',
-      image: '/images/NoisyInstruments.png',
-      highlights: ['SSRN', 'PDF available', 'Robust MIR'],
     },
   ];
 
@@ -122,99 +126,110 @@ export function Collaborations() {
           {/* Collaborations Grid */}
           <div className="space-y-8">
             {collaborations.map((collab, index) => (
-              <motion.div
-                key={collab.organization}
-                initial={{ opacity: 0, y: 60 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-                transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
-                className="group"
-              >
-                <div className="bg-card rounded-lg overflow-hidden border border-border shadow-2xl hover:border-primary/40 transition-all duration-500">
-                  <div className="grid lg:grid-cols-5 gap-0">
-                    {/* Image Section */}
-                    <div className="lg:col-span-2 relative h-64 md:h-72 lg:h-72 overflow-hidden">
-                      <ImageWithFallback
-                        src={collab.image}
-                        alt={`${collab.organization} - Collaboration`}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent lg:from-transparent lg:via-transparent lg:to-background/90" />
-                      
-                      {/* Role badge on image */}
-                      <motion.div
-                        className="absolute bottom-6 left-6 bg-primary/90 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center gap-2"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                        transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
-                      >
-                        <FileText size={18} className="text-primary-foreground" />
-                        <span className="text-sm text-primary-foreground">{collab.role}</span>
-                      </motion.div>
+              <div key={`${collab.organization}-wrap`} className="space-y-4">
+                {(index === 0 || collab.section !== collaborations[index - 1].section) && (
+                  <motion.h3
+                    key={`${collab.section}-heading`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.55 + index * 0.2 }}
+                    className="text-xl text-primary/90"
+                  >
+                    {collab.section}
+                  </motion.h3>
+                )}
+                <motion.div
+                  initial={{ opacity: 0, y: 60 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+                  transition={{ duration: 0.8, delay: 0.6 + index * 0.2 }}
+                  className="group"
+                >
+                  <div className="bg-card rounded-lg overflow-hidden border border-border shadow-2xl hover:border-primary/40 transition-all duration-500">
+                    <div className="grid lg:grid-cols-5 gap-0">
+                      {/* Image Section */}
+                      <div className="lg:col-span-2 relative h-64 md:h-72 lg:h-72 overflow-hidden">
+                        <ImageWithFallback
+                          src={collab.image}
+                          alt={`${collab.organization} - Collaboration`}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent lg:from-transparent lg:via-transparent lg:to-background/90" />
+                        
+                        {/* Role badge on image */}
+                        <motion.div
+                          className="absolute bottom-6 left-6 bg-primary/90 backdrop-blur-sm px-4 py-2 rounded-lg flex items-center gap-2"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                          transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
+                        >
+                          <FileText size={18} className="text-primary-foreground" />
+                          <span className="text-sm text-primary-foreground">{collab.role}</span>
+                        </motion.div>
+                      </div>
 
+                      {/* Content Section */}
+                      <div className="lg:col-span-3 p-6 lg:p-8 flex flex-col justify-center">
+                        <motion.div
+                          className="flex items-center justify-between mb-4"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                          transition={{ duration: 0.6, delay: 0.9 + index * 0.2 }}
+                        >
+                          <h3 className="group-hover:text-primary transition-colors duration-300">
+                            {collab.organization}
+                          </h3>
+                          <div className="px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+                            <span className="text-sm text-primary">{collab.period}</span>
+                          </div>
+                        </motion.div>
+
+                        <motion.p
+                          className="text-muted-foreground leading-relaxed mb-6"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                          transition={{ duration: 0.6, delay: 1 + index * 0.2 }}
+                        >
+                          {collab.description}
+                        </motion.p>
+
+                        {/* Highlights */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                          transition={{ duration: 0.6, delay: 1.1 + index * 0.2 }}
+                        >
+                          <h4 className="text-sm mb-3 text-foreground/80">Keywords</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {collab.highlights.map((highlight, hIndex) => (
+                              <motion.div
+                                key={highlight}
+                                className="px-3 py-1.5 bg-muted rounded-lg border border-border text-sm text-foreground/80 hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                                transition={{ duration: 0.4, delay: 1.2 + index * 0.2 + hIndex * 0.1 }}
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                {highlight}
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      </div>
                     </div>
 
-                    {/* Content Section */}
-                    <div className="lg:col-span-3 p-6 lg:p-8 flex flex-col justify-center">
-                      <motion.div
-                        className="flex items-center justify-between mb-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                        transition={{ duration: 0.6, delay: 0.9 + index * 0.2 }}
-                      >
-                        <h3 className="group-hover:text-primary transition-colors duration-300">
-                          {collab.organization}
-                        </h3>
-                        <div className="px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
-                          <span className="text-sm text-primary">{collab.period}</span>
-                        </div>
-                      </motion.div>
-
-                      <motion.p
-                        className="text-muted-foreground leading-relaxed mb-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                        transition={{ duration: 0.6, delay: 1 + index * 0.2 }}
-                      >
-                        {collab.description}
-                      </motion.p>
-
-                      {/* Highlights */}
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                        transition={{ duration: 0.6, delay: 1.1 + index * 0.2 }}
-                      >
-                        <h4 className="text-sm mb-3 text-foreground/80">Keywords</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {collab.highlights.map((highlight, hIndex) => (
-                            <motion.div
-                              key={highlight}
-                              className="px-3 py-1.5 bg-muted rounded-lg border border-border text-sm text-foreground/80 hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300"
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                              transition={{ duration: 0.4, delay: 1.2 + index * 0.2 + hIndex * 0.1 }}
-                              whileHover={{ scale: 1.05 }}
-                            >
-                              {highlight}
-                            </motion.div>
-                          ))}
-                        </div>
-                      </motion.div>
-                    </div>
+                    {/* Bottom accent line */}
+                    <motion.div
+                      className="h-1 bg-gradient-to-r from-primary via-primary/60 to-transparent"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: 0.3 }}
+                      style={{ transformOrigin: 'left' }}
+                    />
                   </div>
-
-                  {/* Bottom accent line */}
-                  <motion.div
-                    className="h-1 bg-gradient-to-r from-primary via-primary/60 to-transparent"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                    style={{ transformOrigin: 'left' }}
-                  />
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>
