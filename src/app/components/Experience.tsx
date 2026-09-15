@@ -21,17 +21,28 @@ export function Experience() {
 
   const items: ExperienceItem[] = [
     {
+      company: 'Trivian Institute',
+      role: 'Research Fellow',
+      meta: 'Trivian Institute · Internship',
+      period: 'Sep 2026 - Present · 1 mo',
+      location: 'Remote',
+      bullets: [
+        'Conducting independent research on falsification and reproducible evaluation of AI systems.',
+        'Designing claim-driven experimental protocols, adversarial testing workflows, and structured failure analysis.',
+        'Developing cross-module evaluation methods for robust and interpretable system-level assessment.',
+      ],
+      initials: 'TI',
+    },
+    {
       company: 'APEXUS - TECH',
       role: 'Machine Learning Engineer',
       meta: 'APEXUS - TECH · Internship',
-      period: 'Jul 2026 - Present · 1 mo',
+      period: 'Jul 2026 - Aug 2026 · 2 mos',
       location: 'New Brunswick, NJ · Remote',
       bullets: [
-        'Built a RAG-oriented research system for long-context retrieval and synthesis over technical corpora.',
-        'Designed hybrid retrieval with rank-fusion strategies to improve precision and recall across multi-source documents.',
-        'Implemented provenance and citation validation checks to reduce unsupported generation and improve traceability.',
-        'Developed expanding-window evaluation with leakage checks for fair benchmarking across iterative prompt/model updates.',
-        'Delivered Python-based data, evaluation, and API tooling for production-oriented experimentation workflows.',
+        'Built a local quantitative-research RAG system over 20 research sources using hybrid dense/BM25 retrieval, reciprocal rank fusion, and citation-grounded generation; achieved 0.92 Precision@5, 1.00 Recall@5, and 0.94 NDCG@5 on a 10-query benchmark.',
+        'Developed a structured research-to-backtest pipeline with provenance validation, schema-constrained strategy generation, and executable SMA/RSI/breakout/volatility strategies; achieved 100% citation/schema validity and 12/12 end-to-end task success.',
+        'Developed EarningsFusion by integrating LLM-derived earnings-call tone, financial surprise, and pre-event market features under expanding-window validation; removed a severe overnight-gap leakage feature (r = 0.935 with 1-day target) and implemented feature-timing safeguards against look-ahead bias.',
       ],
       initials: 'AT',
       logoPath: '/images/apexus.png',
