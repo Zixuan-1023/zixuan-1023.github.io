@@ -32,6 +32,7 @@ export function Experience() {
         'Developing cross-module evaluation methods for robust and interpretable system-level assessment.',
       ],
       initials: 'TI',
+      logoPath: '/images/Trivian.png',
     },
     {
       company: 'APEXUS - TECH',
