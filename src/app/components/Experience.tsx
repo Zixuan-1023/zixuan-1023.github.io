@@ -27,9 +27,9 @@ export function Experience() {
       period: 'Sep 2026 - Present · 1 mo',
       location: 'Remote',
       bullets: [
-        'Conducting independent research on falsification and reproducible evaluation of AI systems.',
-        'Designing claim-driven experimental protocols, adversarial testing workflows, and structured failure analysis.',
-        'Developing cross-module evaluation methods for robust and interpretable system-level assessment.',
+        'Conducting independent research on falsification, reproducibility, and adversarial evaluation of relational AI systems, with an emphasis on claim-driven experimental design, baseline testing, failure analysis, and reproducible evidence.',
+        'Evaluating public components of the TRIA research stack at both module and cross-module levels, including assumptions, interfaces, dependencies, and failure propagation.',
+        'Developing reproducible test suites, evidence-based evaluations, and technical documentation while preserving negative, null, and inconclusive results.',
       ],
       initials: 'TI',
       logoPath: '/images/Trivian.png',
