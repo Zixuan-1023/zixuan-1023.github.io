@@ -37,6 +37,17 @@ export function AcademicService() {
         'Completed a formal peer-review report on multi-agent reinforcement learning for modeling reciprocal social interaction in autism spectrum disorder intervention research.',
       ],
     },
+    {
+      title: 'Social & Behavioral Research',
+      year: '2025',
+      category: 'Certification',
+      issuer: 'CITI Program · Apr 2025 - Apr 2028',
+      associatedWith: 'License/Certification · Active',
+      description: [
+        'Credential ID: 68871472.',
+        'Verification: https://www.citiprogram.org/verify/?kdf358d8b-962d-477e-814d-69aaab7393ef-68871472',
+      ],
+    },
   ];
 
   return (
