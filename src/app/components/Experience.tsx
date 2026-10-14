@@ -11,7 +11,6 @@ type ExperienceItem = {
   period: string;
   location: string;
   bullets: string[];
-  skills?: string;
   initials: string;
   logoPath?: string;
 };
@@ -32,7 +31,6 @@ export function Experience() {
         'Evaluating public components of the TRIA research stack at both module and cross-module levels, including assumptions, interfaces, dependencies, and failure propagation.',
         'Developing reproducible test suites, evidence-based evaluations, and technical documentation while preserving negative, null, and inconclusive results.',
       ],
-      skills: 'Python (Programming Language)',
       initials: 'TI',
       logoPath: '/images/Trivian.png',
     },
@@ -47,7 +45,6 @@ export function Experience() {
         'Developed a structured research-to-backtest pipeline with provenance validation, schema-constrained strategy generation, and executable SMA/RSI/breakout/volatility strategies; achieved 100% citation/schema validity and 12/12 end-to-end task success.',
         'Developed EarningsFusion by integrating LLM-derived earnings-call tone, financial surprise, and pre-event market features under expanding-window validation; removed a severe overnight-gap leakage feature (r = 0.935 with 1-day target) and implemented feature-timing safeguards against look-ahead bias.',
       ],
-      skills: 'Python (Programming Language), PyTorch and +3 skills',
       initials: 'AT',
       logoPath: '/images/apexus.png',
     },
@@ -62,7 +59,6 @@ export function Experience() {
         'Migrated legacy YOLOv2-based workflows to anchor-free YOLOX models to improve contour localization and reduce manual annotation overhead.',
         'Developed preprocessing, augmentation, and hard-negative mining pipelines for noisy acoustic data, contributing to improved robustness and scalability of the detection workflow.',
       ],
-      skills: 'Python (Programming Language), Computer Vision and +3 skills',
       initials: 'UW',
       logoPath: '/images/UW.jpeg',
     },
@@ -77,7 +73,6 @@ export function Experience() {
         'Worked on exploratory data analysis (EDA), data preprocessing, visualization, and automated reporting for market intelligence tasks.',
         'Collaborated with analysts on data-oriented research and reporting projects involving structured financial data and investment-related analytics.',
       ],
-      skills: 'Python (Programming Language), Data Analysis and +2 skills',
       initials: 'HI',
     },
   ];
@@ -156,10 +151,6 @@ export function Experience() {
                         </p>
                       ))}
                     </div>
-                    {item.skills && (
-                      <p className="pt-3 text-sm text-foreground/70">{item.skills}</p>
-                    )}
-
                   </div>
                 </div>
               </motion.article>
