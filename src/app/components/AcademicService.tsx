@@ -17,25 +17,24 @@ export function AcademicService() {
 
   const items: ServiceItem[] = [
     {
-      title: 'Invited Reviewer',
+      title: 'Peer Reviewer',
       year: '2026',
       category: 'Academic Service',
-      issuer: 'Scientific Reports (Nature Portfolio) · Jul 2026',
-      associatedWith: 'Manuscript review service',
+      issuer: 'Scientific Reports (Nature Portfolio) · Jun 2026 - Present',
+      associatedWith: 'Peer Review · Completed & Ongoing',
       description: [
-        'Reviewed the manuscript "Deep Learning-Based Adaptive Recommendation Algorithm for Personalized Music Teaching."',
-        'Reviewed research on deep learning-based personalized music teaching and provided a formal peer-review report.',
+        'Completed three peer-review rounds (June-July 2026) for a manuscript in AI-enabled personalized music education.',
+        'Currently reviewing an additional manuscript on graph attention networks for digital-twin material flow modeling (October 2026-present).',
       ],
     },
     {
-      title: 'Invited Reviewer',
+      title: 'Peer Reviewer',
       year: '2026',
       category: 'Academic Service',
-      issuer: 'Discover Artificial Intelligence (Springer Nature) · Aug 2026',
-      associatedWith: 'Manuscript review service',
+      issuer: 'Discover Artificial Intelligence (Springer Nature) · Sep 2026',
+      associatedWith: 'Peer Review · Completed',
       description: [
-        'Reviewed the manuscript "Modeling Reciprocal Social Interaction for ASD Intervention via Multi-Agent Reinforcement Learning in Grid Systems."',
-        'Provided a formal peer-review report for reciprocal social interaction modeling in ASD intervention research.',
+        'Completed a formal peer-review report on multi-agent reinforcement learning for modeling reciprocal social interaction in autism spectrum disorder intervention research.',
       ],
     },
   ];
