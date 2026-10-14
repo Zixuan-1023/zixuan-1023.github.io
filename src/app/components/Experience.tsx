@@ -24,7 +24,7 @@ export function Experience() {
       company: 'Trivian Institute',
       role: 'Research Fellow',
       meta: 'Trivian Institute · Internship',
-      period: 'Sep 2026 - Present · 2 mos',
+      period: 'Sep 2026 - Present',
       location: 'Remote',
       bullets: [
         'Conducting independent research on falsification, reproducibility, and adversarial evaluation of relational AI systems, with an emphasis on claim-driven experimental design, baseline testing, failure analysis, and reproducible evidence.',
@@ -38,7 +38,7 @@ export function Experience() {
       company: 'APEXUS - TECH',
       role: 'Machine Learning Engineer',
       meta: 'APEXUS - TECH · Internship',
-      period: 'Jul 2026 - Aug 2026 · 2 mos',
+      period: 'Jul 2026 - Aug 2026',
       location: 'New Brunswick, NJ · Remote',
       bullets: [
         'Built a local quantitative-research RAG system over 20 research sources using hybrid dense/BM25 retrieval, reciprocal rank fusion, and citation-grounded generation; achieved 0.92 Precision@5, 1.00 Recall@5, and 0.94 NDCG@5 on a 10-query benchmark.',
@@ -52,7 +52,7 @@ export function Experience() {
       company: 'University of Washington',
       role: 'Machine Learning Research Assistant',
       meta: 'University of Washington · Part-time',
-      period: 'May 2025 - Nov 2025 · 7 mos',
+      period: 'May 2025 - Nov 2025',
       location: 'Seattle, Washington, United States · Remote',
       bullets: [
         'Collaborated remotely on modernization of a spectrogram-based acoustic event detection pipeline for low-SNR bioacoustic analysis.',
@@ -66,7 +66,7 @@ export function Experience() {
       company: 'Hazel Investment Co',
       role: 'Data Analyst',
       meta: 'Hazel Investment Co · Internship',
-      period: 'Jan 2024 - Feb 2024 · 2 mos',
+      period: 'Jan 2024 - Feb 2024',
       location: 'Shenzhen, Guangdong, China · On-site',
       bullets: [
         'Supported quantitative analysis and analytics workflows on financial datasets using Python.',
