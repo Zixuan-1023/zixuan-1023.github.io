@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
-import { BookOpen, FileText } from 'lucide-react';
+import { BookOpen, ExternalLink, FileText } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Collaborations() {
@@ -18,6 +18,7 @@ export function Collaborations() {
         'Guo, Z., Fang, Q., Yang, J.-S., and Rhee, M. Presents a closed-loop audio neuroregulation framework for ADHD using graph-based attention decoding and rhythm entrainment. DOI: 10.1109/ACCESS.2026.3731552.',
       image: '/images/Closed-Loop.png',
       highlights: ['IEEE', 'Open Access', 'ADHD', 'Rhythm Entrainment'],
+      publicationUrl: 'https://ieeexplore.ieee.org/document/11683456',
     },
     {
       section: 'First-Author Research',
@@ -27,6 +28,7 @@ export function Collaborations() {
       description: 'Guo, Z., Zhong, J., and Chen, S. A study on robust MIR classification under challenging real-world noise conditions.',
       image: '/images/NoisyInstruments.png',
       highlights: ['SSRN', 'PDF available', 'Robust MIR'],
+      publicationUrl: 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6510838',
     },
     {
       section: 'Collaborative Research',
@@ -37,6 +39,7 @@ export function Collaborations() {
         'Mo, T., Zhang, C., Zou, J., Guo, Z., and Rhee, M. Proposes LS-CM, a dual-memory agent architecture for software testing and bug localization with improved fault localization accuracy and lower editing churn. DOI: 10.1109/ACCESS.2026.3713401.',
       image: '/images/dualmemory.png',
       highlights: ['IEEE', 'Open Access', 'Software Testing', 'Bug Localization'],
+      publicationUrl: 'https://ieeexplore.ieee.org/document/11609447',
     },
     {
       section: 'Collaborative Research',
@@ -47,6 +50,7 @@ export function Collaborations() {
         'Zhang, F., Guo, Z., Ding, J., Yang, J., and Liu, W. Introduces a gated vision-LiDAR integration framework for robust perception under dense fog conditions. DOI: 10.3390/s26123728.',
       image: '/images/Adaptive_Sensor.png',
       highlights: ['Sensors', 'Journal Article', 'Vision-LiDAR Fusion', 'Robust Perception'],
+      publicationUrl: 'https://www.mdpi.com/1424-8220/26/12/3728',
     },
   ];
 
@@ -177,7 +181,18 @@ export function Collaborations() {
                           transition={{ duration: 0.6, delay: 0.9 + index * 0.2 }}
                         >
                           <h3 className="group-hover:text-primary transition-colors duration-300">
-                            {collab.organization}
+                            {collab.publicationUrl ? (
+                              <a
+                                href={collab.publicationUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-primary transition-colors"
+                              >
+                                {collab.organization}
+                              </a>
+                            ) : (
+                              collab.organization
+                            )}
                           </h3>
                           <div className="px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
                             <span className="text-sm text-primary">{collab.period}</span>
@@ -192,6 +207,17 @@ export function Collaborations() {
                         >
                           {collab.description}
                         </motion.p>
+                        {collab.publicationUrl && (
+                          <a
+                            href={collab.publicationUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 mb-4 text-sm text-primary hover:text-primary/80 transition-colors"
+                          >
+                            <ExternalLink size={15} />
+                            Open Publication
+                          </a>
+                        )}
 
                         {/* Highlights */}
                         <motion.div

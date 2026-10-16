@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef, useState } from 'react';
-import { Mail, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, BookOpen } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -44,6 +44,12 @@ export function Contact() {
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/zixuan-guo-a27bb9347/',
       username: 'zixuan-guo-a27bb9347',
+    },
+    {
+      icon: BookOpen,
+      label: 'Google Scholar',
+      href: 'https://scholar.google.com/citations?user=iAeqHnYAAAAJ&hl=en&authuser=1',
+      username: 'iAeqHnYAAAAJ',
     },
   ];
 
