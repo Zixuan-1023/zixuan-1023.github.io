@@ -8,6 +8,7 @@ import { Performances } from './components/Performances';
 import { Audio } from './components/Audio';
 import { Collaborations } from './components/Collaborations';
 import { AcademicService } from './components/AcademicService';
+import { Certifications } from './components/Certifications';
 import { Gallery } from './components/Gallery';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -28,6 +29,7 @@ export default function App() {
           <Audio />
           <Collaborations />
           <AcademicService />
+          <Certifications />
           <Honors />
           <Education />
           <Experience />

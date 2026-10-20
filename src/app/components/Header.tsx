@@ -30,6 +30,7 @@ export function Header() {
     { id: 'audio', label: 'Music' },
     { id: 'collaborations', label: 'Publications' },
     { id: 'service', label: 'Service' },
+    { id: 'certifications', label: 'Certifications' },
     { id: 'honors', label: 'Honors & Awards' },
     { id: 'education', label: 'Education' },
     { id: 'experience', label: 'Experience' },

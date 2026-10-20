@@ -23,8 +23,8 @@ export function AcademicService() {
       issuer: 'Scientific Reports (Nature Portfolio) · Jun 2026 - Present',
       associatedWith: 'Peer Review · Completed & Ongoing',
       description: [
-        'Completed three peer-review rounds (June-July 2026) for a manuscript in AI-enabled personalized music education.',
-        'Currently reviewing an additional manuscript on graph attention networks for digital-twin material flow modeling (October 2026-present).',
+        'Completed four peer-review rounds across two manuscripts in 2026.',
+        'Continuing peer-review service on ongoing editorial cycles.',
       ],
     },
     {
@@ -34,18 +34,7 @@ export function AcademicService() {
       issuer: 'Discover Artificial Intelligence (Springer Nature) · Sep 2026',
       associatedWith: 'Peer Review · Completed',
       description: [
-        'Completed a formal peer-review report on multi-agent reinforcement learning for modeling reciprocal social interaction in autism spectrum disorder intervention research.',
-      ],
-    },
-    {
-      title: 'Social & Behavioral Research',
-      year: '2025',
-      category: 'Certification',
-      issuer: 'CITI Program · Apr 2025 - Apr 2028',
-      associatedWith: 'License/Certification · Active',
-      description: [
-        'Credential ID: 68871472.',
-        'Verification: https://www.citiprogram.org/verify/?kdf358d8b-962d-477e-814d-69aaab7393ef-68871472',
+        'Completed one formal peer-review report for one manuscript in 2026.',
       ],
     },
   ];

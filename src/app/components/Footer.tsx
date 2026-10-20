@@ -32,6 +32,7 @@ export function Footer() {
     { label: 'Music', id: 'audio' },
     { label: 'Publications', id: 'collaborations' },
     { label: 'Service', id: 'service' },
+    { label: 'Certifications', id: 'certifications' },
     { label: 'Honors & Awards', id: 'honors' },
     { label: 'Education', id: 'education' },
     { label: 'Experience', id: 'experience' },
