@@ -28,15 +28,10 @@ export function Footer() {
   const quickLinks = [
     { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
+    { label: 'Research', id: 'collaborations' },
     { label: 'Projects', id: 'projects' },
     { label: 'Music', id: 'audio' },
-    { label: 'Publications', id: 'collaborations' },
-    { label: 'Service', id: 'service' },
-    { label: 'Certifications', id: 'certifications' },
-    { label: 'Honors & Awards', id: 'honors' },
-    { label: 'Education', id: 'education' },
     { label: 'Experience', id: 'experience' },
-    { label: 'Gallery', id: 'gallery' },
     { label: 'Contact', id: 'contact' },
   ];
 

@@ -1,43 +1,16 @@
 import { motion, useInView } from 'motion/react';
 import { BookCheck } from 'lucide-react';
 import { useRef } from 'react';
-
-type ServiceItem = {
-  title: string;
-  year: string;
-  category: string;
-  issuer: string;
-  associatedWith: string;
-  description: string[];
-};
+import { academicServiceItems } from '../data/academicService';
 
 export function AcademicService() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const items: ServiceItem[] = [
-    {
-      title: 'Peer Reviewer',
-      year: '2026',
-      category: 'Academic Service',
-      issuer: 'Scientific Reports (Nature Portfolio) · Jun 2026 - Present',
-      associatedWith: 'Peer Review · Completed & Ongoing',
-      description: [
-        'Completed four peer-review rounds across two manuscripts in 2026.',
-        'Continuing peer-review service on ongoing editorial cycles.',
-      ],
-    },
-    {
-      title: 'Peer Reviewer',
-      year: '2026',
-      category: 'Academic Service',
-      issuer: 'Discover Artificial Intelligence (Springer Nature) · Sep 2026',
-      associatedWith: 'Peer Review · Completed',
-      description: [
-        'Completed one formal peer-review report for one manuscript in 2026.',
-      ],
-    },
-  ];
+  const goToAcademicService = () => {
+    sessionStorage.setItem('homeScrollY', String(window.scrollY));
+    window.location.hash = '#/service?from=home';
+  };
 
   return (
     <section id="service" ref={ref} className="py-20 bg-[#101116] relative overflow-hidden">
@@ -79,38 +52,39 @@ export function AcademicService() {
             />
           </div>
 
-          <div className="space-y-7">
-            {items.map((item, index) => (
+          <div className="space-y-4 max-w-4xl mx-auto">
+            {academicServiceItems.map((item, index) => (
               <motion.article
-                key={`${item.title}-${item.issuer}`}
+                key={item.organization}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                 transition={{ duration: 0.7, delay: 0.3 + index * 0.15 }}
-                className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-2xl"
+                className="bg-card border border-border rounded-xl p-5 md:p-6 shadow-xl"
               >
-                <div className="inline-flex items-center gap-2 mb-4">
-                  <span className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-xs text-primary">
-                    {item.year}
-                  </span>
-                  <span className="px-3 py-1 rounded-full bg-card border border-border text-xs text-muted-foreground">
-                    {item.category}
-                  </span>
-                </div>
-
-                <h3 className="mb-3">{item.title}</h3>
-                <p className="text-sm text-primary mb-2">{item.issuer}</p>
-                <p className="text-sm text-foreground/80 mb-4">{item.associatedWith}</p>
-
-                <div className="space-y-2">
-                  {item.description.map((line) => (
-                    <p key={line} className="text-sm text-muted-foreground leading-relaxed">
-                      {line}
-                    </p>
-                  ))}
-                </div>
+                <p className="text-foreground">{item.organization} - {item.role} · {item.period}</p>
               </motion.article>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="mt-8 flex justify-center"
+          >
+            <motion.a
+              href="#/service?from=home"
+              onClick={(event) => {
+                event.preventDefault();
+                goToAcademicService();
+              }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-6 py-2.5 rounded-full border border-border bg-card text-foreground/90 hover:border-primary/40 hover:text-primary transition-all duration-300"
+            >
+              View Academic Service
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>

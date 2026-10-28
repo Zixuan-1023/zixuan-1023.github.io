@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { Image } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { Dialog, DialogContent } from './ui/dialog';
+import { featuredGalleryImages } from '../data/gallery';
 
 export function Gallery() {
   const ref = useRef(null);
@@ -11,58 +12,10 @@ export function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const images = [
-    {
-      src: '/images/gallery/IMG_7437.jpeg',
-      alt: 'Gallery Photo 1',
-      title: 'Gallery Photo 1',
-    },
-    {
-      src: '/images/gallery/IMG_7436.jpeg',
-      alt: 'Gallery Photo 2',
-      title: 'Gallery Photo 2',
-    },
-    {
-      src: '/images/gallery/IMG_4008.jpg',
-      alt: 'Gallery Photo 3',
-      title: 'Gallery Photo 3',
-    },
-    {
-      src: '/images/gallery/IMG_4645.jpg',
-      alt: 'Gallery Photo 4',
-      title: 'Gallery Photo 4',
-    },
-    {
-      src: '/images/gallery/IMG_4691.jpeg',
-      alt: 'Gallery Photo 5',
-      title: 'Gallery Photo 5',
-    },
-    {
-      src: '/images/gallery/IMG_4853.JPG',
-      alt: 'Gallery Photo 6',
-      title: 'Gallery Photo 6',
-    },
-    {
-      src: '/images/gallery/IMG_4965.JPG',
-      alt: 'Gallery Photo 7',
-      title: 'Gallery Photo 7',
-    },
-    {
-      src: '/images/gallery/IMG_6764.jpeg',
-      alt: 'Gallery Photo 9',
-      title: 'Gallery Photo 9',
-    },
-    {
-      src: '/images/gallery/IMG_6777.jpeg',
-      alt: 'Gallery Photo 10',
-      title: 'Gallery Photo 10',
-    },
-    {
-      src: '/images/gallery/IMG_3581.JPG',
-      alt: 'Gallery Photo 11',
-      title: 'Gallery Photo 11',
-    },
-  ];
+  const goToAllGallery = () => {
+    sessionStorage.setItem('homeScrollY', String(window.scrollY));
+    window.location.hash = '#/gallery?from=home';
+  };
 
   return (
     <section id="gallery" ref={ref} className="py-20 bg-[#0f0f12] relative overflow-hidden">
@@ -105,7 +58,7 @@ export function Gallery() {
             />
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {images.map((image, index) => (
+            {featuredGalleryImages.map((image, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.5, y: 50, rotateY: -15 }}
@@ -160,6 +113,26 @@ export function Gallery() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-8 flex justify-center"
+          >
+            <motion.a
+              href="#/gallery?from=home"
+              onClick={(event) => {
+                event.preventDefault();
+                goToAllGallery();
+              }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-6 py-2.5 rounded-full border border-border bg-card text-foreground/90 hover:border-primary/40 hover:text-primary transition-all duration-300"
+            >
+              View All
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
 

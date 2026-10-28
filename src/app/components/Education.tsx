@@ -3,52 +3,16 @@ import { useInView } from 'motion/react';
 import { useRef } from 'react';
 import { GraduationCap } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-
-type EducationItem = {
-  school: string;
-  degree: string;
-  period: string;
-  details: string[];
-  initials: string;
-  logoPath?: string;
-};
+import { educationItems } from '../data/education';
 
 export function Education() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const educationItems: EducationItem[] = [
-    {
-      school: 'New York University',
-      degree: 'Master of Music, Music Technology',
-      period: 'Sep 2024 – May 2026',
-      details: [
-        'GPA: 3.98/4.00 | Coursework: Deep Learning for Media, Machine Listening, Digital Signal Processing, Music Information Retrieval, C++ Audio Application Development',
-      ],
-      initials: 'NYU',
-      logoPath: '/images/nyu.jpg',
-    },
-    {
-      school: 'Jilin University',
-      degree: 'Bachelor of Science, Computer Science',
-      period: 'Sep 2019 – May 2024',
-      details: [
-        'Coursework: Object-Oriented Programming, Software Engineering, Algorithms & Data Structures, Operating Systems, Machine Learning, Linux Systems',
-      ],
-      initials: 'JLU',
-      logoPath: '/images/jlu.jpeg',
-    },
-    {
-      school: 'Berklee College of Music',
-      degree: 'Five-Week Summer Performance Program, Woodwind Performance',
-      period: 'Jul 2023 – Aug 2023',
-      details: [
-        'Completed Berklee’s Five-Week Summer Program (Woodwind): ensemble performance, musicianship, jazz improvisation, and creative collaboration.',
-      ],
-      initials: 'BCM',
-      logoPath: '/images/berklee.png',
-    },
-  ];
+  const goToAllEducation = () => {
+    sessionStorage.setItem('homeScrollY', String(window.scrollY));
+    window.location.hash = '#/education?from=home';
+  };
 
   return (
     <section id="education" ref={ref} className="py-20 bg-[#101116] relative overflow-hidden">
@@ -122,18 +86,31 @@ export function Education() {
                   <h3 className="group-hover:text-primary transition-colors">{item.school}</h3>
                   <p className="text-foreground/90">{item.degree}</p>
                   <p className="text-sm text-primary">{item.period}</p>
-
-                  <div className="pt-1 space-y-2">
-                    {item.details.map((line) => (
-                      <p key={line} className="text-sm text-muted-foreground leading-relaxed">
-                        {line}
-                      </p>
-                    ))}
-                  </div>
+                  {item.summary ? <p className="text-sm text-muted-foreground">{item.summary}</p> : null}
                 </div>
               </motion.article>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-8 flex justify-center"
+          >
+            <motion.a
+              href="#/education?from=home"
+              onClick={(event) => {
+                event.preventDefault();
+                goToAllEducation();
+              }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-6 py-2.5 rounded-full border border-border bg-card text-foreground/90 hover:border-primary/40 hover:text-primary transition-all duration-300"
+            >
+              View Education
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>

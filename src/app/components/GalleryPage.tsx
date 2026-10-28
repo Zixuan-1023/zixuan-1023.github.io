@@ -1,0 +1,114 @@
+import { ChevronLeft, Image } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useState } from 'react';
+import { galleryImages } from '../data/gallery';
+import { ImageWithFallback } from './figma/ImageWithFallback';
+import { Dialog, DialogContent } from './ui/dialog';
+
+type GalleryPageProps = {
+  fromHome?: boolean;
+};
+
+export function GalleryPage({ fromHome = false }: GalleryPageProps) {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const goBack = () => {
+    if (fromHome && sessionStorage.getItem('homeScrollY')) {
+      sessionStorage.setItem('shouldRestoreHomeOnReturn', '1');
+    }
+    window.location.hash = '#/';
+  };
+
+  return (
+    <section className="min-h-screen py-20 bg-[#0f0f12] relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 20% 50%, rgba(139, 38, 53, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 38, 53, 0.1) 0%, transparent 50%)',
+        }}
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <a
+            href="#/"
+            onClick={(event) => {
+              event.preventDefault();
+              goBack();
+            }}
+            className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors mb-8"
+          >
+            <ChevronLeft size={16} />
+            Back to Home
+          </a>
+
+          <div className="flex flex-col items-center mb-8">
+            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 border border-primary/20 mb-5">
+              <Image size={28} className="text-primary" />
+            </div>
+            <h2 className="text-center mb-4">Gallery</h2>
+            <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/30 rounded-full" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={image.src}
+                initial={{ opacity: 0, scale: 0.5, y: 50, rotateY: -15 }}
+                animate={{ opacity: 1, scale: 1, y: 0, rotateY: 0 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.15 + index * 0.06,
+                  ease: 'easeOut',
+                }}
+                onHoverStart={() => setHoveredIndex(index)}
+                onHoverEnd={() => setHoveredIndex(null)}
+                whileHover={{ scale: 1.03, y: -5 }}
+                className="group relative aspect-[4/3] overflow-hidden rounded-lg cursor-pointer shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300"
+                onClick={() => setSelectedImage(image.src)}
+              >
+                <ImageWithFallback
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
+                />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent flex items-end justify-center p-6 z-20"
+                  initial={false}
+                  animate={{
+                    opacity: hoveredIndex === index ? 1 : 0,
+                    y: hoveredIndex === index ? 0 : 20,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.h3
+                    className="text-white"
+                    initial={false}
+                    animate={{ scale: hoveredIndex === index ? 1.1 : 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {image.title}
+                  </motion.h3>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-4xl p-0 bg-transparent border-0">
+          {selectedImage ? (
+            <ImageWithFallback
+              src={selectedImage}
+              alt="Gallery Image"
+              className="w-full h-auto rounded-lg shadow-2xl"
+            />
+          ) : null}
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+}

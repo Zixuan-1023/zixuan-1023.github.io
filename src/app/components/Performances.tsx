@@ -3,85 +3,25 @@ import { useInView } from 'motion/react';
 import { useRef } from 'react';
 import { Calendar, FolderKanban, Link2 } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { featuredProjects } from '../data/projects';
 
 export function Performances() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const projects = [
-    {
-      title: 'Noise-Robust Musical Instrument Classification',
-      period: 'Spring 2025',
-      track: 'Research',
-      description: 'Developed a low-SNR instrument classifier using LAION-CLAP embeddings and noise-aware curriculum learning on MUSAN-mixed Medley-solos-DB. Compared TCN and Transformer sequence models, and added harmonic fallback plus noise negatives for stronger robustness under real-world conditions.',
-      image: '/images/NoisyInstruments.png',
-      github: 'https://github.com/Zixuan-1023/Noisy_Instruments_Classification.git',
-      linkLabel: 'GitHub',
-    },
-    {
-      title: 'Low-Label Acoustic Representation Learning under DCASE Constraints',
-      period: 'Spring 2026',
-      track: 'Research',
-      description: 'Reproduced and extended ConvMixer+RSC for DCASE 2024 Task 1 under strict edge constraints and low-label regimes. Built deterministic benchmarking and ablations across ConvMixer, EfficientLEAF, and ECA modules, improving 5% macro accuracy while reducing compute.',
-      image: '/images/dcase.png',
-      github: 'https://github.com/Zixuan-1023/dcase-rsc-project.git',
-      linkLabel: 'GitHub',
-    },
-    {
-      title: 'Pitch Tracking under Non-Ideal Conditions',
-      period: 'Fall 2025',
-      track: 'Research',
-      description: 'Built a reproducible MedleyDB-Pitch benchmark with distortion, additive noise, and detuning perturbations. Standardized heterogeneous model outputs and evaluated pYIN, CREPE, and Basic Pitch with OA/RPA/RCA/VR metrics for robustness analysis.',
-      image: '/images/PitchTracking.png',
-      github: 'https://github.com/HQQHQ/Benchmark-PitchTracking-in-Non-ideal-Conditions.git',
-      linkLabel: 'GitHub',
-    },
-    {
-      title: 'Master’s Thesis | Controllable Symbolic Music Generation',
-      period: 'May 2026',
-      track: 'Research',
-      description: 'Studied symbolic music representations for fine-grained generation and transformation. Developed a hybrid MuseCoco + constraint-based + AR-VAE pipeline, deployed through a JUCE DAW plugin and backend inference system, and improved New-mode constraint success from 48% to 76%.',
-      image: '/images/SymbolicGeneration.png',
-      github: 'https://github.com/Zixuan-1023/Symbolic_Generation.git',
-      linkLabel: 'GitHub',
-    },
-    {
-      title: 'Domain-Adversarial Transfer Learning',
-      period: 'Spring 2024',
-      track: 'ML Engineering',
-      description: 'Implemented an intermediate-domain transfer strategy on top of DANN using Mixup/CutMixup to reduce source-target mismatch. Evaluations on Office-31, ImageCLEF, and OfficeHome showed significant gains, including +18.16 pp on ImageCLEF.',
-      image: '/images/domaintransfer.png',
-      github: 'https://github.com/Zixuan-1023/Domain-Adversarial-Transfer-Learning-.git',
-      linkLabel: 'GitHub',
-    },
-    {
-      title: 'Audio Visualizer JUCE Plugin',
-      period: 'December 2025',
-      track: 'Music Technology',
-      description: 'Built a real-time JUCE audiovisual plugin that maps continuous audio features to a physically inspired particle system in DAWs. Added latent "Emotion" controls to support higher-level musical visual behavior.',
-      image: '/images/AudioVisualizer.png',
-      github: 'https://github.com/Zixuan-1023/AudioVisualizer',
-      linkLabel: 'GitHub',
-    },
-    {
-      title: 'Monophonic MIDI Synthesizer (Max/MSP)',
-      period: 'December 2025',
-      track: 'Music Technology',
-      description: 'Built an interactive monophonic Max/MSP instrument with waveform control, ADSR, LFO modulation, nonlinear overdrive, filtering, and time-based effects for real-time performance.',
-      image: '/images/Max%20Synth.png',
-      github: 'https://github.com/Zixuan-1023/Monophonic-MIDI-Synthesizer',
-      linkLabel: 'GitHub',
-    },
-    {
-      title: 'Image-Based Interactive Music System',
-      period: 'Fall 2024',
-      track: 'Music Technology',
-      description: 'Designed a real-time audiovisual interaction system in Max/MSP that maps image features such as color, brightness, saturation, and position to dynamic audio parameters.',
-      image: '/images/InteractiveGeneration.png',
-      github: 'https://drive.google.com/file/d/1TyujxVXRZVkRDKZgBPpPKhxTOhaMo3Mw/view',
-      linkLabel: 'Watch Video',
-    },
-  ];
+  const saveHomeScroll = () => {
+    sessionStorage.setItem('homeScrollY', String(window.scrollY));
+  };
+
+  const goToProjectDetailFromHome = (slug: string) => {
+    saveHomeScroll();
+    window.location.hash = `#/projects/${slug}?from=home`;
+  };
+
+  const goToAllProjectsFromHome = () => {
+    saveHomeScroll();
+    window.location.hash = '#/projects?from=home';
+  };
 
   return (
     <section id="projects" ref={ref} className="py-20 bg-[#121318] relative overflow-hidden">
@@ -130,11 +70,14 @@ export function Performances() {
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             />
+            <p className="mt-5 text-sm text-muted-foreground max-w-2xl mx-auto">
+              Featured projects for quick browsing. Open each project for methods, results, and implementation details.
+            </p>
           </div>
 
           {/* Projects Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+            {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.title}
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -173,9 +116,18 @@ export function Performances() {
 
                 {/* Content */}
                 <div className="p-6 relative">
-                  <h3 className="mb-3 group-hover:text-primary transition-colors duration-300">
-                    {project.title}
-                  </h3>
+                  <a
+                    href={`#/projects/${project.slug}?from=home`}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      goToProjectDetailFromHome(project.slug);
+                    }}
+                    className="block mb-3"
+                  >
+                    <h3 className="group-hover:text-primary transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                  </a>
                   
                   <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                     <Calendar size={16} className="text-primary flex-shrink-0" />
@@ -183,18 +135,14 @@ export function Performances() {
                   </div>
 
                   <a
-                    href={project.github}
+                    href={project.externalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mb-4 text-primary hover:text-primary/80 transition-colors"
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
                   >
                     <Link2 size={16} className="flex-shrink-0" />
-                    <span className="text-sm">{project.linkLabel ?? 'Open Link'}</span>
+                    <span className="text-sm">{project.externalLabel}</span>
                   </a>
-
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
 
                   {/* Bottom Accent */}
                   <motion.div
@@ -209,6 +157,24 @@ export function Performances() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="mt-12 text-center"
+          >
+            <a
+              href="#/projects?from=home"
+              onClick={(event) => {
+                event.preventDefault();
+                goToAllProjectsFromHome();
+              }}
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/40 text-white hover:bg-white/10 transition-colors"
+            >
+              View All Projects
+            </a>
+          </motion.div>
         </motion.div>
       </div>
     </section>

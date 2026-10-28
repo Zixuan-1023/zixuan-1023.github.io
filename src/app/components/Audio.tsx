@@ -1,179 +1,24 @@
 import { motion, useInView } from 'motion/react';
 import { Calendar, Music2 } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-
-type AudioItem = {
-  title: string;
-  period: string;
-  note: string;
-  audioPath: string;
-  imagePath?: string;
-};
-
-type CompositionItem = {
-  title: string;
-  period: string;
-  description: string;
-  audioPath?: string;
-  imagePath?: string;
-  imagePosition?: string;
-  link?: string;
-  linkLabel?: string;
-};
-
-const audioItems: AudioItem[] = [
-  {
-    title: 'String Trio',
-    period: 'June 4, 2025',
-    note: 'Stereo recording at Dolan recording studio',
-    audioPath: '/audio/StringTrio.mp3',
-    imagePath: '/images/stringTrio.png',
-  },
-  {
-    title: 'Piano Solo',
-    period: 'June 5, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/PianoSolo.mp3',
-    imagePath: '/images/pianoSolo.png',
-  },
-  {
-    title: 'Piano Trio',
-    period: 'June 6, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/PianoTrio.mp3',
-    imagePath: '/images/pianoTrio.png',
-  },
-  {
-    title: 'Guitar Violin Tango',
-    period: 'June 10, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/GuitarViolinTango.mp3',
-    imagePath: '/images/guitarViolinTango.png',
-  },
-  {
-    title: 'Percussion Trio',
-    period: 'June 11, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/PercussionTrio.mp3',
-    imagePath: '/images/percussionTrio.png',
-  },
-  {
-    title: 'Jazz Organ',
-    period: 'June 12, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/JazzOrgan.mp3',
-    imagePath: '/images/jazzOrgan.png',
-  },
-  {
-    title: 'Marimba Quintet',
-    period: 'June 17, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/MarimbaQuintet.mp3',
-    imagePath: '/images/MarimbaQuintet.png',
-  },
-  {
-    title: 'Wind Quintet',
-    period: 'June 18, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/WindQuentet.mp3',
-    imagePath: '/images/windquintet.png',
-  },
-  {
-    title: 'Jazz Sextet',
-    period: 'June 23, 2025',
-    note: '3D recording at 370 Jay Street',
-    audioPath: '/audio/JazzSextet.mp3',
-    imagePath: '/images/JazzSextet.png',
-  },
-  {
-    title: 'Eastern Folk',
-    period: 'June 24, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/EasternFolk.mp3',
-    imagePath: '/images/EasternFolk.png',
-  },
-  {
-    title: 'Quartango',
-    period: 'June 25, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/Quartango%20.mp3',
-    imagePath: '/images/Quartango.png',
-  },
-  {
-    title: 'Brass Quartet',
-    period: 'June 26, 2025',
-    note: '3D recording at Paulson Center',
-    audioPath: '/audio/BrassQuartet.mp3',
-    imagePath: '/images/BrassQuartet.png',
-  },
-];
-
-const compositionItems: CompositionItem[] = [
-  {
-    title: 'Misty Forest',
-    period: 'December 2024',
-    description: 'Live sound processing in Max/MSP with clarinet material and MIDI keyboard control.',
-    imagePath: '/images/mistyforest.JPG',
-    link: 'https://drive.google.com/file/d/1WbNbeAdn0Ur-jCnHQwMYf94Q1NTPanlA/view?usp=sharing',
-    linkLabel: 'Watch Video',
-  },
-  {
-    title: 'Lonely Travel',
-    period: 'September 2022',
-    description: 'Original experimental piece depicting a solitary journey.',
-    imagePath: '/images/lonelytravel.png',
-    imagePosition: 'center 32%',
-    link: 'https://soundcloud.com/x3kus4lyferg/lonely-travelzixuan-guo/s-p1dvk2QNHXc?si=eb69c73e05524f0981aeb11e728773dd&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing',
-    linkLabel: 'SoundCloud',
-  },
-  {
-    title: 'Dancing in the Rain',
-    period: 'April 2023',
-    description: 'Instrumental piano composition inspired by a rainy city walk.',
-    imagePath: '/images/dancingintherain.jpg',
-    link: 'https://music.163.com/#/song?id=2037854978',
-    linkLabel: 'NetEase Music',
-  },
-  {
-    title: 'Breaking Free',
-    period: 'January 2024',
-    description: 'Early EDM production experiment combining live guitar, vocals, and electronic arrangement.',
-    imagePath: '/images/breakingfree.jpeg',
-    audioPath: '/audio/Breaking%20Free%E6%B7%B7%E9%9F%B324.1.12.mp3',
-  },
-  {
-    title: 'Playing Bass in a Mountain',
-    period: 'February 2024',
-    description: 'Mixed media playing with bass guitar and MIDI keyboard.',
-    imagePath: '/images/PlayingBass.png',
-    link: 'https://drive.google.com/file/d/1VccAunN-d9St-IpUV4t4oykC-xq7hWeY/view',
-    linkLabel: 'Watch Video',
-  },
-  {
-    title: 'The Evil Within 2 Trailer Soundtrack',
-    period: 'October 2023',
-    description: 'Original soundtrack composition.',
-    imagePath: '/images/theevilwithin2.jpeg',
-    link: 'https://drive.google.com/file/d/1vblBLnAz_0w1KRGSQpfg43YEfnx_ey83/view',
-    linkLabel: 'Watch Video',
-  },
-  {
-    title: 'Walking Through the Dark',
-    period: 'November 2024',
-    description: 'Code music composed and played in SuperCollider.',
-    imagePath: '/images/walkingthroughthedark.png',
-    link: 'https://drive.google.com/file/d/1M4xdQEVmX5z_XDGprVyPCwwtLLL8Ll4v/view',
-    linkLabel: 'Watch Video',
-  },
-];
+import { audioItems } from '../data/recordings';
+import { featuredCompositionItems } from '../data/compositions';
 
 export function Audio() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-  const [showAllRecordings, setShowAllRecordings] = useState(false);
+  const visibleRecordingItems = audioItems.slice(0, 3);
 
-  const visibleRecordingItems = showAllRecordings ? audioItems : audioItems.slice(0, 3);
+  const goToAllRecordings = () => {
+    sessionStorage.setItem('homeScrollY', String(window.scrollY));
+    window.location.hash = '#/recordings?from=home';
+  };
+
+  const goToAllCompositions = () => {
+    sessionStorage.setItem('homeScrollY', String(window.scrollY));
+    window.location.hash = '#/compositions?from=home';
+  };
 
   return (
     <section id="audio" ref={sectionRef} className="py-20 bg-[#0f0f12] relative overflow-hidden">
@@ -251,15 +96,18 @@ export function Audio() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-8 flex justify-center"
           >
-            <motion.button
-              type="button"
-              onClick={() => setShowAllRecordings((prev) => !prev)}
+            <motion.a
+              href="#/recordings?from=home"
+              onClick={(event) => {
+                event.preventDefault();
+                goToAllRecordings();
+              }}
               whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               className="px-6 py-2.5 rounded-full border border-border bg-card text-foreground/90 hover:border-primary/40 hover:text-primary transition-all duration-300"
             >
-              {showAllRecordings ? 'Show Less' : 'View All'}
-            </motion.button>
+              View All
+            </motion.a>
           </motion.div>
         )}
 
@@ -286,7 +134,7 @@ export function Audio() {
         </motion.div>
 
         <div className="space-y-6">
-          {compositionItems.map((item, index) => (
+          {featuredCompositionItems.map((item, index) => (
             <motion.article
               key={item.title}
               initial={{ opacity: 0, y: 24 }}
@@ -340,6 +188,26 @@ export function Audio() {
             </motion.article>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-8 flex justify-center"
+        >
+          <motion.a
+            href="#/compositions?from=home"
+            onClick={(event) => {
+              event.preventDefault();
+              goToAllCompositions();
+            }}
+            whileHover={{ y: -2, scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-6 py-2.5 rounded-full border border-border bg-card text-foreground/90 hover:border-primary/40 hover:text-primary transition-all duration-300"
+          >
+            View All
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );
