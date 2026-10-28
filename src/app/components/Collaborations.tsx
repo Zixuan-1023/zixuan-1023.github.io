@@ -3,6 +3,7 @@ import { useInView } from 'motion/react';
 import { useRef } from 'react';
 import { BookOpen, ExternalLink } from 'lucide-react';
 import { featuredPublications } from '../data/publications';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Collaborations() {
   const ref = useRef(null);
@@ -93,23 +94,35 @@ export function Collaborations() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.7, delay: 0.5 + index * 0.12 }}
-                className="bg-card border border-border rounded-xl p-6 md:p-7 shadow-xl"
+                className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row"
               >
-                <h3 className="mb-3">{collab.organization}</h3>
-                <p className="text-sm text-muted-foreground mb-3">
-                  {collab.role.replace(' (Early Access)', '')} · {collab.period}
-                </p>
-                {collab.publicationUrl && (
-                  <a
-                    href={collab.publicationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    View Publication
-                    <ExternalLink size={14} />
-                  </a>
-                )}
+                <div className="w-full md:w-4/12 border-b md:border-b-0 md:border-r border-border">
+                  <div className="h-48 md:h-56 lg:h-60 bg-muted/60 relative overflow-hidden">
+                    <ImageWithFallback
+                      src={collab.image}
+                      alt={`${collab.organization} cover`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                <div className="w-full md:w-8/12 p-5 md:p-6">
+                  <h3 className="mb-3">{collab.organization}</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {collab.role.replace(' (Early Access)', '')} · {collab.period}
+                  </p>
+                  {collab.publicationUrl && (
+                    <a
+                      href={collab.publicationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+                    >
+                      View Publication
+                      <ExternalLink size={14} />
+                    </a>
+                  )}
+                </div>
               </motion.article>
             ))}
           </div>
