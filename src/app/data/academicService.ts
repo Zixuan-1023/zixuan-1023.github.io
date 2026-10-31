@@ -11,8 +11,8 @@ export const academicServiceItems: AcademicServiceItem[] = [
     role: 'Peer Reviewer',
     period: '2026-Present',
     details: [
-      'Completed peer-review rounds for manuscripts in AI-enabled music and learning-related topics.',
-      'Continues editorial peer-review service in ongoing cycles.',
+      'Completed four review rounds across two manuscripts in 2026.',
+      'Completed and ongoing editorial cycles include AI-enabled personalized music education and temporal graph modeling topics.',
     ],
   },
   {
@@ -20,7 +20,15 @@ export const academicServiceItems: AcademicServiceItem[] = [
     role: 'Peer Reviewer',
     period: '2026',
     details: [
-      'Completed a formal peer-review report for a manuscript in multi-agent AI and social interaction modeling.',
+      'Completed one formal peer-review report in multi-agent AI and reciprocal social interaction research.',
+    ],
+  },
+  {
+    organization: 'Future Business Journal (Springer Nature)',
+    role: 'Peer Reviewer',
+    period: '2026',
+    details: [
+      'Completed one formal peer-review report in October 2026 for an intelligent expert-system manuscript.',
     ],
   },
 ];
